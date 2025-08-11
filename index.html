@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Muhire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            letter-spacing: 0.02em;
+        }
+
+        .links {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #fff;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 30px;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            cursor: pointer;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: color 0.3s ease;
+        }
+
+        .section-header:hover {
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #b0b0b0;
+        }
+
+        .arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+            color: #666;
+        }
+
+        .section.active .arrow {
+            transform: rotate(90deg);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding-top: 0;
+        }
+
+        .section.active .section-content {
+            max-height: 2000px;
+            padding-top: 20px;
+        }
+
+        .item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .item::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #333;
+        }
+
+        .item-title {
+            font-size: 0.9rem;
+            color: #d0d0d0;
+            margin-bottom: 5px;
+        }
+
+        .item-title a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .item-title a:hover {
+            border-color: #888;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .tech {
+            font-size: 0.7rem;
+            color: #888;
+            background: #141414;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .background-item {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .background-item strong {
+            color: #d0d0d0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Jonathan Muhire</h1>
+            <p class="subtitle">Founder @ Neotix · Robotics Data Infrastructure</p>
+            <div class="links">
+                <a href="https://github.com/Jonathan-321" target="_blank">Github</a>
+                <a href="https://x.com/frogeaterfirst1" target="_blank">X</a>
+                <a href="mailto:muhirejonathan123@gmail.com">Email</a>
+                <a href="https://docs.google.com/document/d/1M2XiX7mFAiUMdnS_nlBqZwRiig2jxwowBDU1ytCv-0Q/edit" target="_blank">Notes</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="section" id="projects">
+                <div class="section-header">
+                    <span class="section-title">Projects</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.neotix.dev/" target="_blank">Neotix Robotics</a>
+                        </div>
+                        <div class="item-desc">Building data collection pipelines for robotics companies - processing high-volume sensor streams, cloud-based annotation, and human-in-the-loop validation</div>
+                        <div class="tech-stack">
+                            <span class="tech">AWS S3</span>
+                            <span class="tech">SAM2</span>
+                            <span class="tech">DINO</span>
+                            <span class="tech">SLAM ORB3</span>
+                            <span class="tech">Minio</span>
+                            <span class="tech">LakeFS</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Jonathan-321/SO-ARM100" target="_blank">ISO-101 Robot Platform</a>
+                        </div>
+                        <div class="item-desc">LeRobot-based system for robotic data collection and teleoperation experiments</div>
+                        <div class="tech-stack">
+                            <span class="tech">Python</span>
+                            <span class="tech">LeRobot</span>
+                            <span class="tech">Teleoperation</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Jonathan-321" target="_blank">UMI Preprocessing Pipeline</a>
+                        </div>
+                        <div class="item-desc">Extracting SLAM trajectories from robotic demonstrations for Universal Manipulation Interface</div>
+                        <div class="tech-stack">
+                            <span class="tech">SLAM</span>
+                            <span class="tech">Python</span>
+                            <span class="tech">Trajectory Processing</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://min.io/" target="_blank">Minio Infrastructure</a>
+                        </div>
+                        <div class="item-desc">S3-compatible object storage deployment for robotics data management</div>
+                        <div class="tech-stack">
+                            <span class="tech">Minio</span>
+                            <span class="tech">S3</span>
+                            <span class="tech">Object Storage</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank">LeRobot Modal</a>
+                        </div>
+                        <div class="item-desc">Real-time robot vision system using Modal-hosted SmolVLA inference with local camera input</div>
+                        <div class="tech-stack">
+                            <span class="tech">Python</span>
+                            <span class="tech">Computer Vision</span>
+                            <span class="tech">Modal</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank">Swarm Robotics Simulator</a>
+                        </div>
+                        <div class="item-desc">Web-based simulation platform for multi-robot systems with configurable presets and analytics</div>
+                        <div class="tech-stack">
+                            <span class="tech">TypeScript</span>
+                            <span class="tech">React</span>
+                            <span class="tech">Simulation</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Jonathan-321/ISSR" target="_blank">ISSR</a>
+                        </div>
+                        <div class="item-desc">AI-powered behavioral analysis for mental health crisis detection with geospatial trend analysis</div>
+                        <div class="tech-stack">
+                            <span class="tech">Python</span>
+                            <span class="tech">ML</span>
+                            <span class="tech">Geospatial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="research">
+                <div class="section-header">
+                    <span class="section-title">Research</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://docs.google.com/document/d/1h4Enp9Ck7_NjuJoLx09rkmpp9uzufidEHCKwZlhtm6o/edit?usp=sharing" target="_blank">Neotix Whitepaper</a>
+                        </div>
+                        <div class="item-desc">Technical architecture for scalable robotics data collection infrastructure</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/html/2411.01813v1" target="_blank">Scaling Autonomous Robotics Data Collection</a>
+                        </div>
+                        <div class="item-desc">On challenges and approaches in large-scale robotics data acquisition</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/html/2503.06669v2" target="_blank">Agibot World Colosseo</a>
+                        </div>
+                        <div class="item-desc">Benchmarking framework for embodied AI systems</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://umi-gripper.github.io/" target="_blank">Universal Manipulation Interface</a>
+                        </div>
+                        <div class="item-desc">Dexterous control systems for robotic manipulation</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/pdf/2411.02214" target="_blank">DexHub and DART</a>
+                        </div>
+                        <div class="item-desc">Dexterous manipulation benchmarks and datasets</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/pdf/2304.03442" target="_blank">Generative Agents</a>
+                        </div>
+                        <div class="item-desc">Interactive simulacra of human behavior</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/abs/2203.08459" target="_blank">KinyaBERT</a>
+                        </div>
+                        <div class="item-desc">Morphology-aware Kinyarwanda language model</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://aclanthology.org/2020.coling-main.480/" target="_blank">KINNEWS and KIRNEWS</a>
+                        </div>
+                        <div class="item-desc">Benchmarking cross-lingual text classification for Kinyarwanda</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://huggingface.co/mbazaNLP" target="_blank">mbazaNLP</a>
+                        </div>
+                        <div class="item-desc">Kinyarwanda NLP models and speech systems</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://huggingface.co/spaces/DigitalUmuganda/machine-translation" target="_blank">DigitalUmuganda</a>
+                        </div>
+                        <div class="item-desc">Machine translation systems for Rwandan languages</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://huggingface.co/AI-MO/NuminaMath-7B-TIR" target="_blank">NuminaMath World Model</a>
+                        </div>
+                        <div class="item-desc">Mathematical reasoning and problem-solving models</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/abs/2307.12008" target="_blank">Room-Temperature Superconductor</a>
+                        </div>
+                        <div class="item-desc">LK-99 and ambient-pressure superconductivity claims</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://aclanthology.org/2023.findings-acl.426.pdf" target="_blank">Low-Resource Language Classification</a>
+                        </div>
+                        <div class="item-desc">Novel algorithms for underrepresented languages</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/pdf/2402.17764.pdf" target="_blank">Era of 1-bit LLMs</a>
+                        </div>
+                        <div class="item-desc">Extreme quantization in language models</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/pdf/2503.02113" target="_blank">Deep Learning Is Not So Mysterious</a>
+                        </div>
+                        <div class="item-desc">Demystifying neural network operations</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/abs/2501.19393" target="_blank">Test Time Inference</a>
+                        </div>
+                        <div class="item-desc">Adaptive computation during model inference</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/pdf/2502.16473" target="_blank">Highly Efficient LLM Inference</a>
+                        </div>
+                        <div class="item-desc">Optimization techniques for large model deployment</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/abs/2306.07303" target="_blank">Transformers for Deep Learning Survey</a>
+                        </div>
+                        <div class="item-desc">Comprehensive overview of transformer applications</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="reading">
+                <div class="section-header">
+                    <span class="section-title">Reading</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://situational-awareness.ai/" target="_blank">Situational Awareness: The Decade Ahead</a>
+                        </div>
+                        <div class="item-desc">Leopold Aschenbrenner on AGI timelines and implications</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.palladiummag.com/2023/07/13/dont-learn-your-values-from-society/" target="_blank">Don't Learn Your Values From Society</a>
+                        </div>
+                        <div class="item-desc">On independent thinking and value formation</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.benkuhn.net/conviction/" target="_blank">No One Can Teach You About Conviction</a>
+                        </div>
+                        <div class="item-desc">Ben Kuhn on developing deep conviction in your work</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.benkuhn.net/hard/" target="_blank">You Don't Need to Work on Hard Problems</a>
+                        </div>
+                        <div class="item-desc">Ben Kuhn on choosing impactful work</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://avalonlibrary.net/ebooks/David%20Deutsch%20-%20The%20Beginning%20of%20Infinity%20-%20Explanations%20that%20Transform%20the%20World.pdf" target="_blank">The Beginning of Infinity</a>
+                        </div>
+                        <div class="item-desc">David Deutsch on explanations that transform the world</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://paulgraham.com/ds.html" target="_blank">Do Things That Don't Scale</a>
+                        </div>
+                        <div class="item-desc">Paul Graham on startup growth strategies</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://blog.samaltman.com/what-i-wish-someone-had-told-me" target="_blank">What I Wish Someone Had Told Me</a>
+                        </div>
+                        <div class="item-desc">Sam Altman's career advice for young people</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://open.substack.com/pub/apoorvagovind/p/how-to-waste-your-career-one-comfortable" target="_blank">How to Waste Your Career One Comfortable Year at a Time</a>
+                        </div>
+                        <div class="item-desc">On avoiding career stagnation through comfort</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://yaledailynews.com/blog/2012/05/27/keegan-the-opposite-of-loneliness/" target="_blank">The Opposite of Loneliness</a>
+                        </div>
+                        <div class="item-desc">Marina Keegan's essay on connection and possibility</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.lesswrong.com/posts/bx3gkHJehRCYZAF3r/pain-is-not-the-unit-of-effort" target="_blank">Pain Is Not the Unit of Effort</a>
+                        </div>
+                        <div class="item-desc">On effective work vs suffering for its own sake</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.epsilontheory.com/why-we-dont-trust-each-other-anymore/" target="_blank">Why We Don't Trust Each Other Anymore</a>
+                        </div>
+                        <div class="item-desc">Epsilon Theory on societal trust erosion</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.tabletmag.com/feature/american-vulcan-palmer-luckey-anduril" target="_blank">Palmer Luckey, American Vulcan</a>
+                        </div>
+                        <div class="item-desc">Profile of the Anduril founder and defense innovation</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://semianalysis.com/2025/03/11/america-is-missing-the-new-labor-economy-robotics-part-1/" target="_blank">Robotics Geopolitics</a>
+                        </div>
+                        <div class="item-desc">America's position in the new labor economy</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/" target="_blank">What Is ChatGPT Doing and Why Does It Work?</a>
+                        </div>
+                        <div class="item-desc">Stephen Wolfram's technical deep dive into LLMs</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.lewissociety.org/innerring/" target="_blank">The Inner Ring</a>
+                        </div>
+                        <div class="item-desc">CS Lewis on social exclusion and ambition</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://ciechanow.ski/gps/" target="_blank">GPS</a>
+                        </div>
+                        <div class="item-desc">Bartosz Ciechanowski's interactive explainer</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://users.ece.cmu.edu/~gamvrosi/thelastq.html" target="_blank">The Last Question</a>
+                        </div>
+                        <div class="item-desc">Asimov's short story on entropy and existence</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.thealgorithmicbridge.com/p/deepseek-is-chinese-but-its-ai-models" target="_blank">DeepSeek's Algorithm</a>
+                        </div>
+                        <div class="item-desc">Analysis of Chinese AI model architectures</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://marginalrevolution.com/marginalrevolution/2021/06/how-do-you-ask-good-questions.html" target="_blank">How Do You Ask Good Questions?</a>
+                        </div>
+                        <div class="item-desc">Tyler Cowen on the art of inquiry</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://teachyourselfcs.com/" target="_blank">Teach Yourself Computer Science</a>
+                        </div>
+                        <div class="item-desc">Self-directed CS curriculum guide</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.goodreads.com/book/show/35167685-surely-you-re-joking-mr-feynman" target="_blank">Surely You're Joking, Mr. Feynman!</a>
+                        </div>
+                        <div class="item-desc">Adventures of a curious character</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://z-lib.gd/book/1897874/f8fb02/the-stranger.html" target="_blank">The Stranger</a>
+                        </div>
+                        <div class="item-desc">Albert Camus on existentialism and absurdity</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.lesswrong.com/posts/SwBEJapZNzWFifLN6/the-funnel-of-human-experience" target="_blank">The Funnel of Human Experience</a>
+                        </div>
+                        <div class="item-desc">On shared experiences and diverging paths</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.scimitar.capital/p/time-is-event-based" target="_blank">Time Is Event-Based</a>
+                        </div>
+                        <div class="item-desc">Rethinking our perception of time</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="influences">
+                <div class="section-header">
+                    <span class="section-title">Influences</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid">
+                        <div class="item">
+                            <div class="item-title">Eric Jang</div>
+                            <div class="item-desc">1X · Humanoid robotics</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Andrej Karpathy</div>
+                            <div class="item-desc">Neural networks · GPT series</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Amanda Askell</div>
+                            <div class="item-desc">Anthropic · AI alignment</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">George Hotz</div>
+                            <div class="item-desc">comma.ai · Hacker culture</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Sam Zeloof</div>
+                            <div class="item-desc">Garage semiconductors</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Palmer Luckey</div>
+                            <div class="item-desc">Anduril · Defense tech</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Vitalik Buterin</div>
+                            <div class="item-desc">Ethereum · Crypto philosophy</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Alexander Wang</div>
+                            <div class="item-desc">Scale AI · Data infrastructure</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Greg Yang</div>
+                            <div class="item-desc">xAI · Research foundations</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Ben Kuhn</div>
+                            <div class="item-desc">Anthropic · Technical writing</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Chip Huyen</div>
+                            <div class="item-desc">ML systems · Production ML</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Seth Goldin</div>
+                            <div class="item-desc">Philosophy · Tech criticism</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Rob Henderson</div>
+                            <div class="item-desc">Troubled · Social psychology</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Jonathan Bi</div>
+                            <div class="item-desc">Philosophy series · YouTube</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Eric Torenberg</div>
+                            <div class="item-desc">a16z · Venture capital</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="podcasts">
+                <div class="section-header">
+                    <span class="section-title">Podcasts</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid">
+                        <div class="item">
+                            <div class="item-title">Machine Learning Street Talk</div>
+                            <div class="item-desc">Deep technical ML discussions</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Dwarkesh Patel</div>
+                            <div class="item-desc">Long-form interviews with builders</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Lex Fridman</div>
+                            <div class="item-desc">AI, science, and philosophy</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Manifold</div>
+                            <div class="item-desc">Prediction markets and rationality</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">Acquired</div>
+                            <div class="item-desc">Tech company deep dives</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">The Diary of a CEO</div>
+                            <div class="item-desc">Entrepreneurship and mindset</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="background">
+                <div class="section-header">
+                    <span class="section-title">Background</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="background-item">
+                        <strong>Oklahoma Christian University</strong> · Accelerated BS/MS in CS & AI Systems
+                    </div>
+                    <div class="background-item">
+                        <strong>Bridge2Rwanda</strong> · Gap Year Scholar
+                    </div>
+                    <div class="background-item">
+                        <strong>Collège Saint André</strong> · High School
+                    </div>
+                    <div class="background-item">
+                        <strong>Location</strong> · Oklahoma City / Kigali
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="resources">
+                <div class="section-header">
+                    <span class="section-title">Resources</span>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="section-content">
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="http://neuralnetworksanddeeplearning.com/" target="_blank">Neural Networks and Deep Learning</a>
+                        </div>
+                        <div class="item-desc">Michael Nielsen's interactive book on neural networks</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/labmlai/annotated_deep_learning_paper_implementations" target="_blank">Annotated Deep Learning Papers</a>
+                        </div>
+                        <div class="item-desc">Implementation guides for key ML papers</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="http://web.stanford.edu/class/cs25/" target="_blank">CS25: Transformers United</a>
+                        </div>
+                        <div class="item-desc">Stanford's course on transformer architectures</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://karpathy.medium.com/yes-you-should-understand-backprop-e2f06eab496b" target="_blank">Yes You Should Understand Backprop</a>
+                        </div>
+                        <div class="item-desc">Karpathy on the importance of fundamentals</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Ouckah/Summer2025-Internships" target="_blank">Summer 2025 Tech Internships</a>
+                        </div>
+                        <div class="item-desc">Crowdsourced list of internship opportunities</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://segment-anything.com/" target="_blank">Segment Anything</a>
+                        </div>
+                        <div class="item-desc">Meta's foundation model for image segmentation</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://mlc.ai/chapter_introduction/index.html" target="_blank">Machine Learning Compilation</a>
+                        </div>
+                        <div class="item-desc">Building and deploying ML applications</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://timdettmers.com/2022/08/17/llm-int8-and-emergent-features/" target="_blank">LLM.int8() and Emergent Features</a>
+                        </div>
+                        <div class="item-desc">Tim Dettmers on LLM quantization</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/AntonOsika/gpt-engineer" target="_blank">GPT Engineer</a>
+                        </div>
+                        <div class="item-desc">AI agent for autonomous code generation</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('active');
+            });
+        });
+
+        // Auto-open projects section
+        document.querySelector('#projects').classList.add('active');
+    </script>
+</body>
+</html>
