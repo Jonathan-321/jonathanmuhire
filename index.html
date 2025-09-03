@@ -121,6 +121,61 @@
             position: relative;
         }
 
+        .item-with-demo {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .item-with-demo::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #333;
+        }
+
+        .item-content {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .item-demo {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .demo-frame {
+            background: #141414;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 8px;
+            overflow: hidden;
+        }
+
+        .demo-frame img,
+        .demo-frame video {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .demo-frame .tall-video {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .item-with-demo {
+                flex-direction: column;
+            }
+            
+            .item-demo {
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+
         .item::before {
             content: "—";
             position: absolute;
@@ -164,6 +219,23 @@
             background: #141414;
             padding: 3px 8px;
             border-radius: 3px;
+        }
+
+        .paper-link {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .paper-link a {
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .paper-link a:hover {
+            border-color: #888;
         }
 
         .grid {
@@ -218,84 +290,113 @@
                     <span class="arrow">→</span>
                 </div>
                 <div class="section-content">
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://www.neotix.dev/" target="_blank">Neotix Robotics</a>
+                    <div class="item item-with-demo">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <a href="https://github.com/elephantrobotics/pymycobot" target="_blank">PyMyCobot Teleoperation</a>
+                            </div>
+                            <div class="item-desc">Utilized remote teleoperation system for robotic arms data collection using <a href="https://github.com/elephantrobotics/pymycobot">PyMyCobot</a>. Implemented real-time control protocols and collected demonstration data for imitation learning tasks, enabling precise manipulation through intuitive human-robot interfaces.</div>
+                            <div class="tech-stack">
+                                <span class="tech">Python</span>
+                                <span class="tech">ROS</span>
+                                <span class="tech">MyCobot</span>
+                                <span class="tech">Teleoperation</span>
+                            </div>
                         </div>
-                        <div class="item-desc">Building data collection pipelines for robotics companies - processing high-volume sensor streams, cloud-based annotation, and human-in-the-loop validation</div>
-                        <div class="tech-stack">
-                            <span class="tech">AWS S3</span>
-                            <span class="tech">SAM2</span>
-                            <span class="tech">DINO</span>
-                            <span class="tech">SLAM ORB3</span>
-                            <span class="tech">Minio</span>
-                            <span class="tech">LakeFS</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/Jonathan-321/SO-ARM100" target="_blank">ISO-101 Robot Platform</a>
-                        </div>
-                        <div class="item-desc">LeRobot-based system for robotic data collection and teleoperation experiments</div>
-                        <div class="tech-stack">
-                            <span class="tech">Python</span>
-                            <span class="tech">LeRobot</span>
-                            <span class="tech">Teleoperation</span>
+                        <div class="item-demo">
+                            <div class="demo-frame">
+                                <video autoplay loop muted playsinline>
+                                    <source src="media/neotixdemo.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/Jonathan-321" target="_blank">UMI Preprocessing Pipeline</a>
+                    <div class="item item-with-demo">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <a href="https://umi-gripper.github.io/" target="_blank">UMI Multi-Sensor Data Extraction</a>
+                            </div>
+                            <div class="item-desc">Engineered comprehensive data extraction pipeline for <a href="https://umi-gripper.github.io/">UMI</a>, implementing SLAM-ORB3 for trajectory extraction from GoPro footage and gripper state estimation. Developed custom Rerun visualizations for real-time 7-DOF trajectory analysis (3D position + 4D quaternion), synchronizing visual SLAM outputs with gripper sensor data. Pipeline processes raw demonstrations into training-ready datasets with precise temporal alignment between camera poses and manipulation actions.</div>
+                            <div class="tech-stack">
+                                <span class="tech">SLAM-ORB3</span>
+                                <span class="tech">Rerun</span>
+                                <span class="tech">Python</span>
+                                <span class="tech">OpenCV</span>
+                                <span class="tech">7-DOF Tracking</span>
+                            </div>
+                            <div class="paper-link">Paper: <a href="https://umi-gripper.github.io/umi.pdf">UMI: Universal Manipulation Interface</a></div>
                         </div>
-                        <div class="item-desc">Extracting SLAM trajectories from robotic demonstrations for Universal Manipulation Interface</div>
-                        <div class="tech-stack">
-                            <span class="tech">SLAM</span>
-                            <span class="tech">Python</span>
-                            <span class="tech">Trajectory Processing</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://min.io/" target="_blank">Minio Infrastructure</a>
-                        </div>
-                        <div class="item-desc">S3-compatible object storage deployment for robotics data management</div>
-                        <div class="tech-stack">
-                            <span class="tech">Minio</span>
-                            <span class="tech">S3</span>
-                            <span class="tech">Object Storage</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank">LeRobot Modal</a>
-                        </div>
-                        <div class="item-desc">Real-time robot vision system using Modal-hosted SmolVLA inference with local camera input</div>
-                        <div class="tech-stack">
-                            <span class="tech">Python</span>
-                            <span class="tech">Computer Vision</span>
-                            <span class="tech">Modal</span>
+                        <div class="item-demo">
+                            <div class="demo-frame">
+                                <video autoplay loop muted playsinline>
+                                    <source src="media/UMI-annotated.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank">Swarm Robotics Simulator</a>
+                    <div class="item item-with-demo">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank">UMI Data Annotation Pipeline</a>
+                            </div>
+                            <div class="item-desc">Developed annotation tools for robotic manipulation datasets using <a href="https://github.com/MichalZawalski/embodied-CoT">embodied Chain-of-Thought</a> methods. Created interfaces for labeling gripper poses, contact points, and task-relevant keyframes in demonstration data.</div>
+                            <div class="tech-stack">
+                                <span class="tech">Python</span>
+                                <span class="tech">Computer Vision</span>
+                                <span class="tech">Annotation Tools</span>
+                                <span class="tech">PyTorch</span>
+                            </div>
+                            <div class="paper-link">Paper: <a href="https://arxiv.org/pdf/2407.08693">Embodied Chain-of-Thought Reasoning</a></div>
                         </div>
-                        <div class="item-desc">Web-based simulation platform for multi-robot systems with configurable presets and analytics</div>
-                        <div class="tech-stack">
-                            <span class="tech">TypeScript</span>
-                            <span class="tech">React</span>
-                            <span class="tech">Simulation</span>
+                        <div class="item-demo">
+                            <div class="demo-frame">
+                                <video autoplay loop muted playsinline>
+                                    <source src="media/UMI-annotated.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/Jonathan-321/ISSR" target="_blank">ISSR</a>
+                    <div class="item item-with-demo">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <a href="https://github.com/Jonathan-321/minio" target="_blank">MinIO + LakeFS Data Infrastructure</a>
+                            </div>
+                            <div class="item-desc">Architected scalable data storage and versioning system for robotics datasets. Deployed <a href="https://github.com/Jonathan-321/minio">MinIO</a> for S3-compatible object storage with LakeFS for Git-like version control of large sensor data, enabling reproducible ML experiments and efficient data management across distributed teams.</div>
+                            <div class="tech-stack">
+                                <span class="tech">MinIO</span>
+                                <span class="tech">LakeFS</span>
+                                <span class="tech">S3 API</span>
+                                <span class="tech">Docker</span>
+                                <span class="tech">Data Versioning</span>
+                            </div>
                         </div>
-                        <div class="item-desc">AI-powered behavioral analysis for mental health crisis detection with geospatial trend analysis</div>
-                        <div class="tech-stack">
-                            <span class="tech">Python</span>
-                            <span class="tech">ML</span>
-                            <span class="tech">Geospatial</span>
+                        <div class="item-demo">
+                            <div class="demo-frame">
+                                <video autoplay loop muted playsinline>
+                                    <source src="media/minio+LakeFS.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-with-demo">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <a href="https://huggingface.co/lerobot" target="_blank">LeRobot ISO-101 Platform</a>
+                            </div>
+                            <div class="item-desc">Built end-to-end robotic learning platform using <a href="https://huggingface.co/lerobot">LeRobot</a> framework. Implemented data collection pipelines, teleoperation interfaces, and policy training infrastructure for the ISO-101 robot, enabling rapid prototyping of manipulation behaviors from human demonstrations.</div>
+                            <div class="tech-stack">
+                                <span class="tech">LeRobot</span>
+                                <span class="tech">PyTorch</span>
+                                <span class="tech">ROS2</span>
+                                <span class="tech">Imitation Learning</span>
+                            </div>
+                        </div>
+                        <div class="item-demo">
+                            <div class="demo-frame">
+                                <video class="tall-video" autoplay loop muted playsinline>
+                                    <source src="media/lerobot.MP4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -571,133 +672,6 @@
                 </div>
             </div>
 
-            <div class="section" id="influences">
-                <div class="section-header">
-                    <span class="section-title">Influences</span>
-                    <span class="arrow">→</span>
-                </div>
-                <div class="section-content">
-                    <div class="grid">
-                        <div class="item">
-                            <div class="item-title">Eric Jang</div>
-                            <div class="item-desc">1X · Humanoid robotics</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Andrej Karpathy</div>
-                            <div class="item-desc">Neural networks · GPT series</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Amanda Askell</div>
-                            <div class="item-desc">Anthropic · AI alignment</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">George Hotz</div>
-                            <div class="item-desc">comma.ai · Hacker culture</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Sam Zeloof</div>
-                            <div class="item-desc">Garage semiconductors</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Palmer Luckey</div>
-                            <div class="item-desc">Anduril · Defense tech</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Vitalik Buterin</div>
-                            <div class="item-desc">Ethereum · Crypto philosophy</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Alexander Wang</div>
-                            <div class="item-desc">Scale AI · Data infrastructure</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Greg Yang</div>
-                            <div class="item-desc">xAI · Research foundations</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Ben Kuhn</div>
-                            <div class="item-desc">Anthropic · Technical writing</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Chip Huyen</div>
-                            <div class="item-desc">ML systems · Production ML</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Seth Goldin</div>
-                            <div class="item-desc">Philosophy · Tech criticism</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Rob Henderson</div>
-                            <div class="item-desc">Troubled · Social psychology</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Jonathan Bi</div>
-                            <div class="item-desc">Philosophy series · YouTube</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Eric Torenberg</div>
-                            <div class="item-desc">a16z · Venture capital</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section" id="podcasts">
-                <div class="section-header">
-                    <span class="section-title">Podcasts</span>
-                    <span class="arrow">→</span>
-                </div>
-                <div class="section-content">
-                    <div class="grid">
-                        <div class="item">
-                            <div class="item-title">Machine Learning Street Talk</div>
-                            <div class="item-desc">Deep technical ML discussions</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Dwarkesh Patel</div>
-                            <div class="item-desc">Long-form interviews with builders</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Lex Fridman</div>
-                            <div class="item-desc">AI, science, and philosophy</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Manifold</div>
-                            <div class="item-desc">Prediction markets and rationality</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">Acquired</div>
-                            <div class="item-desc">Tech company deep dives</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-title">The Diary of a CEO</div>
-                            <div class="item-desc">Entrepreneurship and mindset</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section" id="background">
-                <div class="section-header">
-                    <span class="section-title">Background</span>
-                    <span class="arrow">→</span>
-                </div>
-                <div class="section-content">
-                    <div class="background-item">
-                        <strong>Oklahoma Christian University</strong> · Accelerated BS/MS in CS & AI Systems
-                    </div>
-                    <div class="background-item">
-                        <strong>Bridge2Rwanda</strong> · Gap Year Scholar
-                    </div>
-                    <div class="background-item">
-                        <strong>Collège Saint André</strong> · High School
-                    </div>
-                    <div class="background-item">
-                        <strong>Location</strong> · Oklahoma City / Kigali
-                    </div>
-                </div>
-            </div>
-
             <div class="section" id="resources">
                 <div class="section-header">
                     <span class="section-title">Resources</span>
@@ -771,8 +745,7 @@
             });
         });
 
-        // Auto-open projects section
-        document.querySelector('#projects').classList.add('active');
+        // Remove auto-open - all sections start collapsed
     </script>
 </body>
 </html>
