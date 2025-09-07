@@ -1,0 +1,107 @@
+JONATHAN MUHIRE
+Founder @ Neotix · Scaling Embodied AI Through Robotics Data Infrastructure
+
+Email: muhirejonathan123@gmail.com | Portfolio: jonathanmuhire.com
+GitHub: github.com/Jonathan-321 | X: x.com/frogeaterfirst1
+
+================================================================================
+EDUCATION
+================================================================================
+Oklahoma Christian University — Expected Graduation: May 2026
+Master of Science in Computer Science with Artificial Intelligence, GPA: 4.0
+
+• Relevant coursework includes Data Structures & Algorithms, Computer Systems Architecture, 
+  Robotics, Machine Learning, and Multimodal AI systems.
+• Research focus on solving the critical data bottleneck in embodied AI through scalable
+  infrastructure for collecting, annotating, and versioning robotic demonstration data.
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+Languages: Python, C++, JavaScript, TypeScript, SQL
+Robotics/ML: PyTorch, TensorFlow, OpenCV, ROS/ROS2, SLAM-ORB3, Rerun, Computer Vision
+Infrastructure: MinIO, LakeFS, Docker, AWS, S3 APIs, Git/GitHub
+Web Technologies: React, Next.js, Node.js, Django, PostgreSQL, MongoDB
+
+================================================================================
+EXPERIENCE
+================================================================================
+Founder & Lead Engineer — Neotix
+Present
+
+• Co-founded robotics data collection venture solving the critical data bottleneck in embodied AI
+  by establishing scalable infrastructure in Kigali, Rwanda with 8 MyCobot arms, Universal
+  Manipulation Interface (UMI) kits, and ego-centric camera rigs funded by Yale Tsai City
+  Ventures $20,000 grant.
+• Engineered end-to-end data collection pipeline implementing Embodied Chain-of-Thought (ECoT)
+  reasoning and Segment Anything Model-2 (SAM2) for robot video action annotation, transforming
+  raw teleoperation streams into clean, task-specific datasets for cross-embodiment learning.
+• Secured commercial validation with Humanoid AI requesting 1,000 hours of demonstration data
+  and FADA committing to 100-hour pilot for last-mile drone delivery, while collaborating with
+  Yale GRAB Lab on manipulation challenges and cross-embodiment knowledge transfer.
+• Addressed hardware reliability challenges including servo motor failures through pragmatic
+  resource management and comprehensive testing protocols, ensuring consistent data quality
+  across diverse manipulation tasks.
+
+AI Model Evaluation Specialist — Scale.ai / GenAI Outlier
+May 2024 - Aug 2024
+
+• Evaluated over 200 AI model training iterations focusing on code generation capabilities
+  across Python, JavaScript, and SQL while ensuring alignment with safety guidelines.
+• Collaborated with team of 8+ specialists to identify and resolve approximately 40 critical
+  response issues monthly, resulting in 15% improvement in model performance consistency.
+
+================================================================================
+PROJECTS
+================================================================================
+PyMyCobot Teleoperation System [github.com/Jonathan-321/pymycobot-teleoperation]
+
+• Developed remote teleoperation system for bimanual dexterous manipulation enabling precise
+  control and demonstration data collection for imitation learning tasks.
+• Implemented real-time control protocols for pick-and-place operations, creating intuitive
+  human-robot interfaces that streamline the data collection process.
+
+UMI Multi-Sensor Data Extraction Pipeline [github.com/Jonathan-321/umi-data-extraction]
+
+• Engineered comprehensive pipeline implementing SLAM-ORB3 for trajectory extraction from
+  GoPro footage, developing custom Rerun visualizations for real-time 7-DOF trajectory
+  analysis (3D position + 4D quaternion).
+• Synchronized visual SLAM outputs with gripper sensor data to produce training-ready datasets
+  with precise temporal alignment between camera poses and manipulation actions.
+
+MinIO + LakeFS Data Infrastructure [github.com/Jonathan-321/minio]
+
+• Architected scalable storage and versioning system for robotics datasets, deploying MinIO
+  for S3-compatible object storage with LakeFS for Git-like version control of large sensor data.
+• Enabled reproducible ML experiments across distributed teams while reducing data management
+  overhead by 52% through efficient versioning strategies.
+
+LeRobot ISO-101 Platform [github.com/Jonathan-321/lerobot-iso101]
+
+• Built end-to-end robotic learning platform using LeRobot framework, implementing data
+  collection pipelines and policy training infrastructure for rapid prototyping.
+• Fine-tuned smolVLA (Small Vision-Language-Action) model on custom ISO-101 dataset,
+  achieving improved task generalization for manipulation tasks through multimodal learning.
+• Integrated teleoperation interfaces with imitation learning algorithms, enabling efficient
+  transfer of human demonstrations to robot behaviors with 78% success rate on novel tasks.
+
+UMI Data Annotation Pipeline [github.com/Jonathan-321/umi-annotation]
+
+• Developed annotation tools for robotic manipulation datasets using embodied Chain-of-Thought
+  (ECoT) methods and SAM2 for robot video action annotation.
+• Created interfaces for labeling gripper poses, contact points, and task-relevant keyframes,
+  transforming raw teleoperation streams into clean, task-specific datasets.
+
+================================================================================
+RESEARCH INTERESTS
+================================================================================
+• Scalable data infrastructure for embodied AI and cross-embodiment learning
+• Multimodal fusion of visual, tactile, and proprioceptive data for robust robotic systems
+• Adapting large-scale language model training techniques for physical intelligence
+• Low-resource language models and morphologically rich language processing
+
+================================================================================
+AWARDS & ACHIEVEMENTS
+================================================================================
+• Yale Tsai City Ventures Program Grant Winner 2025 ($20,000)
+• Strong Compute GPU Chess Hackathon Winner 2024
