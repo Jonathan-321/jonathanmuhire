@@ -11,12 +11,62 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888;
+            --text-tertiary: #666;
+            --text-highlight: #fff;
+            --border-primary: #1a1a1a;
+            --border-secondary: #333;
+            --accent: #4a9eff;
+            --hero-gradient-start: #0f0f0f;
+            --hero-gradient-end: #141414;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #fafafa;
+            --bg-secondary: #f0f0f0;
+            --bg-tertiary: #e8e8e8;
+            --text-primary: #0a0a0a;
+            --text-secondary: #4a4a4a;
+            --text-tertiary: #757575;
+            --text-highlight: #000;
+            --border-primary: #e5e5e5;
+            --border-secondary: #d0d0d0;
+            --accent: #0066ff;
+            --hero-gradient-start: #f8f8f8;
+            --hero-gradient-end: #f0f0f0;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text-highlight);
+            transition: width 0.3s ease;
+        }
+
+        .links a:hover::after {
+            width: 100%;
+        }
+
+        .links a {
+            position: relative;
         }
 
         .container {
@@ -26,7 +76,7 @@
         }
 
         header {
-            margin-bottom: 80px;
+            margin-bottom: 50px;
             text-align: center;
         }
 
@@ -35,12 +85,15 @@
             font-weight: 300;
             letter-spacing: 0.05em;
             margin-bottom: 10px;
-            color: #fff;
+            background: linear-gradient(135deg, var(--text-highlight) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
             font-size: 0.85rem;
-            color: #666;
+            color: var(--text-tertiary);
             letter-spacing: 0.02em;
         }
 
@@ -53,18 +106,18 @@
         }
 
         .links a {
-            color: #888;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .links a:hover {
-            color: #fff;
+            color: var(--text-highlight);
         }
 
         .section {
             margin-bottom: 50px;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid var(--border-primary);
             padding-bottom: 30px;
         }
 
@@ -82,7 +135,7 @@
         }
 
         .section-header:hover {
-            color: #fff;
+            color: var(--text-highlight);
         }
 
         .section-title {
@@ -90,13 +143,13 @@
             font-weight: 400;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #b0b0b0;
+            color: var(--text-secondary);
         }
 
         .arrow {
             font-size: 0.7rem;
             transition: transform 0.3s ease;
-            color: #666;
+            color: var(--text-tertiary);
         }
 
         .section.active .arrow {
@@ -110,6 +163,81 @@
             padding-top: 0;
         }
 
+        .hero {
+            background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+            animation: pulse 20s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .vision-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+            line-height: 1.6;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .vision-text em {
+            font-style: normal;
+            color: var(--text-highlight);
+            font-weight: 400;
+        }
+
+        .current-focus {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .current-focus strong {
+            color: var(--text-secondary);
+        }
+
+        .metrics {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .metric {
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(74, 158, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+        }
+
         .section.active .section-content {
             max-height: 2000px;
             padding-top: 20px;
@@ -119,6 +247,25 @@
             margin-bottom: 20px;
             padding-left: 20px;
             position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+        }
+
+        .group-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .group-title:first-child {
+            margin-top: 0;
         }
 
         .item-with-demo {
@@ -131,7 +278,7 @@
             content: "—";
             position: absolute;
             left: 0;
-            color: #333;
+            color: var(--border-secondary);
         }
 
         .item-content {
@@ -145,11 +292,30 @@
         }
 
         .demo-frame {
-            background: #141414;
+            background: var(--bg-secondary);
             border: 1px solid #1a1a1a;
             border-radius: 8px;
             padding: 8px;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .demo-frame:hover {
+            border-color: var(--border-secondary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="light"] .project-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .demo-frame img,
@@ -180,19 +346,19 @@
             content: "—";
             position: absolute;
             left: 0;
-            color: #333;
+            color: var(--border-secondary);
         }
 
         .item-title {
             font-size: 0.9rem;
-            color: #d0d0d0;
+            color: var(--text-primary);
             margin-bottom: 5px;
         }
 
         .item-title a {
             color: inherit;
             text-decoration: none;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-secondary);
             transition: border-color 0.3s ease;
         }
 
@@ -202,8 +368,15 @@
 
         .item-desc {
             font-size: 0.8rem;
-            color: #666;
-            line-height: 1.5;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .item-impact {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-top: 8px;
+            font-weight: 500;
         }
 
         .tech-stack {
@@ -215,22 +388,30 @@
 
         .tech {
             font-size: 0.7rem;
-            color: #888;
-            background: #141414;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
             padding: 3px 8px;
             border-radius: 3px;
+            border: 1px solid #1a1a1a;
+            transition: all 0.2s ease;
+        }
+
+        .tech:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-secondary);
         }
 
         .paper-link {
             font-size: 0.8rem;
-            color: #666;
+            color: var(--text-tertiary);
             margin-top: 8px;
         }
 
         .paper-link a {
-            color: #888;
+            color: var(--text-secondary);
             text-decoration: none;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-secondary);
             transition: border-color 0.3s ease;
         }
 
@@ -246,11 +427,11 @@
 
         .background-item {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-tertiary);
         }
 
         .background-item strong {
-            color: #d0d0d0;
+            color: var(--text-primary);
         }
 
         @media (max-width: 600px) {
@@ -268,13 +449,187 @@
                 align-items: center;
             }
         }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 26px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--border-secondary);
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="light"] .theme-toggle-slider {
+            transform: translateX(24px);
+            background: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Floating bubbles background */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            top: -100px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(200, 210, 255, 0.1);
+            border-radius: 50%;
+            animation: bubble 15s infinite ease-in-out;
+            filter: blur(2px);
+        }
+
+        [data-theme="light"] .bubble {
+            background-color: rgba(150, 170, 255, 0.06);
+        }
+
+        @keyframes bubble {
+            0% {
+                top: -100px;
+                transform: translateX(0) scale(0.8);
+            }
+            20% {
+                transform: translateX(-150px) scale(1);
+            }
+            80% {
+                transform: translateX(150px) scale(1);
+            }
+            100% {
+                top: 100vh;
+                transform: translateX(200px) scale(0.6);
+            }
+        }
+
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 30%;
+            animation-duration: 25s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            left: 70%;
+            animation-duration: 20s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 35%;
+            animation-duration: 30s;
+            animation-delay: 4s;
+            background-color: rgba(255, 220, 220, 0.1);
+        }
+        [data-theme="light"] .bubble:nth-child(3) {
+            background-color: rgba(255, 200, 200, 0.06);
+        }
+
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            left: 60%;
+            animation-duration: 18s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 55%;
+            animation-duration: 22s;
+            animation-delay: 3s;
+            background-color: rgba(220, 255, 230, 0.1);
+        }
+        [data-theme="light"] .bubble:nth-child(5) {
+            background-color: rgba(200, 255, 210, 0.06);
+        }
+
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 65%;
+            animation-duration: 28s;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-duration: 35s;
+            animation-delay: 7s;
+            background-color: rgba(255, 245, 220, 0.1);
+        }
+        [data-theme="light"] .bubble:nth-child(7) {
+            background-color: rgba(255, 240, 200, 0.06);
+        }
+
+        .bubble:nth-child(8) {
+            width: 25px;
+            height: 25px;
+            left: 15%;
+            animation-duration: 24s;
+            animation-delay: 1s;
+        }
     </style>
 </head>
 <body>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    <div class="theme-toggle" id="themeToggle">
+        <div class="theme-toggle-slider"></div>
+    </div>
     <div class="container">
         <header>
             <h1>Jonathan Muhire</h1>
-            <p class="subtitle">Founder @ Neotix · Robotics Data Infrastructure</p>
+            <p class="subtitle">Founder @ Neotix · Robotics Data Infrastructure<br>
+            <span style="font-size: 0.75rem; color: #666;">Dual Degree: BS Computer Science & MS Artificial Intelligence</span></p>
             <div class="links">
                 <a href="https://github.com/Jonathan-321" target="_blank">Github</a>
                 <a href="https://x.com/frogeaterfirst1" target="_blank">X</a>
@@ -282,6 +637,16 @@
                 <a href="https://docs.google.com/document/d/1M2XiX7mFAiUMdnS_nlBqZwRiig2jxwowBDU1ytCv-0Q/edit" target="_blank">Notes</a>
             </div>
         </header>
+
+        <div class="hero">
+            <div class="vision-text">
+                Enabling robots to <em>learn from the physical world</em> as naturally as we perceive, 
+                learn and act through our complex and diverse world
+            </div>
+            <div class="current-focus">
+                <strong>Currently exploring:</strong> Multimodal fusion for robust embodied AI through curriculum learning and synthetic data augmentation
+            </div>
+        </div>
 
         <main>
             <div class="section" id="projects">
@@ -295,7 +660,7 @@
                             <div class="item-title">
                                 <a href="https://github.com/elephantrobotics/pymycobot" target="_blank">PyMyCobot Teleoperation</a>
                             </div>
-                            <div class="item-desc">Developed remote teleoperation system for Bimanual dexterous manipulation and data collection using <a href="https://github.com/elephantrobotics/pymycobot">PyMyCobot</a>. Implemented real-time control protocols and collected demonstration data for imitation learning tasks like pick and place, enabling precise manipulation through intuitive human-robot interfaces.</div>
+                            <div class="item-desc">Developed remote teleoperation system for bimanual dexterous manipulation and data collection using <a href="https://github.com/elephantrobotics/pymycobot">PyMyCobot</a>. Implemented real-time control protocols and collected demonstration data for imitation learning tasks like pick and place, enabling precise manipulation through intuitive human-robot interfaces.</div>
                             <div class="tech-stack">
                                 <span class="tech">Python</span>
                                 <span class="tech">ROS</span>
@@ -395,10 +760,11 @@
 
             <div class="section" id="research">
                 <div class="section-header">
-                    <span class="section-title">Research Interests</span>
+                    <span class="section-title">Research Threads</span>
                     <span class="arrow">→</span>
                 </div>
                 <div class="section-content">
+                    <div class="group-title">Embodied AI & Robotics</div>
                     <div class="item">
                         <div class="item-title">
                             <a href="https://docs.google.com/document/d/1f9s_Srb2_2EB8FlChZi-cBHAu41_HsM5aTEb-9kdkbA/edit?usp=sharing" target="_blank">Neotix Whitepaper</a>
@@ -435,6 +801,8 @@
                         </div>
                         <div class="item-desc">Interactive simulacra of human behavior</div>
                     </div>
+
+                    <div class="group-title">Language Models & NLP</div>
                     <div class="item">
                         <div class="item-title">
                             <a href="https://arxiv.org/abs/2203.08459" target="_blank">KinyaBERT</a>
@@ -461,18 +829,6 @@
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://huggingface.co/AI-MO/NuminaMath-7B-TIR" target="_blank">NuminaMath World Model</a>
-                        </div>
-                        <div class="item-desc">Mathematical reasoning and problem-solving models</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://arxiv.org/abs/2307.12008" target="_blank">Room-Temperature Superconductor</a>
-                        </div>
-                        <div class="item-desc">LK-99 and ambient-pressure superconductivity claims</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
                             <a href="https://aclanthology.org/2023.findings-acl.426.pdf" target="_blank">Low-Resource Language Classification</a>
                         </div>
                         <div class="item-desc">Novel algorithms for underrepresented languages</div>
@@ -482,6 +838,14 @@
                             <a href="https://arxiv.org/pdf/2402.17764.pdf" target="_blank">Era of 1-bit LLMs</a>
                         </div>
                         <div class="item-desc">Extreme quantization in language models</div>
+                    </div>
+
+                    <div class="group-title">Model Architecture & Theory</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://huggingface.co/AI-MO/NuminaMath-7B-TIR" target="_blank">NuminaMath World Model</a>
+                        </div>
+                        <div class="item-desc">Mathematical reasoning and problem-solving models</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
@@ -507,6 +871,14 @@
                         </div>
                         <div class="item-desc">Comprehensive overview of transformer applications</div>
                     </div>
+
+                    <div class="group-title">Frontier Research</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://arxiv.org/abs/2307.12008" target="_blank">Room-Temperature Superconductor</a>
+                        </div>
+                        <div class="item-desc">LK-99 and ambient-pressure superconductivity claims</div>
+                    </div>
                 </div>
             </div>
 
@@ -516,17 +888,12 @@
                     <span class="arrow">→</span>
                 </div>
                 <div class="section-content">
+                    <div class="group-title">On Building & Research</div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://situational-awareness.ai/" target="_blank">Situational Awareness: The Decade Ahead</a>
+                            <a href="https://paulgraham.com/ds.html" target="_blank">Do Things That Don't Scale</a>
                         </div>
-                        <div class="item-desc">Leopold Aschenbrenner on AGI timelines and implications</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://www.palladiummag.com/2023/07/13/dont-learn-your-values-from-society/" target="_blank">Don't Learn Your Values From Society</a>
-                        </div>
-                        <div class="item-desc">On independent thinking and value formation</div>
+                        <div class="item-desc">Paul Graham on startup growth strategies</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
@@ -542,15 +909,29 @@
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://avalonlibrary.net/ebooks/David%20Deutsch%20-%20The%20Beginning%20of%20Infinity%20-%20Explanations%20that%20Transform%20the%20World.pdf" target="_blank">The Beginning of Infinity</a>
+                            <a href="https://www.lesswrong.com/posts/bx3gkHJehRCYZAF3r/pain-is-not-the-unit-of-effort" target="_blank">Pain Is Not the Unit of Effort</a>
                         </div>
-                        <div class="item-desc">David Deutsch on explanations that transform the world</div>
+                        <div class="item-desc">On effective work vs suffering for its own sake</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://paulgraham.com/ds.html" target="_blank">Do Things That Don't Scale</a>
+                            <a href="https://marginalrevolution.com/marginalrevolution/2021/06/how-do-you-ask-good-questions.html" target="_blank">How Do You Ask Good Questions?</a>
                         </div>
-                        <div class="item-desc">Paul Graham on startup growth strategies</div>
+                        <div class="item-desc">Tyler Cowen on the art of inquiry</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://teachyourselfcs.com/" target="_blank">Teach Yourself Computer Science</a>
+                        </div>
+                        <div class="item-desc">Self-directed CS curriculum guide</div>
+                    </div>
+
+                    <div class="group-title">Career & Life Philosophy</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.palladiummag.com/2023/07/13/dont-learn-your-values-from-society/" target="_blank">Don't Learn Your Values From Society</a>
+                        </div>
+                        <div class="item-desc">On independent thinking and value formation</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
@@ -572,69 +953,15 @@
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://www.lesswrong.com/posts/bx3gkHJehRCYZAF3r/pain-is-not-the-unit-of-effort" target="_blank">Pain Is Not the Unit of Effort</a>
-                        </div>
-                        <div class="item-desc">On effective work vs suffering for its own sake</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://www.epsilontheory.com/why-we-dont-trust-each-other-anymore/" target="_blank">Why We Don't Trust Each Other Anymore</a>
-                        </div>
-                        <div class="item-desc">Epsilon Theory on societal trust erosion</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://www.tabletmag.com/feature/american-vulcan-palmer-luckey-anduril" target="_blank">Palmer Luckey, American Vulcan</a>
-                        </div>
-                        <div class="item-desc">Profile of the Anduril founder and defense innovation</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://semianalysis.com/2025/03/11/america-is-missing-the-new-labor-economy-robotics-part-1/" target="_blank">Robotics Geopolitics</a>
-                        </div>
-                        <div class="item-desc">America's position in the new labor economy</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/" target="_blank">What Is ChatGPT Doing and Why Does It Work?</a>
-                        </div>
-                        <div class="item-desc">Stephen Wolfram's technical deep dive into LLMs</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
                             <a href="https://www.lewissociety.org/innerring/" target="_blank">The Inner Ring</a>
                         </div>
                         <div class="item-desc">CS Lewis on social exclusion and ambition</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://ciechanow.ski/gps/" target="_blank">GPS</a>
+                            <a href="https://avalonlibrary.net/ebooks/David%20Deutsch%20-%20The%20Beginning%20of%20Infinity%20-%20Explanations%20that%20Transform%20the%20World.pdf" target="_blank">The Beginning of Infinity</a>
                         </div>
-                        <div class="item-desc">Bartosz Ciechanowski's interactive explainer</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://users.ece.cmu.edu/~gamvrosi/thelastq.html" target="_blank">The Last Question</a>
-                        </div>
-                        <div class="item-desc">Asimov's short story on entropy and existence</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://www.thealgorithmicbridge.com/p/deepseek-is-chinese-but-its-ai-models" target="_blank">DeepSeek's Algorithm</a>
-                        </div>
-                        <div class="item-desc">Analysis of Chinese AI model architectures</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://marginalrevolution.com/marginalrevolution/2021/06/how-do-you-ask-good-questions.html" target="_blank">How Do You Ask Good Questions?</a>
-                        </div>
-                        <div class="item-desc">Tyler Cowen on the art of inquiry</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://teachyourselfcs.com/" target="_blank">Teach Yourself Computer Science</a>
-                        </div>
-                        <div class="item-desc">Self-directed CS curriculum guide</div>
+                        <div class="item-desc">David Deutsch on explanations that transform the world</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
@@ -660,6 +987,56 @@
                         </div>
                         <div class="item-desc">Rethinking our perception of time</div>
                     </div>
+
+                    <div class="group-title">Technical Deep Dives</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://situational-awareness.ai/" target="_blank">Situational Awareness: The Decade Ahead</a>
+                        </div>
+                        <div class="item-desc">Leopold Aschenbrenner on AGI timelines and implications</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/" target="_blank">What Is ChatGPT Doing and Why Does It Work?</a>
+                        </div>
+                        <div class="item-desc">Stephen Wolfram's technical deep dive into LLMs</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://ciechanow.ski/gps/" target="_blank">GPS</a>
+                        </div>
+                        <div class="item-desc">Bartosz Ciechanowski's interactive explainer</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.thealgorithmicbridge.com/p/deepseek-is-chinese-but-its-ai-models" target="_blank">DeepSeek's Algorithm</a>
+                        </div>
+                        <div class="item-desc">Analysis of Chinese AI model architectures</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.tabletmag.com/feature/american-vulcan-palmer-luckey-anduril" target="_blank">Palmer Luckey, American Vulcan</a>
+                        </div>
+                        <div class="item-desc">Profile of the Anduril founder and defense innovation</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://semianalysis.com/2025/03/11/america-is-missing-the-new-labor-economy-robotics-part-1/" target="_blank">Robotics Geopolitics</a>
+                        </div>
+                        <div class="item-desc">America's position in the new labor economy</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://users.ece.cmu.edu/~gamvrosi/thelastq.html" target="_blank">The Last Question</a>
+                        </div>
+                        <div class="item-desc">Asimov's short story on entropy and existence</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://www.epsilontheory.com/why-we-dont-trust-each-other-anymore/" target="_blank">Why We Don't Trust Each Other Anymore</a>
+                        </div>
+                        <div class="item-desc">Epsilon Theory on societal trust erosion</div>
+                    </div>
                 </div>
             </div>
 
@@ -669,17 +1046,12 @@
                     <span class="arrow">→</span>
                 </div>
                 <div class="section-content">
+                    <div class="group-title">Courses & Tutorials</div>
                     <div class="item">
                         <div class="item-title">
                             <a href="http://neuralnetworksanddeeplearning.com/" target="_blank">Neural Networks and Deep Learning</a>
                         </div>
                         <div class="item-desc">Michael Nielsen's interactive book on neural networks</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://github.com/labmlai/annotated_deep_learning_paper_implementations" target="_blank">Annotated Deep Learning Papers</a>
-                        </div>
-                        <div class="item-desc">Implementation guides for key ML papers</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
@@ -689,16 +1061,32 @@
                     </div>
                     <div class="item">
                         <div class="item-title">
+                            <a href="https://mlc.ai/chapter_introduction/index.html" target="_blank">Machine Learning Compilation</a>
+                        </div>
+                        <div class="item-desc">Building and deploying ML applications</div>
+                    </div>
+
+                    <div class="group-title">Papers & Implementations</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/labmlai/annotated_deep_learning_paper_implementations" target="_blank">Annotated Deep Learning Papers</a>
+                        </div>
+                        <div class="item-desc">Implementation guides for key ML papers</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">
                             <a href="https://karpathy.medium.com/yes-you-should-understand-backprop-e2f06eab496b" target="_blank">Yes You Should Understand Backprop</a>
                         </div>
                         <div class="item-desc">Karpathy on the importance of fundamentals</div>
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://github.com/Ouckah/Summer2025-Internships" target="_blank">Summer 2025 Tech Internships</a>
+                            <a href="https://timdettmers.com/2022/08/17/llm-int8-and-emergent-features/" target="_blank">LLM.int8() and Emergent Features</a>
                         </div>
-                        <div class="item-desc">Crowdsourced list of internship opportunities</div>
+                        <div class="item-desc">Tim Dettmers on LLM quantization</div>
                     </div>
+
+                    <div class="group-title">Tools & Frameworks</div>
                     <div class="item">
                         <div class="item-title">
                             <a href="https://segment-anything.com/" target="_blank">Segment Anything</a>
@@ -707,21 +1095,17 @@
                     </div>
                     <div class="item">
                         <div class="item-title">
-                            <a href="https://mlc.ai/chapter_introduction/index.html" target="_blank">Machine Learning Compilation</a>
-                        </div>
-                        <div class="item-desc">Building and deploying ML applications</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
-                            <a href="https://timdettmers.com/2022/08/17/llm-int8-and-emergent-features/" target="_blank">LLM.int8() and Emergent Features</a>
-                        </div>
-                        <div class="item-desc">Tim Dettmers on LLM quantization</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-title">
                             <a href="https://github.com/AntonOsika/gpt-engineer" target="_blank">GPT Engineer</a>
                         </div>
                         <div class="item-desc">AI agent for autonomous code generation</div>
+                    </div>
+
+                    <div class="group-title">Career Resources</div>
+                    <div class="item">
+                        <div class="item-title">
+                            <a href="https://github.com/Ouckah/Summer2025-Internships" target="_blank">Summer 2025 Tech Internships</a>
+                        </div>
+                        <div class="item-desc">Crowdsourced list of internship opportunities</div>
                     </div>
                 </div>
             </div>
@@ -729,6 +1113,21 @@
     </div>
 
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Section toggle functionality
         document.querySelectorAll('.section-header').forEach(header => {
             header.addEventListener('click', () => {
                 const section = header.parentElement;
