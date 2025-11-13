@@ -74,4 +74,31 @@
   ::file-selector-button {
     @apply border-border outline-ring/50 tracking-tight;
   }
+  
+  /* Add subtle background pattern */
+  body {
+    position: relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(120, 120, 120, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(120, 120, 120, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(120, 120, 120, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  [data-theme='dark'] body::before {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.01) 0%, transparent 50%);
+  }
 }

@@ -2,45 +2,55 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllProjects } from '@/lib/data-utils'
-
-const projects = await getAllProjects()
 ---
 
 <Layout class="max-w-3xl">
-  <PageHead slot="head" title="About" />
+  <PageHead slot="head" title="About" description="Learn more about Jonathan Muhire" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>
     <div class="min-w-full">
-      <div class="prose mb-8">
-        <p class="mt-0">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            external
-            underline>Astro</Link
-          >, <Link href="https://tailwindcss.com" external underline
-            >Tailwind</Link
-          >, and <Link href="https://ui.shadcn.com" external underline
-            >shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
-        </p>
+      <div class="prose prose-neutral dark:prose-invert max-w-none">
+        <h1 class="text-3xl font-medium mb-8">About Me</h1>
+        
         <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+          I'm Jonathan Muhire, previously co-founder at Neotix where we built infrastructure for robotics data collection 
+          and embodied AI systems. I'm passionate about creating the foundation that enables robots to understand and 
+          interact with our physical world through continuous learning.
         </p>
-      </div>
 
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
-      <div class="flex flex-col gap-4">
-        {projects.map((project) => <ProjectCard project={project} />)}
+        <h2 class="text-2xl font-medium mt-8 mb-4">Background</h2>
+        <p>
+          I hold a dual degree in Computer Science (BS) and Artificial Intelligence (MS), which has given me a strong 
+          foundation in both theoretical and practical aspects of building intelligent systems. My work sits at the 
+          intersection of robotics, machine learning, and distributed systems.
+        </p>
+
+        <h2 class="text-2xl font-medium mt-8 mb-4">Current Focus</h2>
+        <p>
+          I'm currently exploring multimodal fusion techniques for robust embodied AI, with a particular interest in:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Curriculum learning for robotic manipulation</li>
+          <li>Synthetic data augmentation for sim-to-real transfer</li>
+          <li>Scalable data infrastructure for robotics</li>
+          <li>Real-time teleoperation and imitation learning</li>
+        </ul>
+
+        <h2 class="text-2xl font-medium mt-8 mb-4">Projects & Experience</h2>
+        <p>
+          My recent work includes developing teleoperation systems for bimanual manipulation, building data extraction 
+          pipelines for visual SLAM, and creating version-controlled infrastructure for large-scale robotics datasets. 
+          I've worked with various robotic platforms including MyCobot, UMI, and LeRobot.
+        </p>
+
+        <h2 class="text-2xl font-medium mt-8 mb-4">Get in Touch</h2>
+        <p>
+          I'm always excited to discuss robotics, AI infrastructure, or potential collaborations. Feel free to reach out 
+          via <Link href="mailto:muhirejonathan123@gmail.com">email</Link> or connect with me on 
+          <Link href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" external>LinkedIn</Link>.
+        </p>
       </div>
     </div>
   </section>

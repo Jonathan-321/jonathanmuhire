@@ -1,85 +1,588 @@
 ---
-import BlogCard from '@/components/BlogCard.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import { buttonVariants } from '@/components/ui/button'
-import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts } from '@/lib/data-utils'
 
-const blog = await getRecentPosts(SITE.featuredPostCount)
+const blog = await getRecentPosts(3)
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-none">
   <PageHead slot="head" title="Home" />
-  <section class="rounded-lg border">
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
-      <p class="text-muted-foreground text-sm">
-        /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
+  
+  <style>
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+    }
+    
+    /* Full-page sections */
+    .page-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      scroll-snap-align: start;
+    }
+    
+    /* First page - intro */
+    .intro-page {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 0;
+    }
+    
+    /* Intro blob */
+    .intro-blob {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      max-width: 500px;
+    }
+    
+    .blob-title {
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      color: var(--foreground);
+    }
+    
+    .blob-text {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--foreground);
+      margin-bottom: 0.75rem;
+    }
+    
+    .blob-subtext {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--muted-foreground);
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    
+    .scroll-indicator:hover {
+      opacity: 1;
+    }
+    
+    .scroll-text {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-foreground);
+    }
+    
+    .scroll-arrow {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .scroll-arrow::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--foreground);
+      animation: scrollDown 2s infinite;
+    }
+    
+    @keyframes scrollDown {
+      0% {
+        transform: translateY(-100%);
+      }
+      50% {
+        transform: translateY(200%);
+      }
+      100% {
+        transform: translateY(200%);
+      }
+    }
+    
+    /* Navigation boxes */
+    .nav-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      width: 100%;
+      align-items: start;
+    }
+    
+    .boxes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-foreground);
+      margin-bottom: 1.5rem;
+    }
+    
+    .boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    
+    .box {
+      display: block;
+      aspect-ratio: 1;
+      background: var(--background);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--foreground);
+      transition: border-color 0.2s ease;
+      position: relative;
+    }
+    
+    .box:hover {
+      border-color: var(--foreground);
+    }
+    
+    .box-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 0.4rem;
+      font-size: 0.75rem;
+    }
+    
+    /* Side profiles */
+    .profiles-section {
+      border-left: 1px solid var(--border);
+      padding-left: 3rem;
+    }
+    
+    .profile-link {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--foreground);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .profile-link:hover {
+      opacity: 0.6;
+    }
+    
+    /* Projects page */
+    .projects-container {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .project-entry {
+      display: grid;
+      grid-template-columns: 140px 1fr 100px;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    
+    .project-entry:last-child {
+      border-bottom: none;
+    }
+    
+    .project-year {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      font-variant-numeric: tabular-nums;
+    }
+    
+    .project-entry.year-2024 .project-year {
+      color: #666;
+    }
+    
+    .project-entry.year-2024 .project-title {
+      opacity: 0.85;
+    }
+    
+    .project-entry.year-2024 .project-description {
+      opacity: 0.9;
+    }
+    
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .project-title {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .project-title:hover {
+      opacity: 0.6;
+    }
+    
+    .project-description {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+    
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .project-link::after {
+      content: '↗';
+      margin-left: 0.25rem;
+      font-size: 0.7rem;
+    }
+    
+    .project-link:hover {
+      color: var(--foreground);
+    }
+    
+    .project-tech {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    /* Writing page */
+    .writing-list {
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .post-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .post-item:last-child {
+      border-bottom: none;
+    }
+    
+    .post-date {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.5rem;
+    }
+    
+    .post-title {
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+    
+    [data-theme='dark'] .box,
+    [data-theme='dark'] .project-item {
+      background: var(--background);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .profiles-section {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 2rem;
+      }
+      
+      .boxes-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .intro-blob {
+        left: 2rem;
+        bottom: 3rem;
+        max-width: calc(100% - 4rem);
+      }
+      
+      .blob-title {
+        font-size: 1.5rem;
+      }
+      
+      .blob-text {
+        font-size: 1rem;
+      }
+      
+      .project-entry {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .project-year {
+        order: -1;
+        margin-bottom: 0.5rem;
+      }
+      
+      .project-tech {
+        text-align: left;
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+  
+  <!-- Page 1: Intro -->
+  <section class="page-section intro-page">
+    <div class="intro-blob">
+      <h1 class="blob-title">Hi, I'm Jonathan.</h1>
+      <p class="blob-text">
+        I design intelligent systems that learn from experience.
+      </p>
+      <p class="blob-subtext">
+        I explore multimodal fusion and curriculum learning to make autonomous systems more adaptive and reliable.
       </p>
     </div>
-    <div class="p-6 pt-0">
-      <p class="text-muted-foreground mb-2 text-sm">
-        astro-erudite is an opinionated, unstyled static blogging template built
-        with <Link
-          href="https://astro.build"
-          class="text-foreground"
-          external
-          underline>Astro</Link
-        >, <Link
-          href="https://tailwindcss.com"
-          class="text-foreground"
-          external
-          underline>Tailwind</Link
-        >, and <Link
-          href="https://ui.shadcn.com"
-          class="text-foreground"
-          external
-          underline>shadcn/ui</Link
-        >. Extraordinarily loosely based on the <Link
-          href="https://astro-micro.vercel.app/"
-          class="text-foreground"
-          external
-          underline>Astro Micro</Link
-        > theme.
-      </p>
-      <p class="text-muted-foreground text-sm">
-        To use this template, check out the <Link
-          href="https://github.com/jktrn/astro-erudite"
-          class="text-foreground"
-          underline
-          external>GitHub</Link
-        > repository. To learn more about why this template exists, read this blog
-        post: <Link
-          href="/blog/the-state-of-static-blogs"
-          class="text-foreground"
-          underline>The State of Static Blogs in 2024</Link
-        >.
-      </p>
+    <div class="scroll-indicator">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-arrow"></div>
     </div>
   </section>
-  <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest posts</h2>
-    <ul class="flex flex-col gap-y-4">
-      {
-        blog.map((post) => (
-          <li>
-            <BlogCard entry={post} />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex justify-center">
-      <Link
-        href="/blog"
-        class={buttonVariants({ variant: 'ghost' }) + ' group'}
-      >
-        See all posts <span
-          class="ml-1.5 transition-transform group-hover:translate-x-1"
-          >&rarr;</span
-        >
-      </Link>
+  
+  <!-- Page 2: Navigation -->
+  <section class="page-section">
+    <div class="nav-section">
+      <!-- Left side - boxes -->
+      <div class="boxes-container">
+        <div>
+          <div class="section-label">How do I...</div>
+          <div class="boxes-grid">
+            <a href="#projects" class="box">
+              <span class="box-label">Projects</span>
+            </a>
+            
+            <a href="#about" class="box">
+              <span class="box-label">About</span>
+            </a>
+            
+            <a href="#writing" class="box">
+              <span class="box-label">Writing</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right side - profiles -->
+      <div class="profiles-section">
+        <div class="section-label">Profiles</div>
+        <div>
+          <a href="mailto:muhirejonathan123@gmail.com" class="profile-link">Email</a>
+          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
+          <a href="https://drive.google.com/file/d/1fp8UE3FwneJaqZkecK6oP1XbRuv_anoQ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="profile-link">Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Page 3: Projects -->
+  <section id="projects" class="page-section">
+    <div class="projects-container">
+      <h2 class="section-label" style="margin-bottom: 3rem;">Projects</h2>
+      <div class="projects-list">
+        <!-- PyMyCobot Teleoperation -->
+        <div class="project-entry">
+          <div class="project-year">2025</div>
+          <div class="project-info">
+            <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">
+              PyMyCobot Teleoperation
+            </a>
+            <p class="project-description">
+              Developed remote teleoperation system for bimanual dexterous manipulation and data collection. Implemented real-time control protocols for imitation learning tasks.
+            </p>
+            <div class="project-links">
+              <a href="/media/neotixdemo.mp4" target="_blank" class="project-link">Demo</a>
+              <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>ROS</span>
+          </div>
+        </div>
+        
+        <!-- UMI Multi-Sensor Data Extraction -->
+        <div class="project-entry">
+          <div class="project-year">2025</div>
+          <div class="project-info">
+            <a href="https://umi-gripper.github.io/" target="_blank" rel="noopener noreferrer" class="project-title">
+              UMI Multi-Sensor Data Extraction
+            </a>
+            <p class="project-description">
+              Engineered comprehensive data extraction pipeline implementing SLAM-ORB3 for trajectory extraction and real-time 7-DOF trajectory analysis.
+            </p>
+            <div class="project-links">
+              <a href="/media/umi-demo.mp4" target="_blank" class="project-link">Demo</a>
+              <a href="https://umi-gripper.github.io/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+              <a href="https://umi-gripper.github.io/umi.pdf" target="_blank" rel="noopener noreferrer" class="project-link">Paper</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>SLAM-ORB3</span>
+            <span>Rerun</span>
+          </div>
+        </div>
+        
+        <!-- UMI Data Annotation Pipeline -->
+        <div class="project-entry">
+          <div class="project-year">2025</div>
+          <div class="project-info">
+            <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank" rel="noopener noreferrer" class="project-title">
+              UMI Data Annotation Pipeline
+            </a>
+            <p class="project-description">
+              Developed annotation tools for robotic manipulation datasets using embodied Chain-of-Thought methods for labeling gripper poses and keyframes.
+            </p>
+            <div class="project-links">
+              <a href="/media/UMI-annotated.mp4" target="_blank" class="project-link">Demo</a>
+              <a href="https://arxiv.org/pdf/2407.08693" target="_blank" rel="noopener noreferrer" class="project-link">Paper</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>PyTorch</span>
+            <span>Computer Vision</span>
+          </div>
+        </div>
+        
+        <!-- MinIO + LakeFS Data Infrastructure -->
+        <div class="project-entry">
+          <div class="project-year">2025</div>
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">
+              MinIO + LakeFS Data Infrastructure
+            </a>
+            <p class="project-description">
+              Architected scalable data storage and versioning system for robotics datasets with Git-like version control for large sensor data.
+            </p>
+            <div class="project-links">
+              <a href="/media/minio+LakeFS.MP4" target="_blank" class="project-link">Demo</a>
+              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>MinIO</span>
+            <span>LakeFS</span>
+          </div>
+        </div>
+        
+        <!-- LeRobot ISO-101 Platform -->
+        <div class="project-entry">
+          <div class="project-year">2025</div>
+          <div class="project-info">
+            <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-title">
+              LeRobot ISO-101 Platform
+            </a>
+            <p class="project-description">
+              Built end-to-end robotic learning platform with data collection pipelines and policy training infrastructure for rapid prototyping.
+            </p>
+            <div class="project-links">
+              <a href="/media/lerobot.MP4" target="_blank" class="project-link">Demo</a>
+              <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-link">Models</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>LeRobot</span>
+            <span>ROS2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Page 4: About -->
+  <section id="about" class="page-section">
+    <div class="projects-container">
+      <h2 class="section-label" style="margin-bottom: 3rem;">About</h2>
+      <div class="project-entry">
+        <div class="project-year"></div>
+        <div class="project-info">
+          <a href="/about" class="project-title">
+            About
+          </a>
+          <p class="project-description">
+            Learn more about my background, experience, and approach to building intelligent systems.
+          </p>
+          <div class="project-links">
+            <a href="/about" class="project-link">Read more</a>
+          </div>
+        </div>
+        <div class="project-tech">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Page 5: Writing -->
+  <section id="writing" class="page-section">
+    <div class="writing-list">
+      <h2 class="section-label" style="margin-bottom: 3rem;">Recent Writing</h2>
+      {blog.map((post) => (
+        <article class="post-item">
+          <time class="post-date">
+            {new Date(post.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          <h3 class="post-title">
+            <Link href={`/blog/${post.id}`} class="project-link">
+              {post.data.title}
+            </Link>
+          </h3>
+        </article>
+      ))}
     </div>
   </section>
 </Layout>
