@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'Jonathan Muhire',
   description:
     'Prev Cofounder @ Neotix · Building infrastructure for embodied AI through robotics data and continuous learning',
-  href: 'https://jonathan-321.github.io',
+  href: 'https://jonathanmuhire.com',
   author: 'Jonathan Muhire',
   locale: 'en-US',
   featuredPostCount: 2,
