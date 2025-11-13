@@ -4,7 +4,7 @@ A modern portfolio website built with Astro, featuring a clean design and full-p
 
 ## 🚀 Live Site
 
-Visit the live site at: [jonathan-321.github.io/jonathanmuhire](jonathanmuhire.com)
+Visit the live site at: jonathanmuhire.com
 
 ## ✨ Features
 
