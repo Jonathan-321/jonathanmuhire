@@ -34,17 +34,28 @@ const blog = await getRecentPosts(3)
     .intro-page {
       position: relative;
       display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      padding: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    
+    [data-theme="light"] .intro-page {
+      background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
     
     /* Intro blob */
     .intro-blob {
-      position: absolute;
-      bottom: 4rem;
-      left: 4rem;
-      max-width: 500px;
+      position: relative;
+      padding: 4rem;
+      max-width: 600px;
     }
     
     .blob-title {
@@ -67,6 +78,7 @@ const blog = await getRecentPosts(3)
       color: var(--muted-foreground);
     }
     
+    
     /* Scroll indicator */
     .scroll-indicator {
       position: absolute;
@@ -79,10 +91,14 @@ const blog = await getRecentPosts(3)
       gap: 0.5rem;
       opacity: 0.6;
       transition: opacity 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--muted-foreground);
     }
     
     .scroll-indicator:hover {
       opacity: 1;
+      color: var(--foreground);
     }
     
     .scroll-text {
@@ -199,6 +215,21 @@ const blog = await getRecentPosts(3)
       max-width: 800px;
     }
     
+    /* Year sections */
+    .year-section {
+      margin-bottom: 4rem;
+    }
+    
+    .year-header {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--muted-foreground);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    
     .projects-list {
       display: flex;
       flex-direction: column;
@@ -207,11 +238,15 @@ const blog = await getRecentPosts(3)
     
     .project-entry {
       display: grid;
-      grid-template-columns: 140px 1fr 100px;
+      grid-template-columns: 1fr 100px;
       gap: 2rem;
       padding: 1.5rem 0;
       border-bottom: 1px solid var(--border);
       align-items: baseline;
+    }
+    
+    .project-year {
+      display: none;
     }
     
     .project-entry:last-child {
@@ -359,6 +394,10 @@ const blog = await getRecentPosts(3)
         gap: 1rem;
       }
       
+      .year-header {
+        font-size: 1.25rem;
+      }
+      
       .project-year {
         order: -1;
         margin-bottom: 0.5rem;
@@ -378,16 +417,16 @@ const blog = await getRecentPosts(3)
     <div class="intro-blob">
       <h1 class="blob-title">Hi, I'm Jonathan.</h1>
       <p class="blob-text">
-        I design intelligent systems that learn from experience.
+        I build learning systems for real-world robots.
       </p>
       <p class="blob-subtext">
-        I explore multimodal fusion and curriculum learning to make autonomous systems more adaptive and reliable.
+        Graduate researcher working on multimodal fusion and large-scale robot data pipelines. Previously co-founded Neotix Robotics.
       </p>
     </div>
-    <div class="scroll-indicator">
-      <span class="scroll-text">Scroll</span>
+    <a href="#projects" class="scroll-indicator">
+      <span class="scroll-text">View My Work</span>
       <div class="scroll-arrow"></div>
-    </div>
+    </a>
   </section>
   
   <!-- Page 2: Navigation -->
@@ -395,21 +434,18 @@ const blog = await getRecentPosts(3)
     <div class="nav-section">
       <!-- Left side - boxes -->
       <div class="boxes-container">
-        <div>
-          <div class="section-label">How do I...</div>
-          <div class="boxes-grid">
-            <a href="#projects" class="box">
-              <span class="box-label">Projects</span>
-            </a>
-            
-            <a href="#about" class="box">
-              <span class="box-label">About</span>
-            </a>
-            
-            <a href="#writing" class="box">
-              <span class="box-label">Writing</span>
-            </a>
-          </div>
+        <div class="boxes-grid">
+          <a href="#projects" class="box">
+            <span class="box-label">Projects</span>
+          </a>
+          
+          <a href="#about" class="box">
+            <span class="box-label">About</span>
+          </a>
+          
+          <a href="#writing" class="box">
+            <span class="box-label">Writing</span>
+          </a>
         </div>
       </div>
       
@@ -430,10 +466,13 @@ const blog = await getRecentPosts(3)
   <section id="projects" class="page-section">
     <div class="projects-container">
       <h2 class="section-label" style="margin-bottom: 3rem;">Projects</h2>
-      <div class="projects-list">
+      
+      <!-- 2025 Projects -->
+      <div class="year-section">
+        <h3 class="year-header">2025 - Robotics & AI Research</h3>
+        <div class="projects-list">
         <!-- PyMyCobot Teleoperation -->
         <div class="project-entry">
-          <div class="project-year">2025</div>
           <div class="project-info">
             <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">
               PyMyCobot Teleoperation
@@ -454,7 +493,6 @@ const blog = await getRecentPosts(3)
         
         <!-- UMI Multi-Sensor Data Extraction -->
         <div class="project-entry">
-          <div class="project-year">2025</div>
           <div class="project-info">
             <a href="https://umi-gripper.github.io/" target="_blank" rel="noopener noreferrer" class="project-title">
               UMI Multi-Sensor Data Extraction
@@ -476,7 +514,6 @@ const blog = await getRecentPosts(3)
         
         <!-- UMI Data Annotation Pipeline -->
         <div class="project-entry">
-          <div class="project-year">2025</div>
           <div class="project-info">
             <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank" rel="noopener noreferrer" class="project-title">
               UMI Data Annotation Pipeline
@@ -497,7 +534,6 @@ const blog = await getRecentPosts(3)
         
         <!-- MinIO + LakeFS Data Infrastructure -->
         <div class="project-entry">
-          <div class="project-year">2025</div>
           <div class="project-info">
             <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">
               MinIO + LakeFS Data Infrastructure
@@ -518,7 +554,6 @@ const blog = await getRecentPosts(3)
         
         <!-- LeRobot ISO-101 Platform -->
         <div class="project-entry">
-          <div class="project-year">2025</div>
           <div class="project-info">
             <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-title">
               LeRobot ISO-101 Platform
@@ -535,6 +570,178 @@ const blog = await getRecentPosts(3)
             <span>LeRobot</span>
             <span>ROS2</span>
           </div>
+        </div>
+        
+        <!-- RenAIssance GSoC -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">
+              RenAIssance Document Analysis
+            </a>
+            <p class="project-description">
+              Google Summer of Code 2025 project. Built AI pipeline for digitizing Renaissance-era texts using deep learning for layout recognition and OCR.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>PyTorch</span>
+            <span>LayoutLMv3</span>
+            <span>GSoC</span>
+          </div>
+        </div>
+        
+        <!-- ISSR -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">
+              ISSR - Mental Health Crisis Detection
+            </a>
+            <p class="project-description">
+              GSoC candidate project. AI-powered system for suicide prevention through social media analysis, sentiment detection, and geospatial crisis mapping.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>NLP</span>
+            <span>Social Media APIs</span>
+            <span>Mental Health AI</span>
+          </div>
+        </div>
+        
+        <!-- ArtExtract -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-title">
+              ArtExtract - Art Analysis AI
+            </a>
+            <p class="project-description">
+              Deep learning system combining CNN-RNN architectures for artwork classification, style detection, and similarity analysis across art history.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>CNN-RNN</span>
+            <span>PyTorch</span>
+            <span>Art Analysis</span>
+          </div>
+        </div>
+        </div>
+      </div>
+      
+      <!-- 2024 Projects -->
+      <div class="year-section">
+        <h3 class="year-header">2024 - Full-Stack Development</h3>
+        <div class="projects-list">
+        <!-- NutrAI -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-title">
+              NutrAI Health Assistant
+            </a>
+            <p class="project-description">
+              AI-powered health and nutrition recommendation system. Built full-stack application with intelligent meal planning and dietary analysis.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>React</span>
+          </div>
+        </div>
+        
+        <!-- CampusBuddy -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-title">
+              CampusBuddy Mobile App
+            </a>
+            <p class="project-description">
+              Flutter-based student application for discovering campus events, dining options, and university resources. Designed to enhance student life experience.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Flutter</span>
+            <span>Dart</span>
+            <span>Mobile</span>
+          </div>
+        </div>
+        
+        <!-- Point of Sales Terminal -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-title">
+              Point of Sales Terminal
+            </a>
+            <p class="project-description">
+              Comprehensive Java-based POS system with inventory management, multiple payment methods, and sales reporting. Built with modular architecture for retail environments.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Java</span>
+            <span>OOP</span>
+            <span>Retail Systems</span>
+          </div>
+        </div>
+        </div>
+      </div>
+      
+      <!-- 2023 Projects -->
+      <div class="year-section">
+        <h3 class="year-header">2023 - Game Development</h3>
+        <div class="projects-list">
+        <!-- Space Invader -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-title">
+              Space Invader Game
+            </a>
+            <p class="project-description">
+              Modified version of the classic arcade game with enhanced gameplay mechanics and modern graphics. Implemented in C++ with custom game engine features.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>C++</span>
+            <span>Game Dev</span>
+          </div>
+        </div>
+        
+        <!-- Pacman AI -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-title">
+              Pacman AI
+            </a>
+            <p class="project-description">
+              AI-driven Pacman implementation featuring autonomous agents, pathfinding algorithms, and intelligent ghost behavior. Demonstrates search algorithms and game AI principles.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Pygame</span>
+            <span>AI Algorithms</span>
+          </div>
+        </div>
         </div>
       </div>
     </div>
