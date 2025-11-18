@@ -18,8 +18,10 @@ import { Icon } from 'astro-icon/components'
 <script is:inline data-astro-rerun>
   (() => {
     const theme = (() => {
-      const stored = localStorage?.getItem('theme') ?? ''
-      if (['dark', 'light'].includes(stored)) return stored
+      const stored = localStorage?.getItem('theme')
+      // Only use stored theme if it exists and is valid
+      if (stored && ['dark', 'light'].includes(stored)) return stored
+      // Default to light theme
       return 'light'
     })()
 
