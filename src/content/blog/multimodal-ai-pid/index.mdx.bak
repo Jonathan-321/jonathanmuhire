@@ -1,0 +1,182 @@
+---
+title: "Making Sense of Multimodal Models with Partial Information Decomposition"
+description: "A deep dive into how Partial Information Decomposition (PID) reveals how different modalities interact in AI systems, from redundancy to synergy"
+date: "2024-12-23"
+tags: [multimodal-ai, information-theory, machine-learning, neurips]
+authors: [jonathan-muhire]
+---
+
+import { Image } from 'astro:assets'
+
+Multimodal AI has gone from niche to everywhere. Image–text models answer questions about photos, speech systems read emotion from voice and face, and robots lean on cameras, depth sensors, and proprioception at the same time. Yet when deciding *how* to fuse all this information, most of us are still guessing. We stack features, add cross‑attention, try a tensor fusion layer, and keep whatever works.
+
+The NeurIPS 2023 paper *Quantifying & Modeling Multimodal Interactions: An Information Decomposition Framework* by Paul Pu Liang and collaborators offers a more principled path. It gives a way to measure how different modalities actually interact on a task, both in the raw data and inside trained models. Instead of treating "multimodal" as a buzzword, it asks a sharper question:  
+
+> How much of the task signal is redundant between modalities, how much is unique to each one, and how much only appears when they are combined?
+
+The tool behind this is **Partial Information Decomposition**, or **PID**. In this post, the goal is to unpack what PID means in this context, how Liang et al. scale it to real datasets, what they find when they apply it, and how you might use the same ideas to design better multimodal systems.
+
+---
+
+## What PID means for two modalities and a label
+
+Consider two modalities, X₁ and X₂. These might be audio and video, an image and a caption, or a camera and a LiDAR scan. Let Y be the task label: sentiment, an action, a diagnosis, a navigation command. Classical information theory gives us mutual information I(X₁,X₂;Y), which measures how many bits of uncertainty about Y disappear when we see both modalities together.
+
+On its own, that single number does not say how the information is distributed across the modalities. Partial Information Decomposition refines it into four non‑negative pieces that still sum to the total:
+
+I(X₁,X₂;Y) = R + U₁ + U₂ + S
+
+- **Redundancy R** is information about the label that is present in both modalities. If either X₁ or X₂ is observed, that piece of information can be recovered.  
+- **Uniqueness U₁** is information about the label that only the first modality provides; U₂ is the counterpart for the second modality.  
+- **Synergy S** is information that appears only when the modalities are combined. Neither modality on its own is enough to reveal it.[5][2]
+
+All four are measured in the same units (bits) and are defined so they are non‑negative, which makes them directly comparable.[2]
+
+<Image src="/media/pid-venn-diagram.png" alt="PID Components Venn Diagram showing X₁, X₂, and Y, with R in the central overlap, U₁ and U₂ in their respective modality–label overlaps, and synergy as the interaction" width={800} height={600} />
+
+A few simple examples make this concrete:
+
+- In audio–video sentiment analysis, facial expression and vocal tone often carry the same emotional signal, contributing to redundancy. Each may also have its own unique cues, such as micro‑expressions or subtle prosodic patterns.  
+- In medical imaging with lab values, some risk markers appear only in labs and never in pixels, driving uniqueness of that modality.  
+- In sarcasm, text alone might look positive and tone alone might seem neutral, while the combination reveals a mismatch that exposes the true intent. That mismatch is synergistic information.[3][2]
+
+The particular PID formulation Liang et al. adopt goes back to work by Bertschinger and colleagues. In that formulation, redundancy, uniqueness, and synergy are defined through optimization problems over an auxiliary joint distribution that shares the same pairwise statistics with the real data but relaxes the coupling between the two modalities. Intuitively, the idea is that redundancy and uniqueness should depend only on how each modality relates to the label, while synergy should depend on how the modalities co‑vary.[2]
+
+---
+
+## Why PID is hard to compute, and how this paper makes it practical
+
+In small, discrete systems, one can compute the PID quantities by enumerating distributions and solving the corresponding optimization problems. That is fine when each variable takes a handful of values, but breaks down when modalities become high‑dimensional or continuous. Real multimodal models rarely live in the discrete toy world.
+
+Liang and co‑authors introduce two estimators that make PID usable at scale: **CVX**, a convex optimization method for discretized features, and **BATCH**, a neural, batch‑based estimator for continuous, high‑dimensional data.[5][2]
+
+### CVX: convex optimization on discretized features
+
+CVX assumes that features for each modality and the label can be discretized into a moderate number of states, for example through clustering or histogramming. From this, one can build an empirical joint distribution p(x₁,x₂,y) and compute the marginals p(x₁,y) and p(x₂,y).[2]
+
+The method then considers the family Δₚ of all distributions q(x₁,x₂,y) that match those marginals but otherwise are free. Within that family, it solves a maximum‑conditional‑entropy problem:
+
+q* = arg max_{q∈Δₚ} H_q(Y | X₁, X₂)
+
+This optimization can be rewritten as a convex Kullback–Leibler divergence problem over the entries of a tensor Q representing the candidate joint distribution, with linear constraints enforcing valid probabilities and the marginal conditions. Standard conic solvers such as SCS, ECOS, or MOSEK handle this efficiently for supports on the order of a few hundred states. Once the optimal distribution q* is found, the PID equations give the redundancy, uniqueness, and synergy values.[5][2]
+
+CVX is exact up to numerical precision for the discretized distribution and works well for synthetic experiments and for datasets where clustering into discrete states is natural, such as some image–text tasks.[5]
+
+### BATCH: neural, mini‑batch estimation with Sinkhorn scaling
+
+Many real‑world multimodal settings involve continuous or very high‑dimensional features where discretization would be crude or intractable. The BATCH estimator is designed for this regime. Instead of representing the full joint distribution explicitly, it operates on mini‑batches and uses neural networks to parameterize an unnormalized joint density over the batch.[2]
+
+For a mini‑batch of m examples (x₁⁽ⁱ⁾,x₂⁽ⁱ⁾,y⁽ⁱ⁾), BATCH proceeds as follows:
+
+1. Two encoders f_{φ(1)} and f_{φ(2)} map each modality's batch to representations, optionally conditioned on the label.  
+2. These representations are combined into a three‑dimensional tensor A ∈ ℝ^{m × m × |Y|}, where each entry A[i,j,y] is an exponentiated similarity between the representation of x₁⁽ⁱ⁾ and x₂⁽ʲ⁾ given label y. This tensor acts as an unnormalized joint density q̃(x₁⁽ⁱ⁾,x₂⁽ʲ⁾,y).  
+3. To enforce consistency with the data, BATCH uses approximations of p(y|x₁) and p(y|x₂), learned by separate unimodal classifiers. It then applies a differentiable Sinkhorn–Knopp scaling procedure to A so that its row and column sums match these conditionals, yielding a normalized joint distribution q̃ in the family Δₚ.[2]
+4. From q̃, all relevant mutual information terms can be computed by summation. The objective used during training is a trivariate mutual information I_{q̃}(X₁;X₂;Y), chosen because optimizing it yields the same optimum as the original PID definitions. Encoder parameters are updated to maximize this objective over many mini‑batches, in effect learning a parametric approximation to the ideal joint coupling.[2]
+5. Once training stabilizes, the learned distribution is used in the PID equations to extract R, U₁, U₂, and S.[2]
+
+Between these two estimators, PID becomes usable both for smaller, discretized problems and for continuous, high‑dimensional multimodal data. The authors provide an open‑source implementation that wraps these steps.[6]
+
+<Image src="/media/cvx-batch-flowchart.png" alt="CVX vs BATCH Estimator Flowchart showing the split pipeline for discretized vs continuous data processing" width={800} height={600} />
+
+---
+
+## What PID reveals about real multimodal datasets
+
+Once the estimators are in place, the paper asks a natural question: what do real multimodal datasets look like when viewed through this lens?
+
+The authors first validate both estimators on synthetic examples where the true interactions are known. For simple bitwise logic tasks such as AND, OR, and XOR, both CVX and BATCH recover the exact redundancy, uniqueness, and synergy values derived in earlier PID work. They then analyze Gaussian mixture models and higher‑dimensional latent variable generators where labels are engineered to depend only on shared factors, only on unique factors, or on combinations of both. In each case, the dominant PID component matches the design: redundancy dominates when labels depend only on shared structure, synergy dominates when labels depend on combining separate factors, and so on.[5]
+
+The more interesting results come from real data. Liang and colleagues apply PID to a broad set of multimodal benchmarks, including MultiBench datasets across combinations like audio–video, image–text, and multimodal medical time‑series, as well as question‑answering datasets such as VQA 2.0 and CLEVR.[3]
+
+A few patterns stand out:
+
+- Some tasks, such as AV‑MNIST and certain medical datasets, show strong uniqueness for one modality, with modest redundancy and relatively little synergy. That matches the observation that a single modality—often the image or the main signal—can already achieve high accuracy.[3]
+- Humor and sarcasm datasets like UR‑FUNNY and MUStARD exhibit considerably higher synergy, echoing the idea that understanding humor requires combining language with prosody or visual cues rather than looking at either alone.[3]
+- Visual question answering datasets are particularly synergy‑heavy, especially CLEVR. These datasets are intentionally constructed so that the answer cannot be derived from the question text or the image alone; both must be considered together. PID recovers this design choice as a large S and relatively small unique contributions.[3][2]
+
+To test whether these interaction profiles line up with human intuition, the authors run a small annotation study. Annotators are shown multiple examples from several datasets and asked to rate, on a five‑point scale, how redundant, unique, or synergistic the modalities seem with respect to the label. After normalizing the scores so that human totals match the PID totals, the dominant interaction type picked by humans matches the PID estimate for several datasets, including AV‑MNIST, MOSEI, VQA 2.0, and CLEVR. Inter‑annotator agreement is reasonably high, which supports the claim that PID is capturing something interpretable.[2]
+
+<Image src="/media/dataset-pid-profiles.png" alt="Dataset PID Profiles showing stacked bars for different datasets with R, U, and S segments" width={800} height={600} />
+
+---
+
+## What PID reveals about multimodal models themselves
+
+So far the focus has been on datasets. The same decomposition can also be applied to **model predictions**. Once a multimodal model is trained, one can run it on a validation set, log its predicted labels Ŷ, and then compute PID statistics on the triplets (X₁,X₂,Ŷ). This reveals which kinds of interactions the model actually uses when making decisions.[2]
+
+Liang et al. perform this analysis across a diverse set of multimodal architectures, including early and late fusion, additive and alignment‑based methods, agreement and contrastive approaches, tensor fusion models, and multimodal transformers. Several consistent observations emerge:[2]
+
+- **Redundancy is easiest to learn.** Many models show substantial redundancy in their predictions and perform well on datasets where shared signal across modalities dominates. Additive and agreement‑based methods, which favor consistency between modalities, tend to shine here.[2]
+- **Uniqueness is moderately captured.** Architectures that include lower‑order interaction terms or reconstruction objectives are better at preserving modality‑specific information. These models exhibit higher uniqueness values and do well on tasks where each modality carries distinct signal.[2]
+- **Synergy is hardest.** Across the tested models, synergy in predictions is generally the smallest component. Only tensor fusion mechanisms and transformer‑style fusion with rich cross‑modal attention achieve high synergy values, and these are the ones that perform best on synergy‑heavy datasets like CLEVR and sarcasm benchmarks. Simpler additive or element‑wise fusion often under‑captures synergy and underperforms when the task truly depends on it.[3][2]
+
+The authors also explore robustness to missing modalities. They evaluate models under modality ablations, measuring how much performance drops when one modality is hidden at test time. They then correlate these drops with the model's PID statistics. The pattern is intuitive but important:
+
+- When the uniqueness Uᵢ of a modality is large, removing that modality leads to a large performance drop; the correlation between uniqueness and degradation is strong.  
+- When uniqueness is small but synergy is large, performance can still fall sharply, because the model relies on cross‑modal interactions that vanish when a modality is removed. In this regime, synergy correlates with the performance drop, while redundancy does not.[2]
+
+From a practical standpoint, these results make PID a diagnostic tool. It explains not just whether a model is accurate, but *how* it is using the modalities and how fragile it might be to sensor failures.
+
+<Image src="/media/model-pid-robustness.png" alt="Model PID vs Robustness Scatter Plot showing correlation between U/S magnitude and accuracy drop" width={800} height={600} />
+
+---
+
+## A practical workflow: how to actually use PID
+
+All of this is interesting, but how does one plug PID into a real project? The workflows in the paper suggest a simple pattern that can be adapted:
+
+1. **Collect a multimodal dataset.**  
+   Log examples of (X₁,X₂,Y). This could be video and sensor data with navigation labels, audio and text with sentiment labels, or any other pair of modalities and a target.  
+
+2. **Extract or cluster features.**  
+   Use existing encoders or simple clustering to obtain manageable features for each modality. This step feeds both CVX (discrete features) and BATCH (continuous features).[6][2]
+
+3. **Compute dataset‑level PID.**  
+   Run one of the estimators to obtain R,U₁,U₂,S for the dataset. This tells you whether the task is redundancy‑heavy, uniqueness‑heavy, or synergy‑heavy.[2]
+
+4. **Train candidate models.**  
+   Choose a small set of fusion architectures with different inductive biases—some good at redundancy, some at uniqueness, some at synergy.  
+
+5. **Compute model‑level PID.**  
+   Apply PID to (X₁,X₂,Ŷ) for each model to see which interactions it is actually capturing.  
+
+6. **Compare and refine.**  
+   Compare model PID to dataset PID. A good model on a synergy‑heavy dataset should show high synergy, for example. Use this comparison to pick architectures, redesign fusion, or even adjust the sensor suite and data collection strategy.[6][2]
+
+<Image src="/media/pid-practical-workflow.png" alt="Practical PID Workflow showing the pipeline from data collection to model refinement" width={800} height={600} />
+
+The paper also explores model selection directly. On a range of synthetic and real tasks, choosing architectures whose inductive biases match the dataset‑level PID profile yields top candidates that achieve performance very close to the best model found by exhaustive search, while evaluating far fewer options. In case studies in computational pathology, mood prediction, and robotics, PID‑guided model choices match or outperform baselines selected by domain experts, showing that the framework is not just a benchmark curiosity.[7][1][2]
+
+---
+
+## Where this line of work might go
+
+Liang and collaborators show that interaction‑aware analysis is not just philosophically appealing; it can be quantified, scaled, and used to guide design decisions. PID turns vague statements like "this is a hard multimodal task" into sharper claims about redundancy, uniqueness, and synergy, measured in bits rather than adjectives.[4][2]
+
+There is already follow‑up work exploring more efficient and fine‑grained PID estimators, including approaches that operate at the level of individual samples and that use alternative parameterizations such as normalizing flows. Other groups look at using interaction measures to design or evaluate robust multimodal models under missing modalities and distribution shifts. In parallel, related decomposition ideas are being used in neuroscience and complex systems to understand how different signals combine to influence behavior.[8][9][10][11][12][13]
+
+For practitioners, the key takeaway is straightforward. If you are building multimodal systems—whether for robotics, medical AI, human–computer interaction, or media—PID gives you a way to inspect *how* information is flowing across modalities. It can tell you whether a second sensor is really adding new signal, whether a complex fusion block is doing more than a simple baseline, and how much your model relies on interactions that might disappear when sensors fail.
+
+Instead of endlessly tweaking architectures in the dark, you can start by measuring redundancy, uniqueness, and synergy, and let those numbers guide the next design move.
+
+---
+
+**References**
+
+- P. P. Liang et al., "Quantifying & Modeling Multimodal Interactions: An Information Decomposition Framework," NeurIPS 2023.[1][7][5][3][2]
+- PID code and trained models repository.[6]
+- Background and follow‑up work on PID and multimodal robustness.[9][10][11][12][13][4][8]
+
+[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/images/6453774/9b46e85d-f4df-4995-be04-d2f89b5826bb/Screenshot-2025-12-23-at-00.46.38.jpg)
+[2](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/images/6453774/2765604f-46f2-4523-9a64-36bae2348be6/Screenshot-2025-12-23-at-00.46.55.jpg)
+[3](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/images/6453774/b1717db2-e0e9-4f87-9f0d-8bb58cec085a/Screenshot-2025-12-23-at-00.47.05.jpg)
+[4](https://chatpaper.com/chatpaper/paper/10887)
+[5](https://arxiv.org/pdf/2302.12247.pdf)
+[6](https://github.com/pliang279/PID)
+[7](https://proceedings.neurips.cc/paper_files/paper/2023/hash/575286a73f238b6516ce0467d67eadb2-Abstract-Conference.html)
+[8](https://dspace.mit.edu/bitstream/handle/1721.1/162503/balachandran-adithyab-meng-eecs-2025-thesis.pdf?sequence=1&isAllowed=y)
+[9](https://openreview.net/forum?id=X13jOIhnog)
+[10](https://arxiv.org/abs/2402.06244)
+[11](https://lst627.github.io/publications/2023-10-10-missing-modality)
+[12](https://openreview.net/forum?id=Ggt3iu0Zni&noteId=vnBQN4B8Kr)
+[13](https://pmc.ncbi.nlm.nih.gov/articles/PMC10372615/)
