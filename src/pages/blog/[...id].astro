@@ -10,6 +10,7 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
+import { Comments } from '@/components/Comments'
 import {
   getAdjacentPosts,
   getAllPostsAndSubposts,
@@ -243,6 +244,10 @@ const tocSections = await getTOCSections(currentPostId)
       olderPost={navigation.older}
       parentPost={isCurrentSubpost ? navigation.parent : undefined}
     />
+
+    <div class="col-start-2">
+      <Comments postId={currentPostId} client:load />
+    </div>
   </section>
 
   <Button
