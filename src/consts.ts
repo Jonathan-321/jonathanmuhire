@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Jonathan Muhire',
   description:
-    'Prev Cofounder @ Neotix · Building infrastructure for embodied AI through robotics data and continuous learning',
+    'Software R&D + ML researcher building deep learning systems, data pipelines, and scalable infrastructure',
   href: 'https://jonathanmuhire.com',
   author: 'Jonathan Muhire',
   locale: 'en-US',
