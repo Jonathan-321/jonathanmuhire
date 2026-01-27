@@ -38,43 +38,192 @@ const blog = await getRecentPosts(3)
       justify-content: center;
       padding: 2rem;
       overflow: hidden;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-color: var(--background);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(94, 234, 212, 0.2), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.18), transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(129, 140, 248, 0.12), transparent 50%),
+        url('/static/circuit-board-dark.svg');
+      background-size: 120% 120%, 140% 140%, 160% 160%, 720px 720px;
+      background-position: 10% 0%, 80% 10%, 60% 80%, center;
     }
     
     [data-theme="light"] .intro-page {
-      background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(14, 116, 144, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.1), transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.08), transparent 50%),
+        url('/static/circuit-board-light.svg');
     }
     
-    /* Intro blob */
-    .intro-blob {
-      position: relative;
-      padding: 4rem;
-      max-width: 600px;
+    /* Hero */
+    .hero-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 3rem;
+      align-items: center;
     }
     
-    .blob-title {
-      font-size: 2rem;
-      font-weight: 300;
-      margin-bottom: 1rem;
+    .hero-content {
+      padding: 3rem;
+      max-width: 720px;
+    }
+    
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted-foreground);
+      margin-bottom: 1.25rem;
+    }
+    
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1.1;
       color: var(--foreground);
+      margin-bottom: 1rem;
     }
     
-    .blob-text {
+    .hero-tagline {
       font-size: 1.125rem;
       line-height: 1.6;
       color: var(--foreground);
       margin-bottom: 0.75rem;
     }
     
-    .blob-subtext {
-      font-size: 0.875rem;
+    .hero-subtext {
+      font-size: 0.9rem;
       line-height: 1.6;
+      color: var(--muted-foreground);
+    }
+    
+    .hero-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 2rem;
+      display: grid;
+      gap: 0.75rem;
+      color: var(--foreground);
+    }
+    
+    .hero-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .hero-list li::before {
+      content: '-';
+      color: var(--muted-foreground);
+      margin-top: 0.1rem;
+    }
+    
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    
+    .cta.primary {
+      background: var(--foreground);
+      color: var(--background);
+      border-color: transparent;
+    }
+    
+    .cta.primary:hover {
+      opacity: 0.9;
+    }
+    
+    .cta.secondary {
+      background: var(--background);
+      color: var(--foreground);
+    }
+    
+    .cta.secondary:hover {
+      border-color: var(--foreground);
+    }
+    
+    .cta.ghost {
+      background: transparent;
+      color: var(--muted-foreground);
+    }
+    
+    .cta.ghost:hover {
+      color: var(--foreground);
+      border-color: var(--foreground);
+    }
+    
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .chip {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+    }
+    
+    .hero-card {
+      background: color-mix(in oklch, var(--background), var(--foreground) 4%);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+    }
+    
+    .card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted-foreground);
+      margin-bottom: 0.75rem;
+    }
+    
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      display: grid;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--foreground);
+    }
+    
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .card-tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
       color: var(--muted-foreground);
     }
     
@@ -139,19 +288,13 @@ const blog = await getRecentPosts(3)
       }
     }
     
-    /* Navigation boxes */
+    /* Featured */
     .nav-section {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 2.2fr 1fr;
       gap: 4rem;
       width: 100%;
       align-items: start;
-    }
-    
-    .boxes-container {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
     }
     
     .section-label {
@@ -162,32 +305,89 @@ const blog = await getRecentPosts(3)
       margin-bottom: 1.5rem;
     }
     
-    .boxes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    
-    .box {
-      display: block;
-      aspect-ratio: 1;
-      background: var(--background);
-      border: 1px solid var(--border);
-      text-decoration: none;
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
       color: var(--foreground);
-      transition: border-color 0.2s ease;
-      position: relative;
     }
     
-    .box:hover {
+    .section-lede {
+      font-size: 0.95rem;
+      color: var(--muted-foreground);
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .featured-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    
+    .featured-card:hover {
       border-color: var(--foreground);
+      transform: translateY(-2px);
     }
     
-    .box-label {
-      position: absolute;
-      bottom: 1rem;
-      left: 0.4rem;
+    .featured-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--foreground);
+      text-decoration: none;
+    }
+    
+    .featured-desc {
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+      margin: 0.75rem 0 1rem;
+      line-height: 1.5;
+    }
+    
+    .featured-meta {
       font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-foreground);
+      margin-bottom: 0.75rem;
+    }
+    
+    .featured-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .featured-tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    .featured-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .featured-link {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      text-decoration: none;
+    }
+    
+    .featured-link:hover {
+      color: var(--foreground);
     }
     
     /* Side profiles */
@@ -209,15 +409,211 @@ const blog = await getRecentPosts(3)
       opacity: 0.6;
     }
     
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .skill-pill {
+      font-size: 0.7rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    .proof-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .proof-pill {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px dashed var(--border);
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    
+    /* Visual systems */
+    .visuals-section {
+      width: 100%;
+      max-width: 1100px;
+    }
+    
+    .visuals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .visual-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+      display: grid;
+      gap: 0.75rem;
+    }
+    
+    .visual-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+    
+    .visual-desc {
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+    
+    .diagram {
+      width: 100%;
+      height: 210px;
+      color: color-mix(in oklch, var(--foreground), var(--background) 70%);
+    }
+    
+    .methods-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    
+    .method-pill {
+      font-size: 0.7rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      position: relative;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    
+    .method-pill::after {
+      content: '↗';
+      font-size: 0.75rem;
+      margin-left: 0.25rem;
+      color: var(--muted-foreground);
+    }
+    
+    .method-pill:hover {
+      border-color: var(--foreground);
+      color: var(--foreground);
+    }
+    
     /* Projects page */
     .projects-container {
       width: 100%;
       max-width: 800px;
     }
     
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+    }
+    
+    .project-meta {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-foreground);
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-summary {
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .project-stack span {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .project-actions a {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      text-decoration: none;
+    }
+    
+    .project-actions a:hover {
+      color: var(--foreground);
+    }
+    
+    .details-block {
+      margin-top: 2.5rem;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
+    }
+    
+    .details-block summary {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--foreground);
+      list-style: none;
+    }
+    
+    .details-block summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .details-content {
+      margin-top: 1.5rem;
+    }
+    
     /* Year sections */
     .year-section {
       margin-bottom: 4rem;
+    }
+    
+    .muted-year {
+      opacity: 0.75;
     }
     
     .year-header {
@@ -354,12 +750,46 @@ const blog = await getRecentPosts(3)
       font-weight: 400;
     }
     
-    [data-theme='dark'] .box,
-    [data-theme='dark'] .project-item {
-      background: var(--background);
+    .post-desc {
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+    
+    .contact-card {
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
     
     @media (max-width: 768px) {
+      .page-section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        padding: 2rem;
+      }
+      
+      .hero-card {
+        order: 2;
+      }
+      
       .nav-section {
         grid-template-columns: 1fr;
       }
@@ -371,27 +801,21 @@ const blog = await getRecentPosts(3)
         padding-top: 2rem;
       }
       
-      .boxes-grid {
+      .featured-grid {
         grid-template-columns: 1fr;
       }
       
-      .intro-blob {
-        left: 2rem;
-        bottom: 3rem;
-        max-width: calc(100% - 4rem);
-      }
-      
-      .blob-title {
-        font-size: 1.5rem;
-      }
-      
-      .blob-text {
-        font-size: 1rem;
+      .visuals-grid {
+        grid-template-columns: 1fr;
       }
       
       .project-entry {
         grid-template-columns: 1fr;
         gap: 1rem;
+      }
+      
+      .project-grid {
+        grid-template-columns: 1fr;
       }
       
       .year-header {
@@ -414,44 +838,146 @@ const blog = await getRecentPosts(3)
   
   <!-- Page 1: Intro -->
   <section class="page-section intro-page">
-    <div class="intro-blob">
-      <h1 class="blob-title">Hi, I'm Jonathan.</h1>
-      <p class="blob-text">
-        I build learning systems for real-world robots.
-      </p>
-      <p class="blob-subtext">
-        Graduate researcher working on multimodal fusion and large-scale robot data pipelines. Previously co-founded Neotix Robotics.
-      </p>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Software R&amp;D + ML Research</div>
+        <h1 class="hero-title">I build ML systems, data pipelines, and research tooling.</h1>
+        <p class="hero-tagline">
+          I translate research ideas into scalable software with deep learning, multimodal modeling, and distributed systems.
+        </p>
+        <p class="hero-subtext">
+          Graduate researcher. Former co-founder at Neotix.
+        </p>
+        <ul class="hero-list">
+          <li>Multimodal modeling and representation learning across vision and language.</li>
+          <li>Deep learning pipelines for data curation, training, and evaluation.</li>
+          <li>Distributed systems for large-scale datasets, versioning, and reproducibility.</li>
+        </ul>
+        <div class="hero-cta">
+          <a href="#featured" class="cta primary">See Featured Work</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta secondary">Resume</a>
+          <a href="mailto:muhirejonathan123@gmail.com" class="cta ghost">Email</a>
+        </div>
+        <div class="hero-chips">
+          <span class="chip">Open to: Research Engineer / ML Systems</span>
+          <span class="chip">Focus: ML research + distributed systems</span>
+        </div>
+        <div class="proof-strip">
+          <span class="proof-pill">GSoC 2025</span>
+          <span class="proof-pill">Open-source ML projects</span>
+          <span class="proof-pill">Research notes</span>
+          <span class="proof-pill">Data infra demos</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="card-label">Highlights</div>
+        <ul class="card-list">
+          <li>Built multimodal data pipelines for large-scale ML experimentation.</li>
+          <li>Shipped research tooling for dataset curation, labeling, and analysis.</li>
+          <li>Versioned datasets and training artifacts with scalable storage.</li>
+        </ul>
+        <div class="card-label">Core Stack</div>
+        <div class="card-tags">
+          <span class="card-tag">Python</span>
+          <span class="card-tag">PyTorch</span>
+          <span class="card-tag">Deep Learning</span>
+          <span class="card-tag">Distributed Systems</span>
+          <span class="card-tag">Data Infra</span>
+        </div>
+      </div>
     </div>
-    <a href="#projects" class="scroll-indicator">
+    <a href="#featured" class="scroll-indicator">
       <span class="scroll-text">View My Work</span>
       <div class="scroll-arrow"></div>
     </a>
   </section>
   
   <!-- Page 2: Navigation -->
-  <section class="page-section">
+  <section id="featured" class="page-section">
     <div class="nav-section">
-      <!-- Left side - boxes -->
-      <div class="boxes-container">
-        <div class="boxes-grid">
-          <a href="#projects" class="box">
-            <span class="box-label">Projects</span>
-          </a>
-          
-          <a href="#about" class="box">
-            <span class="box-label">About</span>
-          </a>
-          
-          <a href="#writing" class="box">
-            <span class="box-label">Writing</span>
-          </a>
+      <div>
+        <div class="section-label">Featured Work</div>
+        <h2 class="section-title">Selected projects aligned to ML research and systems engineering.</h2>
+        <p class="section-lede">
+          These highlight deep learning pipelines, data systems, and research tooling that map directly to ML research
+          and ML systems roles.
+        </p>
+        <div class="featured-grid">
+          <article class="featured-card">
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-title">
+              RenAIssance Document Analysis
+            </a>
+            <p class="featured-desc">
+              Deep learning pipeline for document layout understanding and OCR on historical texts.
+            </p>
+            <div class="featured-meta">Scope: layout + OCR + structured extraction</div>
+            <div class="featured-tags">
+              <span class="featured-tag">Deep Learning</span>
+              <span class="featured-tag">LayoutLMv3</span>
+              <span class="featured-tag">Research</span>
+            </div>
+            <div class="featured-links">
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+            </div>
+          </article>
+          <article class="featured-card">
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-title">
+              ISSR — Crisis Detection
+            </a>
+            <p class="featured-desc">
+              NLP system for mental health crisis detection with sentiment analysis and geospatial insights.
+            </p>
+            <div class="featured-meta">Scope: NLP + sentiment + geo signals</div>
+            <div class="featured-tags">
+              <span class="featured-tag">NLP</span>
+              <span class="featured-tag">Social Signals</span>
+              <span class="featured-tag">Applied ML</span>
+            </div>
+            <div class="featured-links">
+              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+            </div>
+          </article>
+          <article class="featured-card">
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-title">
+              MinIO + LakeFS Data Infrastructure
+            </a>
+            <p class="featured-desc">
+              Architected scalable storage and versioning for large ML datasets and training artifacts.
+            </p>
+            <div class="featured-meta">Scope: versioning + lineage + storage</div>
+            <div class="featured-tags">
+              <span class="featured-tag">Data Infra</span>
+              <span class="featured-tag">Distributed Systems</span>
+              <span class="featured-tag">Versioning</span>
+            </div>
+            <div class="featured-links">
+              <a href="/media/minio+LakeFS.MP4" target="_blank" class="featured-link">Demo</a>
+              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+            </div>
+          </article>
+          <article class="featured-card">
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-title">
+              ArtExtract — Art Analysis AI
+            </a>
+            <p class="featured-desc">
+              CNN-RNN system for artwork classification, style detection, and similarity analysis.
+            </p>
+            <div class="featured-meta">Scope: CV + representation learning</div>
+            <div class="featured-tags">
+              <span class="featured-tag">Computer Vision</span>
+              <span class="featured-tag">Representation</span>
+              <span class="featured-tag">Deep Learning</span>
+            </div>
+            <div class="featured-links">
+              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+            </div>
+          </article>
         </div>
       </div>
       
       <!-- Right side - profiles -->
       <div class="profiles-section">
-        <div class="section-label">Profiles</div>
+        <div class="section-label">Quick Links</div>
         <div>
           <a href="mailto:muhirejonathan123@gmail.com" class="profile-link">Email</a>
           <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
@@ -459,18 +985,236 @@ const blog = await getRecentPosts(3)
           <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="profile-link">Resume</a>
           <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="profile-link">Book a Call</a>
         </div>
+        <div class="section-label" style="margin-top: 2rem;">Core Skills</div>
+        <div class="skills-list">
+          <span class="skill-pill">Deep Learning</span>
+          <span class="skill-pill">ML Research</span>
+          <span class="skill-pill">Multimodal Modeling</span>
+          <span class="skill-pill">ML Systems</span>
+          <span class="skill-pill">Distributed Systems</span>
+        </div>
       </div>
     </div>
   </section>
   
-  <!-- Page 3: Projects -->
+  <!-- Page 3: Visual Systems -->
+  <section id="systems" class="page-section">
+    <div class="visuals-section">
+      <div class="section-label">Research Systems</div>
+      <h2 class="section-title">How I think about ML research, data, and infrastructure.</h2>
+      <p class="section-lede">
+        Three system views that reflect how I scope research problems, build data pipelines, and ship models.
+      </p>
+      <div class="methods-row">
+        <a class="method-pill" href="https://huggingface.co/docs/transformers/training">Foundation Model Adaptation</a>
+        <a class="method-pill" href="https://labelstud.io/guide/active_learning">Multimodal Data &amp; Labeling</a>
+        <a class="method-pill" href="https://docs.wandb.ai/guides/model-monitoring">Reliability &amp; Drift</a>
+      </div>
+      <div class="visuals-grid">
+        <div class="visual-card">
+          <div class="visual-title">Multimodal ML Pipeline</div>
+          <div class="visual-desc">From data intake to evaluation, with feedback loops for continuous learning.</div>
+          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Multimodal ML pipeline diagram">
+            <style>
+              .box { fill: none; stroke: currentColor; stroke-width: 1.2; rx: 8; }
+              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
+              .sub { fill: var(--muted-foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
+              .arrow { stroke: currentColor; stroke-width: 1.1; fill: none; marker-end: url(#arrow); }
+              .loop { stroke: currentColor; stroke-width: 1; fill: none; stroke-dasharray: 4 4; marker-end: url(#arrow); }
+            </style>
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
+              </marker>
+            </defs>
+            <rect x="12" y="24" width="84" height="24" class="box" />
+            <text x="54" y="40" text-anchor="middle" class="label">Vision</text>
+            <rect x="12" y="108" width="84" height="24" class="box" />
+            <text x="54" y="124" text-anchor="middle" class="label">Language</text>
+            <rect x="120" y="68" width="100" height="28" class="box" />
+            <text x="170" y="86" text-anchor="middle" class="label">Ingest</text>
+            <rect x="238" y="68" width="100" height="28" class="box" />
+            <text x="288" y="86" text-anchor="middle" class="label">Curation</text>
+            <rect x="356" y="68" width="100" height="28" class="box" />
+            <text x="406" y="86" text-anchor="middle" class="label">Training</text>
+            <rect x="474" y="68" width="74" height="28" class="box" />
+            <text x="511" y="86" text-anchor="middle" class="label">Eval</text>
+            <rect x="356" y="124" width="100" height="26" class="box" />
+            <text x="406" y="141" text-anchor="middle" class="label">Deploy</text>
+            <path d="M96 36 L120 76" class="arrow" />
+            <path d="M96 120 L120 88" class="arrow" />
+            <path d="M220 82 L238 82" class="arrow" />
+            <path d="M338 82 L356 82" class="arrow" />
+            <path d="M456 82 L474 82" class="arrow" />
+            <path d="M406 96 L406 124" class="arrow" />
+            <path d="M356 140 C260 170 140 150 120 96" class="loop" />
+            <text x="210" y="160" class="sub">feedback loop</text>
+          </svg>
+        </div>
+        <div class="visual-card">
+          <div class="visual-title">Distributed Data Platform</div>
+          <div class="visual-desc">Storage, versioning, and compute aligned for reproducible experiments.</div>
+          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Distributed data platform diagram">
+            <style>
+              .box { fill: none; stroke: currentColor; stroke-width: 1.2; rx: 10; }
+              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
+              .sub { fill: var(--muted-foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
+              .arrow { stroke: currentColor; stroke-width: 1.1; fill: none; marker-end: url(#arrow2); }
+              .dash { stroke: currentColor; stroke-width: 1; fill: none; stroke-dasharray: 5 4; }
+            </style>
+            <defs>
+              <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
+              </marker>
+            </defs>
+            <rect x="20" y="70" width="110" height="30" class="box" />
+            <text x="75" y="89" text-anchor="middle" class="label">Sources</text>
+            <rect x="160" y="52" width="120" height="30" class="box" />
+            <text x="220" y="71" text-anchor="middle" class="label">Object Store</text>
+            <rect x="160" y="98" width="120" height="30" class="box" />
+            <text x="220" y="117" text-anchor="middle" class="label">Versioning</text>
+            <rect x="310" y="70" width="120" height="30" class="box" />
+            <text x="370" y="89" text-anchor="middle" class="label">Compute</text>
+            <rect x="450" y="70" width="90" height="30" class="box" />
+            <text x="495" y="89" text-anchor="middle" class="label">Registry</text>
+            <rect x="310" y="120" width="120" height="24" class="box" />
+            <text x="370" y="136" text-anchor="middle" class="label">Metrics</text>
+            <path d="M130 85 L160 85" class="arrow" />
+            <path d="M280 85 L310 85" class="arrow" />
+            <path d="M430 85 L450 85" class="arrow" />
+            <path d="M370 100 L370 120" class="arrow" />
+            <path d="M220 82 L220 98" class="dash" />
+            <text x="180" y="36" class="sub">lineage</text>
+          </svg>
+        </div>
+        <div class="visual-card">
+          <div class="visual-title">Experiment Lifecycle</div>
+          <div class="visual-desc">A research loop optimized for iteration speed and insight capture.</div>
+          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Experiment lifecycle diagram">
+            <style>
+              .node { fill: none; stroke: currentColor; stroke-width: 1.2; }
+              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
+              .line { stroke: currentColor; stroke-width: 1.2; fill: none; marker-end: url(#arrow3); }
+            </style>
+            <defs>
+              <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
+              </marker>
+            </defs>
+            <path d="M40 130 L140 100 L240 120 L340 80 L440 110 L520 60" class="line" />
+            <circle cx="40" cy="130" r="8" class="node" />
+            <text x="40" y="152" text-anchor="middle" class="label">Hypothesis</text>
+            <circle cx="140" cy="100" r="8" class="node" />
+            <text x="140" y="122" text-anchor="middle" class="label">Baseline</text>
+            <circle cx="240" cy="120" r="8" class="node" />
+            <text x="240" y="142" text-anchor="middle" class="label">Ablations</text>
+            <circle cx="340" cy="80" r="8" class="node" />
+            <text x="340" y="102" text-anchor="middle" class="label">Insights</text>
+            <circle cx="440" cy="110" r="8" class="node" />
+            <text x="440" y="132" text-anchor="middle" class="label">Results</text>
+            <circle cx="520" cy="60" r="8" class="node" />
+            <text x="520" y="82" text-anchor="middle" class="label">Publish</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Page 4: Projects -->
   <section id="projects" class="page-section">
     <div class="projects-container">
-      <h2 class="section-label" style="margin-bottom: 3rem;">Projects</h2>
+      <div class="section-label">All Projects</div>
+      <h2 class="section-title">Full project timeline</h2>
+      <p class="section-lede">
+        Recent ML research highlights are above. This is the complete catalog across research, systems, and software.
+      </p>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-meta">Research · Document AI</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-title">
+              RenAIssance Document Analysis
+            </a>
+          </h3>
+          <p class="project-summary">
+            End-to-end deep learning pipeline for layout understanding, OCR, and structured digitization of historical text.
+          </p>
+          <div class="project-stack">
+            <span>PyTorch</span>
+            <span>LayoutLMv3</span>
+            <span>Doc AI</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-meta">Applied ML · NLP</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-title">
+              ISSR — Crisis Detection
+            </a>
+          </h3>
+          <p class="project-summary">
+            Social signal analysis for mental health crisis detection with sentiment modeling and geospatial insights.
+          </p>
+          <div class="project-stack">
+            <span>NLP</span>
+            <span>Social Data</span>
+            <span>Geo Analytics</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-meta">Systems · Data Infrastructure</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-title">
+              MinIO + LakeFS Data Infrastructure
+            </a>
+          </h3>
+          <p class="project-summary">
+            Scalable storage, dataset versioning, and lineage tracking for large ML experiments and artifacts.
+          </p>
+          <div class="project-stack">
+            <span>MinIO</span>
+            <span>LakeFS</span>
+            <span>Distributed Systems</span>
+          </div>
+          <div class="project-actions">
+            <a href="/media/minio+LakeFS.MP4" target="_blank">Demo</a>
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-meta">Research · Computer Vision</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-title">
+              ArtExtract — Art Analysis AI
+            </a>
+          </h3>
+          <p class="project-summary">
+            CNN-RNN model for artwork classification, style detection, and similarity search across art history.
+          </p>
+          <div class="project-stack">
+            <span>PyTorch</span>
+            <span>CV</span>
+            <span>Representation</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </article>
+      </div>
+      
+      <details class="details-block">
+        <summary>Additional projects (embodied AI, full-stack, mobile, games)</summary>
+        <div class="details-content">
       
       <!-- 2025 Projects -->
       <div class="year-section">
-        <h3 class="year-header">2025 - Robotics & AI Research</h3>
+        <h3 class="year-header">2025 - ML Research & Systems</h3>
         <div class="projects-list">
         <!-- PyMyCobot Teleoperation -->
         <div class="project-entry">
@@ -702,7 +1446,7 @@ const blog = await getRecentPosts(3)
       </div>
       
       <!-- 2023 Projects -->
-      <div class="year-section">
+      <div class="year-section muted-year">
         <h3 class="year-header">2023 - Game Development</h3>
         <div class="projects-list">
         <!-- Space Invader -->
@@ -745,13 +1489,17 @@ const blog = await getRecentPosts(3)
         </div>
         </div>
       </div>
+      </div>
+      </details>
     </div>
   </section>
   
-  <!-- Page 4: About -->
+  <!-- Page 5: About -->
   <section id="about" class="page-section">
     <div class="projects-container">
-      <h2 class="section-label" style="margin-bottom: 3rem;">About</h2>
+      <div class="section-label">About</div>
+      <h2 class="section-title">Background and research focus</h2>
+      <p class="section-lede">A quick overview of my path and what I am working on now.</p>
       <div class="project-entry">
         <div class="project-year"></div>
         <div class="project-info">
@@ -771,10 +1519,12 @@ const blog = await getRecentPosts(3)
     </div>
   </section>
   
-  <!-- Page 5: Writing -->
+  <!-- Page 6: Writing -->
   <section id="writing" class="page-section">
     <div class="writing-list">
-      <h2 class="section-label" style="margin-bottom: 3rem;">Recent Writing</h2>
+      <div class="section-label">Recent Writing</div>
+      <h2 class="section-title">Research notes and systems breakdowns</h2>
+      <p class="section-lede">Short technical writeups on robotics, ML systems, and multimodal research.</p>
       {blog.map((post) => (
         <article class="post-item">
           <time class="post-date">
@@ -789,8 +1539,36 @@ const blog = await getRecentPosts(3)
               {post.data.title}
             </Link>
           </h3>
+          {post.data.description && (
+            <p class="post-desc">{post.data.description}</p>
+          )}
         </article>
       ))}
+    </div>
+  </section>
+  
+  <!-- Page 7: Contact -->
+  <section id="contact" class="page-section">
+    <div class="projects-container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Open to ML research and systems roles.</h2>
+      <p class="section-lede">
+        Looking for teams building large-scale ML systems, deep learning pipelines, or research tooling.
+        Happy to chat about collaboration or roles.
+      </p>
+      <div class="contact-card">
+        <div>
+          <strong>Fastest ways to reach me</strong>
+          <p class="section-lede" style="margin-top: 0.5rem;">
+            Email is best for opportunities; LinkedIn for introductions.
+          </p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:muhirejonathan123@gmail.com" class="cta primary">Email me</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="cta secondary">LinkedIn</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta ghost">Resume</a>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
