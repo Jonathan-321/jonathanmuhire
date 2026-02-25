@@ -351,6 +351,23 @@ const blog = await getRecentPosts(3)
       margin: 0.75rem 0 1rem;
       line-height: 1.5;
     }
+
+    .featured-evidence {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      margin: 0 0 0.9rem;
+      line-height: 1.5;
+    }
+
+    .featured-evidence a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--border);
+    }
+
+    .featured-evidence a:hover {
+      color: var(--foreground);
+    }
     
     .featured-meta {
       font-size: 0.75rem;
@@ -572,6 +589,11 @@ const blog = await getRecentPosts(3)
     .project-actions {
       display: flex;
       gap: 1rem;
+    }
+
+    .project-actions span {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
     }
     
     .project-actions a {
@@ -846,16 +868,17 @@ const blog = await getRecentPosts(3)
           I translate research ideas into scalable software with deep learning, multimodal modeling, and distributed systems.
         </p>
         <p class="hero-subtext">
-          Graduate researcher. Former co-founder at Neotix.
+          Graduate researcher with open-source ML systems work. Professional background and credentials are listed on
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
         </p>
         <ul class="hero-list">
-          <li>Multimodal modeling and representation learning across vision and language.</li>
-          <li>Deep learning pipelines for data curation, training, and evaluation.</li>
-          <li>Distributed systems for large-scale datasets, versioning, and reproducibility.</li>
+          <li>Document AI pipeline work for layout + OCR in <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">RenAIssance</a>.</li>
+          <li>NLP crisis-signal prototype experiments in <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">ISSR</a>.</li>
+          <li>Dataset versioning workflows with <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">MinIO + LakeFS</a>.</li>
         </ul>
         <div class="hero-cta">
           <a href="#featured" class="cta primary">See Featured Work</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta secondary">Resume</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="cta secondary">LinkedIn</a>
           <a href="mailto:muhirejonathan123@gmail.com" class="cta ghost">Email</a>
         </div>
         <div class="hero-chips">
@@ -863,18 +886,18 @@ const blog = await getRecentPosts(3)
           <span class="chip">Focus: ML research + distributed systems</span>
         </div>
         <div class="proof-strip">
-          <span class="proof-pill">GSoC 2025</span>
-          <span class="proof-pill">Open-source ML projects</span>
+          <span class="proof-pill">GSoC 2025 repository work</span>
+          <span class="proof-pill">Public GitHub repos</span>
           <span class="proof-pill">Research notes</span>
-          <span class="proof-pill">Data infra demos</span>
+          <span class="proof-pill">Robotics demo clips</span>
         </div>
       </div>
       <div class="hero-card">
         <div class="card-label">Highlights</div>
         <ul class="card-list">
-          <li>Built multimodal data pipelines for large-scale ML experimentation.</li>
-          <li>Shipped research tooling for dataset curation, labeling, and analysis.</li>
-          <li>Versioned datasets and training artifacts with scalable storage.</li>
+          <li>What I built: Layout + OCR pipeline experiments for historical docs (<a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
+          <li>What I built: Crisis-signal NLP prototype using social text + sentiment features (<a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
+          <li>What I built: Dataset versioning workflow using MinIO and LakeFS (<a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
         </ul>
         <div class="card-label">Core Stack</div>
         <div class="card-tags">
@@ -899,8 +922,7 @@ const blog = await getRecentPosts(3)
         <div class="section-label">Featured Work</div>
         <h2 class="section-title">Selected projects aligned to ML research and systems engineering.</h2>
         <p class="section-lede">
-          These highlight deep learning pipelines, data systems, and research tooling that map directly to ML research
-          and ML systems roles.
+          Each project summary below separates implementation scope from publicly verifiable evidence.
         </p>
         <div class="featured-grid">
           <article class="featured-card">
@@ -908,16 +930,19 @@ const blog = await getRecentPosts(3)
               RenAIssance Document Analysis
             </a>
             <p class="featured-desc">
-              Deep learning pipeline for document layout understanding and OCR on historical texts.
+              What I built: Document layout analysis and OCR experiments for digitizing historical texts.
             </p>
-            <div class="featured-meta">Scope: layout + OCR + structured extraction</div>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer">README</a>
+            </p>
             <div class="featured-tags">
-              <span class="featured-tag">Deep Learning</span>
+              <span class="featured-tag">Document AI</span>
               <span class="featured-tag">LayoutLMv3</span>
-              <span class="featured-tag">Research</span>
+              <span class="featured-tag">OCR</span>
             </div>
             <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
             </div>
           </article>
           <article class="featured-card">
@@ -925,16 +950,19 @@ const blog = await getRecentPosts(3)
               ISSR — Crisis Detection
             </a>
             <p class="featured-desc">
-              NLP system for mental health crisis detection with sentiment analysis and geospatial insights.
+              What I built: NLP prototype for crisis-signal classification from social text with sentiment and location features.
             </p>
-            <div class="featured-meta">Scope: NLP + sentiment + geo signals</div>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer">README</a>
+            </p>
             <div class="featured-tags">
               <span class="featured-tag">NLP</span>
-              <span class="featured-tag">Social Signals</span>
-              <span class="featured-tag">Applied ML</span>
+              <span class="featured-tag">Sentiment Analysis</span>
+              <span class="featured-tag">Geospatial Signals</span>
             </div>
             <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
             </div>
           </article>
           <article class="featured-card">
@@ -942,17 +970,19 @@ const blog = await getRecentPosts(3)
               MinIO + LakeFS Data Infrastructure
             </a>
             <p class="featured-desc">
-              Architected scalable storage and versioning for large ML datasets and training artifacts.
+              What I built: Dataset storage and versioning workflow for ML experiments using object storage + data version control.
             </p>
-            <div class="featured-meta">Scope: versioning + lineage + storage</div>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer">README</a> · <a href="https://docs.lakefs.io/" target="_blank" rel="noopener noreferrer">LakeFS docs</a>
+            </p>
             <div class="featured-tags">
-              <span class="featured-tag">Data Infra</span>
-              <span class="featured-tag">Distributed Systems</span>
-              <span class="featured-tag">Versioning</span>
+              <span class="featured-tag">Data Infrastructure</span>
+              <span class="featured-tag">Dataset Versioning</span>
+              <span class="featured-tag">MinIO + LakeFS</span>
             </div>
             <div class="featured-links">
-              <a href="/media/minio+LakeFS.MP4" target="_blank" class="featured-link">Demo</a>
-              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
             </div>
           </article>
           <article class="featured-card">
@@ -960,16 +990,19 @@ const blog = await getRecentPosts(3)
               ArtExtract — Art Analysis AI
             </a>
             <p class="featured-desc">
-              CNN-RNN system for artwork classification, style detection, and similarity analysis.
+              What I built: CNN-RNN experiments for artwork classification and style-analysis tasks.
             </p>
-            <div class="featured-meta">Scope: CV + representation learning</div>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">README</a>
+            </p>
             <div class="featured-tags">
               <span class="featured-tag">Computer Vision</span>
-              <span class="featured-tag">Representation</span>
-              <span class="featured-tag">Deep Learning</span>
+              <span class="featured-tag">CNN-RNN</span>
+              <span class="featured-tag">Classification</span>
             </div>
             <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-link">Code</a>
+              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
             </div>
           </article>
         </div>
@@ -982,7 +1015,7 @@ const blog = await getRecentPosts(3)
           <a href="mailto:muhirejonathan123@gmail.com" class="profile-link">Email</a>
           <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
           <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="profile-link">Resume</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="profile-link">Career Timeline</a>
           <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="profile-link">Book a Call</a>
         </div>
         <div class="section-label" style="margin-top: 2rem;">Core Skills</div>
@@ -1137,15 +1170,17 @@ const blog = await getRecentPosts(3)
             </a>
           </h3>
           <p class="project-summary">
-            End-to-end deep learning pipeline for layout understanding, OCR, and structured digitization of historical text.
+            What I built: Layout analysis + OCR experiments for historical document digitization.
           </p>
           <div class="project-stack">
             <span>PyTorch</span>
             <span>LayoutLMv3</span>
-            <span>Doc AI</span>
+            <span>Document AI</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Code</a>
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer">Docs</a>
           </div>
         </article>
         <article class="project-card">
@@ -1156,15 +1191,17 @@ const blog = await getRecentPosts(3)
             </a>
           </h3>
           <p class="project-summary">
-            Social signal analysis for mental health crisis detection with sentiment modeling and geospatial insights.
+            What I built: NLP prototype for crisis-signal classification using social text, sentiment, and location features.
           </p>
           <div class="project-stack">
             <span>NLP</span>
-            <span>Social Data</span>
-            <span>Geo Analytics</span>
+            <span>Sentiment Analysis</span>
+            <span>Geospatial Signals</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Code</a>
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer">Docs</a>
           </div>
         </article>
         <article class="project-card">
@@ -1175,16 +1212,17 @@ const blog = await getRecentPosts(3)
             </a>
           </h3>
           <p class="project-summary">
-            Scalable storage, dataset versioning, and lineage tracking for large ML experiments and artifacts.
+            What I built: Object-storage + dataset versioning workflow for reproducible ML experiments.
           </p>
           <div class="project-stack">
             <span>MinIO</span>
             <span>LakeFS</span>
-            <span>Distributed Systems</span>
+            <span>Dataset Versioning</span>
           </div>
           <div class="project-actions">
-            <a href="/media/minio+LakeFS.MP4" target="_blank">Demo</a>
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Code</a>
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer">Docs</a>
           </div>
         </article>
         <article class="project-card">
@@ -1195,15 +1233,17 @@ const blog = await getRecentPosts(3)
             </a>
           </h3>
           <p class="project-summary">
-            CNN-RNN model for artwork classification, style detection, and similarity search across art history.
+            What I built: CNN-RNN experiments for artwork classification and style-analysis tasks.
           </p>
           <div class="project-stack">
             <span>PyTorch</span>
-            <span>CV</span>
-            <span>Representation</span>
+            <span>CNN-RNN</span>
+            <span>Classification</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Code</a>
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">Docs</a>
           </div>
         </article>
       </div>
@@ -1223,16 +1263,17 @@ const blog = await getRecentPosts(3)
               PyMyCobot Teleoperation
             </a>
             <p class="project-description">
-              Developed remote teleoperation system for bimanual dexterous manipulation and data collection. Implemented real-time control protocols for imitation learning tasks.
+              What I built: Local teleoperation workflow and control scripts for manipulation data-collection experiments using the PyMyCobot stack.
             </p>
             <div class="project-links">
               <a href="/media/neotixdemo.mp4" target="_blank" class="project-link">Demo</a>
-              <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Reference SDK</a>
             </div>
           </div>
           <div class="project-tech">
             <span>Python</span>
-            <span>ROS</span>
+            <span>Teleoperation</span>
+            <span>Data Collection</span>
           </div>
         </div>
         
@@ -1243,7 +1284,7 @@ const blog = await getRecentPosts(3)
               UMI Multi-Sensor Data Extraction
             </a>
             <p class="project-description">
-              Engineered comprehensive data extraction pipeline implementing SLAM-ORB3 for trajectory extraction and real-time 7-DOF trajectory analysis.
+              What I built: Multi-sensor extraction scripts and trajectory analysis workflow around UMI datasets and ORB-SLAM-based tracking.
             </p>
             <div class="project-links">
               <a href="/media/umi-demo.mp4" target="_blank" class="project-link">Demo</a>
@@ -1252,8 +1293,9 @@ const blog = await getRecentPosts(3)
             </div>
           </div>
           <div class="project-tech">
-            <span>SLAM-ORB3</span>
-            <span>Rerun</span>
+            <span>ORB-SLAM3</span>
+            <span>Trajectory Analysis</span>
+            <span>Sensor Fusion</span>
           </div>
         </div>
         
@@ -1264,16 +1306,18 @@ const blog = await getRecentPosts(3)
               UMI Data Annotation Pipeline
             </a>
             <p class="project-description">
-              Developed annotation tools for robotic manipulation datasets using embodied Chain-of-Thought methods for labeling gripper poses and keyframes.
+              What I built: Annotation workflow for manipulation episodes, including gripper-pose and keyframe labeling around embodied-CoT style experiments.
             </p>
             <div class="project-links">
               <a href="/media/UMI-annotated.mp4" target="_blank" class="project-link">Demo</a>
+              <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank" rel="noopener noreferrer" class="project-link">Reference Repo</a>
               <a href="https://arxiv.org/pdf/2407.08693" target="_blank" rel="noopener noreferrer" class="project-link">Paper</a>
             </div>
           </div>
           <div class="project-tech">
-            <span>PyTorch</span>
+            <span>Dataset Annotation</span>
             <span>Computer Vision</span>
+            <span>Embodied CoT</span>
           </div>
         </div>
         
@@ -1284,16 +1328,18 @@ const blog = await getRecentPosts(3)
               MinIO + LakeFS Data Infrastructure
             </a>
             <p class="project-description">
-              Architected scalable data storage and versioning system for robotics datasets with Git-like version control for large sensor data.
+              What I built: Object-storage and dataset-versioning setup for robotics datasets with reproducible data snapshots.
             </p>
             <div class="project-links">
-              <a href="/media/minio+LakeFS.MP4" target="_blank" class="project-link">Demo</a>
-              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+              <a href="https://docs.lakefs.io/" target="_blank" rel="noopener noreferrer" class="project-link">LakeFS Docs</a>
             </div>
           </div>
           <div class="project-tech">
             <span>MinIO</span>
             <span>LakeFS</span>
+            <span>Dataset Versioning</span>
           </div>
         </div>
         
@@ -1304,16 +1350,18 @@ const blog = await getRecentPosts(3)
               LeRobot ISO-101 Platform
             </a>
             <p class="project-description">
-              Built end-to-end robotic learning platform with data collection pipelines and policy training infrastructure for rapid prototyping.
+              What I built: Local data-collection and policy-training workflow using LeRobot tooling for fast experiment loops.
             </p>
             <div class="project-links">
               <a href="/media/lerobot.MP4" target="_blank" class="project-link">Demo</a>
               <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-link">Models</a>
+              <a href="https://huggingface.co/docs/lerobot/index" target="_blank" rel="noopener noreferrer" class="project-link">Docs</a>
             </div>
           </div>
           <div class="project-tech">
             <span>LeRobot</span>
             <span>ROS2</span>
+            <span>Policy Training</span>
           </div>
         </div>
         
@@ -1324,16 +1372,17 @@ const blog = await getRecentPosts(3)
               RenAIssance Document Analysis
             </a>
             <p class="project-description">
-              Google Summer of Code 2025 project. Built AI pipeline for digitizing Renaissance-era texts using deep learning for layout recognition and OCR.
+              What I built: GSoC 2025 repository work on historical document layout analysis and OCR experiments.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
             </div>
           </div>
           <div class="project-tech">
             <span>PyTorch</span>
             <span>LayoutLMv3</span>
-            <span>GSoC</span>
+            <span>Document AI</span>
           </div>
         </div>
         
@@ -1344,16 +1393,17 @@ const blog = await getRecentPosts(3)
               ISSR - Mental Health Crisis Detection
             </a>
             <p class="project-description">
-              GSoC candidate project. AI-powered system for suicide prevention through social media analysis, sentiment detection, and geospatial crisis mapping.
+              What I built: GSoC candidate repository prototype for crisis-signal detection from social text with sentiment and geospatial features.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
             </div>
           </div>
           <div class="project-tech">
             <span>NLP</span>
-            <span>Social Media APIs</span>
-            <span>Mental Health AI</span>
+            <span>Sentiment Analysis</span>
+            <span>Geospatial Signals</span>
           </div>
         </div>
         
@@ -1364,16 +1414,17 @@ const blog = await getRecentPosts(3)
               ArtExtract - Art Analysis AI
             </a>
             <p class="project-description">
-              Deep learning system combining CNN-RNN architectures for artwork classification, style detection, and similarity analysis across art history.
+              What I built: CNN-RNN project for artwork classification and style-analysis experiments.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
             </div>
           </div>
           <div class="project-tech">
             <span>CNN-RNN</span>
             <span>PyTorch</span>
-            <span>Art Analysis</span>
+            <span>Classification</span>
           </div>
         </div>
         </div>
@@ -1390,16 +1441,16 @@ const blog = await getRecentPosts(3)
               NutrAI Health Assistant
             </a>
             <p class="project-description">
-              AI-powered health and nutrition recommendation system. Built full-stack application with intelligent meal planning and dietary analysis.
+              What I built: Full-stack nutrition app prototype with meal-planning and dietary-analysis features.
             </p>
             <div class="project-links">
-              <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
             </div>
           </div>
           <div class="project-tech">
-            <span>JavaScript</span>
-            <span>Python</span>
             <span>React</span>
+            <span>Python</span>
+            <span>Web App</span>
           </div>
         </div>
         
@@ -1410,16 +1461,16 @@ const blog = await getRecentPosts(3)
               CampusBuddy Mobile App
             </a>
             <p class="project-description">
-              Flutter-based student application for discovering campus events, dining options, and university resources. Designed to enhance student life experience.
+              What I built: Flutter app for campus events, dining, and student-resource discovery.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
             </div>
           </div>
           <div class="project-tech">
             <span>Flutter</span>
             <span>Dart</span>
-            <span>Mobile</span>
+            <span>Mobile App</span>
           </div>
         </div>
         
@@ -1430,16 +1481,16 @@ const blog = await getRecentPosts(3)
               Point of Sales Terminal
             </a>
             <p class="project-description">
-              Comprehensive Java-based POS system with inventory management, multiple payment methods, and sales reporting. Built with modular architecture for retail environments.
+              What I built: Java POS application with inventory tracking, payment flows, and sales reporting.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
             </div>
           </div>
           <div class="project-tech">
             <span>Java</span>
-            <span>OOP</span>
-            <span>Retail Systems</span>
+            <span>Desktop App</span>
+            <span>Inventory</span>
           </div>
         </div>
         </div>
@@ -1456,15 +1507,16 @@ const blog = await getRecentPosts(3)
               Space Invader Game
             </a>
             <p class="project-description">
-              Modified version of the classic arcade game with enhanced gameplay mechanics and modern graphics. Implemented in C++ with custom game engine features.
+              What I built: C++ arcade game project with custom gameplay mechanics and rendering logic.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
             </div>
           </div>
           <div class="project-tech">
             <span>C++</span>
-            <span>Game Dev</span>
+            <span>SFML</span>
+            <span>Game Loop</span>
           </div>
         </div>
         
@@ -1475,16 +1527,16 @@ const blog = await getRecentPosts(3)
               Pacman AI
             </a>
             <p class="project-description">
-              AI-driven Pacman implementation featuring autonomous agents, pathfinding algorithms, and intelligent ghost behavior. Demonstrates search algorithms and game AI principles.
+              What I built: Pacman AI project with autonomous agents, pathfinding, and gameplay heuristics.
             </p>
             <div class="project-links">
-              <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
             </div>
           </div>
           <div class="project-tech">
             <span>Python</span>
             <span>Pygame</span>
-            <span>AI Algorithms</span>
+            <span>Search Algorithms</span>
           </div>
         </div>
         </div>
@@ -1566,7 +1618,7 @@ const blog = await getRecentPosts(3)
         <div class="contact-actions">
           <a href="mailto:muhirejonathan123@gmail.com" class="cta primary">Email me</a>
           <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="cta secondary">LinkedIn</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta ghost">Resume</a>
+          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="cta ghost">GitHub</a>
         </div>
       </div>
     </div>
