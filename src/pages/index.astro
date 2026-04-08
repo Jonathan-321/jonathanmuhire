@@ -657,6 +657,20 @@ const blog = await getRecentPosts(3)
         <h2 class="section-title">Research and systems I've shipped.</h2>
         <div class="work-grid">
           <article class="work-card">
+            <img src="/media/card-docintel.png" alt="DocIntel document intelligence pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="work-title">
+              DocIntel — Document Intelligence API
+            </a>
+            <p class="work-desc">
+              End-to-end document intelligence pipeline. Upload PDFs or images → layout detection, OCR, entity extraction → structured JSON. FastAPI + React + 65 tests.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">FastAPI</span>
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">React</span>
+            </div>
+          </article>
+          <article class="work-card">
             <img src="/media/card-renaissance.png" alt="RenAIssance document AI pipeline" class="work-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
               RenAIssance — GSoC 2025
@@ -893,12 +907,26 @@ const blog = await getRecentPosts(3)
         <summary>
           <div class="category-header">
             <div class="category-icon">&#x2699;&#xFE0F;</div>
-            <span class="category-title">Infrastructure & Systems<span class="category-count">&nbsp;&middot; 4</span></span>
+            <span class="category-title">Infrastructure & Systems<span class="category-count">&nbsp;&middot; 5</span></span>
           </div>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </summary>
         <div class="category-content">
           <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="project-title">DocIntel — Document Intelligence API</a>
+                <p class="project-description">End-to-end document intelligence: layout detection, OCR, and entity extraction via FastAPI. React dashboard, 65 tests, Docker deployment.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>FastAPI</span>
+                <span>React</span>
+                <span>Docker</span>
+              </div>
+            </div>
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">MinIO + LakeFS Infrastructure</a>
