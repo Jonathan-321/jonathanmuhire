@@ -338,6 +338,15 @@ const blog = await getRecentPosts(3)
       transform: translateY(-2px);
     }
     
+    .featured-thumb {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    
     .featured-title {
       font-size: 1rem;
       font-weight: 500;
@@ -862,19 +871,20 @@ const blog = await getRecentPosts(3)
   <section class="page-section intro-page">
     <div class="hero-grid">
       <div class="hero-content">
-        <div class="hero-eyebrow">Software R&amp;D + ML Research</div>
-        <h1 class="hero-title">I build ML systems, data pipelines, and research tooling.</h1>
+        <div class="hero-eyebrow">ML Systems + Robotics Infrastructure</div>
+        <h1 class="hero-title">I build learning systems for real-world robots.</h1>
         <p class="hero-tagline">
-          I translate research ideas into scalable software with deep learning, multimodal modeling, and distributed systems.
+          From teleoperation data pipelines to memory-augmented agents — I ship research code that works at scale. 19 open-source repositories with working demos, real benchmarks, and production-grade infrastructure.
         </p>
         <p class="hero-subtext">
-          Graduate researcher with open-source ML systems work. Professional background and credentials are listed on
+          CS & AI researcher. Prev co-founder @ Neotix Robotics. GSoC 2025 contributor. Full background on
           <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
         </p>
         <ul class="hero-list">
-          <li>Document AI pipeline work for layout + OCR in <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">RenAIssance</a>.</li>
-          <li>NLP crisis-signal prototype experiments in <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">ISSR</a>.</li>
-          <li>Dataset versioning workflows with <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">MinIO + LakeFS</a>.</li>
+          <li>Bimanual teleoperation + imitation learning data collection with <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">custom mycobot stack</a>.</li>
+          <li>3-node MinIO cluster with LakeFS versioning for <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">robotics datasets</a>.</li>
+          <li>ReAct agent with memory ablations — 0% to 100% retrieval rescue on <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">needle-in-haystack evals</a>.</li>
+          <li>Document AI pipeline for <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">GSoC 2025</a> — layout + OCR on Renaissance manuscripts.</li>
         </ul>
         <div class="hero-cta">
           <a href="#featured" class="cta primary">See Featured Work</a>
@@ -882,8 +892,8 @@ const blog = await getRecentPosts(3)
           <a href="mailto:muhirejonathan123@gmail.com" class="cta ghost">Email</a>
         </div>
         <div class="hero-chips">
-          <span class="chip">Open to: Research Engineer / ML Systems</span>
-          <span class="chip">Focus: ML research + distributed systems</span>
+          <span class="chip">Open to: Research Engineer / ML Systems / Robotics</span>
+          <span class="chip">Focus: Embodied AI + Data Infrastructure</span>
         </div>
         <div class="proof-strip">
           <span class="proof-pill">GSoC 2025 repository work</span>
@@ -893,19 +903,23 @@ const blog = await getRecentPosts(3)
         </div>
       </div>
       <div class="hero-card">
-        <div class="card-label">Highlights</div>
+        <div class="card-label">Shipped & Verified</div>
         <ul class="card-list">
-          <li>What I built: Layout + OCR pipeline experiments for historical docs (<a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
-          <li>What I built: Crisis-signal NLP prototype using social text + sentiment features (<a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
-          <li>What I built: Dataset versioning workflow using MinIO and LakeFS (<a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">evidence</a>).</li>
+          <li>Teleoperation system for bimanual manipulation + data collection (<a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">code</a>).</li>
+          <li>Memory-augmented ReAct agent: retrieval rescues 0% &rarr; 100% on long-context evals (<a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">benchmarks</a>).</li>
+          <li>Distributed MinIO + LakeFS data versioning for robotics datasets (<a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">infra</a>).</li>
+          <li>GSoC 2025: Document AI pipeline for Renaissance manuscripts (<a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">repo</a>).</li>
         </ul>
         <div class="card-label">Core Stack</div>
         <div class="card-tags">
           <span class="card-tag">Python</span>
           <span class="card-tag">PyTorch</span>
+          <span class="card-tag">Robotics</span>
           <span class="card-tag">Deep Learning</span>
           <span class="card-tag">Distributed Systems</span>
           <span class="card-tag">Data Infra</span>
+          <span class="card-tag">Docker</span>
+          <span class="card-tag">Flutter</span>
         </div>
       </div>
     </div>
@@ -926,11 +940,12 @@ const blog = await getRecentPosts(3)
         </p>
         <div class="featured-grid">
           <article class="featured-card">
+            <img src="/media/renaissance-pipeline.png" alt="RenAIssance 3-stage pipeline: detection, recognition, correction" class="featured-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-title">
               RenAIssance Document Analysis
             </a>
             <p class="featured-desc">
-              What I built: Document layout analysis and OCR experiments for digitizing historical texts.
+              GSoC 2025. Built AI pipeline for digitizing Renaissance-era texts — layout detection with LayoutLMv3, OCR, and post-correction. 3-stage architecture processing real manuscript pages.
             </p>
             <p class="featured-evidence">
               Evidence: <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer">README</a>
@@ -950,7 +965,7 @@ const blog = await getRecentPosts(3)
               ISSR — Crisis Detection
             </a>
             <p class="featured-desc">
-              What I built: NLP prototype for crisis-signal classification from social text with sentiment and location features.
+              GSoC candidate project. AI-powered system for suicide prevention through social media analysis, sentiment detection, and geospatial crisis mapping.
             </p>
             <p class="featured-evidence">
               Evidence: <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer">README</a>
@@ -966,11 +981,12 @@ const blog = await getRecentPosts(3)
             </div>
           </article>
           <article class="featured-card">
+            <img src="/media/minio-infrastructure.png" alt="3-node MinIO cluster with LakeFS, AIStor, and monitoring" class="featured-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-title">
               MinIO + LakeFS Data Infrastructure
             </a>
             <p class="featured-desc">
-              What I built: Dataset storage and versioning workflow for ML experiments using object storage + data version control.
+              3-node distributed MinIO cluster with erasure coding, LakeFS data versioning, AIStor small-file cache, and Prometheus + Grafana monitoring. Built for robotics dataset management.
             </p>
             <p class="featured-evidence">
               Evidence: <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer">README</a> · <a href="https://docs.lakefs.io/" target="_blank" rel="noopener noreferrer">LakeFS docs</a>
@@ -986,11 +1002,12 @@ const blog = await getRecentPosts(3)
             </div>
           </article>
           <article class="featured-card">
+            <img src="/media/artextract-hero.png" alt="ArtExtract CNN-RNN art classification with style predictions" class="featured-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-title">
               ArtExtract — Art Analysis AI
             </a>
             <p class="featured-desc">
-              What I built: CNN-RNN experiments for artwork classification and style-analysis tasks.
+              Deep learning system combining CNN-RNN architectures for artwork classification. Trained on real art samples with confusion matrix validation and training curves.
             </p>
             <p class="featured-evidence">
               Evidence: <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">README</a>
@@ -1003,6 +1020,50 @@ const blog = await getRecentPosts(3)
             <div class="featured-links">
               <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
               <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
+            </div>
+          </article>
+          <article class="featured-card">
+            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval: retrieval memory rescues 0% to 100%" class="featured-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="featured-title">
+              Agentic Long-Runner
+            </a>
+            <p class="featured-desc">
+              ReAct agent with 4 memory modes. Eval benchmarks show chunked vector retrieval fully recovers needle-in-haystack performance on 5,000+ word docs.
+            </p>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer">README</a>
+            </p>
+            <div class="featured-meta">Research &middot; Agents</div>
+            <div class="featured-tags">
+              <span class="featured-tag">ReAct</span>
+              <span class="featured-tag">Memory</span>
+              <span class="featured-tag">Eval</span>
+            </div>
+            <div class="featured-links">
+              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
+            </div>
+          </article>
+          <article class="featured-card">
+            <img src="/media/mycobot-hero.png" alt="Leader-follower teleoperation architecture with 7-DOF joint sync" class="featured-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="featured-title">
+              Bimanual Teleoperation
+            </a>
+            <p class="featured-desc">
+              Custom leader-follower teleoperation system for data collection. Real-time 7-DOF joint synchronization for imitation learning with the mycobot stack.
+            </p>
+            <p class="featured-evidence">
+              Evidence: <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer">README</a>
+            </p>
+            <div class="featured-meta">Robotics &middot; Hardware</div>
+            <div class="featured-tags">
+              <span class="featured-tag">Teleoperation</span>
+              <span class="featured-tag">Imitation Learning</span>
+              <span class="featured-tag">7-DOF</span>
+            </div>
+            <div class="featured-links">
+              <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
             </div>
           </article>
         </div>
@@ -1022,9 +1083,22 @@ const blog = await getRecentPosts(3)
         <div class="skills-list">
           <span class="skill-pill">Deep Learning</span>
           <span class="skill-pill">ML Research</span>
-          <span class="skill-pill">Multimodal Modeling</span>
-          <span class="skill-pill">ML Systems</span>
+          <span class="skill-pill">Robotics</span>
+          <span class="skill-pill">Computer Vision</span>
+          <span class="skill-pill">NLP / Document AI</span>
           <span class="skill-pill">Distributed Systems</span>
+          <span class="skill-pill">Data Infrastructure</span>
+          <span class="skill-pill">Docker / DevOps</span>
+          <span class="skill-pill">Flutter / Mobile</span>
+          <span class="skill-pill">ROS2</span>
+        </div>
+        <div class="section-label" style="margin-top: 2rem;">Languages</div>
+        <div class="skills-list">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Dart</span>
+          <span class="skill-pill">JavaScript</span>
         </div>
       </div>
     </div>
@@ -1034,120 +1108,53 @@ const blog = await getRecentPosts(3)
   <section id="systems" class="page-section">
     <div class="visuals-section">
       <div class="section-label">Research Systems</div>
-      <h2 class="section-title">How I think about ML research, data, and infrastructure.</h2>
+      <h2 class="section-title">Systems I've built — from hardware to eval.</h2>
       <p class="section-lede">
-        Three system views that reflect how I scope research problems, build data pipelines, and ship models.
+        Real architectures from real projects. Each card links to the source repository with full documentation.
       </p>
       <div class="methods-row">
-        <a class="method-pill" href="https://huggingface.co/docs/transformers/training">Foundation Model Adaptation</a>
-        <a class="method-pill" href="https://labelstud.io/guide/active_learning">Multimodal Data &amp; Labeling</a>
-        <a class="method-pill" href="https://docs.wandb.ai/guides/model-monitoring">Reliability &amp; Drift</a>
+        <a class="method-pill" href="https://github.com/Jonathan-321/custom_pymycobot">Teleoperation</a>
+        <a class="method-pill" href="https://github.com/Jonathan-321/minio">Data Infrastructure</a>
+        <a class="method-pill" href="https://github.com/Jonathan-321/agentic">Agent Memory</a>
+        <a class="method-pill" href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025">Document AI</a>
+        <a class="method-pill" href="https://github.com/Jonathan-321/G1Humanoid-spinkick">RL + Simulation</a>
       </div>
       <div class="visuals-grid">
         <div class="visual-card">
-          <div class="visual-title">Multimodal ML Pipeline</div>
-          <div class="visual-desc">From data intake to evaluation, with feedback loops for continuous learning.</div>
-          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Multimodal ML pipeline diagram">
-            <style>
-              .box { fill: none; stroke: currentColor; stroke-width: 1.2; rx: 8; }
-              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
-              .sub { fill: var(--muted-foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
-              .arrow { stroke: currentColor; stroke-width: 1.1; fill: none; marker-end: url(#arrow); }
-              .loop { stroke: currentColor; stroke-width: 1; fill: none; stroke-dasharray: 4 4; marker-end: url(#arrow); }
-            </style>
-            <defs>
-              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
-              </marker>
-            </defs>
-            <rect x="12" y="24" width="84" height="24" class="box" />
-            <text x="54" y="40" text-anchor="middle" class="label">Vision</text>
-            <rect x="12" y="108" width="84" height="24" class="box" />
-            <text x="54" y="124" text-anchor="middle" class="label">Language</text>
-            <rect x="120" y="68" width="100" height="28" class="box" />
-            <text x="170" y="86" text-anchor="middle" class="label">Ingest</text>
-            <rect x="238" y="68" width="100" height="28" class="box" />
-            <text x="288" y="86" text-anchor="middle" class="label">Curation</text>
-            <rect x="356" y="68" width="100" height="28" class="box" />
-            <text x="406" y="86" text-anchor="middle" class="label">Training</text>
-            <rect x="474" y="68" width="74" height="28" class="box" />
-            <text x="511" y="86" text-anchor="middle" class="label">Eval</text>
-            <rect x="356" y="124" width="100" height="26" class="box" />
-            <text x="406" y="141" text-anchor="middle" class="label">Deploy</text>
-            <path d="M96 36 L120 76" class="arrow" />
-            <path d="M96 120 L120 88" class="arrow" />
-            <path d="M220 82 L238 82" class="arrow" />
-            <path d="M338 82 L356 82" class="arrow" />
-            <path d="M456 82 L474 82" class="arrow" />
-            <path d="M406 96 L406 124" class="arrow" />
-            <path d="M356 140 C260 170 140 150 120 96" class="loop" />
-            <text x="210" y="160" class="sub">feedback loop</text>
-          </svg>
+          <div class="visual-title">Teleoperation & Data Collection</div>
+          <div class="visual-desc">Leader-follower bimanual manipulation with real-time 7-DOF joint synchronization for imitation learning datasets.</div>
+          <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">
+            <img src="/media/mycobot-hero.png" alt="Leader-follower teleoperation architecture" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
+          </a>
+          <div class="featured-tags" style="margin-top:0.5rem;">
+            <span class="featured-tag">PyMyCobot</span>
+            <span class="featured-tag">ROS2</span>
+            <span class="featured-tag">7-DOF</span>
+          </div>
         </div>
         <div class="visual-card">
-          <div class="visual-title">Distributed Data Platform</div>
-          <div class="visual-desc">Storage, versioning, and compute aligned for reproducible experiments.</div>
-          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Distributed data platform diagram">
-            <style>
-              .box { fill: none; stroke: currentColor; stroke-width: 1.2; rx: 10; }
-              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
-              .sub { fill: var(--muted-foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
-              .arrow { stroke: currentColor; stroke-width: 1.1; fill: none; marker-end: url(#arrow2); }
-              .dash { stroke: currentColor; stroke-width: 1; fill: none; stroke-dasharray: 5 4; }
-            </style>
-            <defs>
-              <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
-              </marker>
-            </defs>
-            <rect x="20" y="70" width="110" height="30" class="box" />
-            <text x="75" y="89" text-anchor="middle" class="label">Sources</text>
-            <rect x="160" y="52" width="120" height="30" class="box" />
-            <text x="220" y="71" text-anchor="middle" class="label">Object Store</text>
-            <rect x="160" y="98" width="120" height="30" class="box" />
-            <text x="220" y="117" text-anchor="middle" class="label">Versioning</text>
-            <rect x="310" y="70" width="120" height="30" class="box" />
-            <text x="370" y="89" text-anchor="middle" class="label">Compute</text>
-            <rect x="450" y="70" width="90" height="30" class="box" />
-            <text x="495" y="89" text-anchor="middle" class="label">Registry</text>
-            <rect x="310" y="120" width="120" height="24" class="box" />
-            <text x="370" y="136" text-anchor="middle" class="label">Metrics</text>
-            <path d="M130 85 L160 85" class="arrow" />
-            <path d="M280 85 L310 85" class="arrow" />
-            <path d="M430 85 L450 85" class="arrow" />
-            <path d="M370 100 L370 120" class="arrow" />
-            <path d="M220 82 L220 98" class="dash" />
-            <text x="180" y="36" class="sub">lineage</text>
-          </svg>
+          <div class="visual-title">Distributed Data Infrastructure</div>
+          <div class="visual-desc">3-node MinIO cluster with erasure coding, LakeFS versioning, and Prometheus monitoring for robotics datasets.</div>
+          <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">
+            <img src="/media/minio-infrastructure.png" alt="MinIO + LakeFS infrastructure architecture" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
+          </a>
+          <div class="featured-tags" style="margin-top:0.5rem;">
+            <span class="featured-tag">MinIO</span>
+            <span class="featured-tag">LakeFS</span>
+            <span class="featured-tag">Docker</span>
+          </div>
         </div>
         <div class="visual-card">
-          <div class="visual-title">Experiment Lifecycle</div>
-          <div class="visual-desc">A research loop optimized for iteration speed and insight capture.</div>
-          <svg class="diagram" viewBox="0 0 560 180" role="img" aria-label="Experiment lifecycle diagram">
-            <style>
-              .node { fill: none; stroke: currentColor; stroke-width: 1.2; }
-              .label { fill: var(--foreground); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.02em; }
-              .line { stroke: currentColor; stroke-width: 1.2; fill: none; marker-end: url(#arrow3); }
-            </style>
-            <defs>
-              <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" />
-              </marker>
-            </defs>
-            <path d="M40 130 L140 100 L240 120 L340 80 L440 110 L520 60" class="line" />
-            <circle cx="40" cy="130" r="8" class="node" />
-            <text x="40" y="152" text-anchor="middle" class="label">Hypothesis</text>
-            <circle cx="140" cy="100" r="8" class="node" />
-            <text x="140" y="122" text-anchor="middle" class="label">Baseline</text>
-            <circle cx="240" cy="120" r="8" class="node" />
-            <text x="240" y="142" text-anchor="middle" class="label">Ablations</text>
-            <circle cx="340" cy="80" r="8" class="node" />
-            <text x="340" y="102" text-anchor="middle" class="label">Insights</text>
-            <circle cx="440" cy="110" r="8" class="node" />
-            <text x="440" y="132" text-anchor="middle" class="label">Results</text>
-            <circle cx="520" cy="60" r="8" class="node" />
-            <text x="520" y="82" text-anchor="middle" class="label">Publish</text>
-          </svg>
+          <div class="visual-title">Memory-Augmented Agents</div>
+          <div class="visual-desc">ReAct agent with 4 memory modes. Eval benchmarks show chunked retrieval rescues 0% to 100% on needle-in-haystack.</div>
+          <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">
+            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval heatmap" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
+          </a>
+          <div class="featured-tags" style="margin-top:0.5rem;">
+            <span class="featured-tag">ReAct</span>
+            <span class="featured-tag">Vector Retrieval</span>
+            <span class="featured-tag">Eval</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1157,9 +1164,9 @@ const blog = await getRecentPosts(3)
   <section id="projects" class="page-section">
     <div class="projects-container">
       <div class="section-label">All Projects</div>
-      <h2 class="section-title">Full project timeline</h2>
+      <h2 class="section-title">19 repositories. Full project timeline.</h2>
       <p class="section-lede">
-        Recent ML research highlights are above. This is the complete catalog across research, systems, and software.
+        Spanning robotics, ML research, data infrastructure, and full-stack — the complete catalog of shipped work.
       </p>
       <div class="project-grid">
         <article class="project-card">
@@ -1244,6 +1251,48 @@ const blog = await getRecentPosts(3)
             <span>Evidence:</span>
             <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a>
             <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">Docs</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-meta">Robotics · RL</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="featured-title">
+              G1 Humanoid Spin Kick
+            </a>
+          </h3>
+          <p class="project-summary">
+            What I built: RL policy for dynamic humanoid locomotion — 360-degree spin kick in MuJoCo simulation.
+          </p>
+          <div class="project-stack">
+            <span>RL</span>
+            <span>MuJoCo</span>
+            <span>Unitree G1</span>
+          </div>
+          <div class="project-actions">
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick#readme" target="_blank" rel="noopener noreferrer">Docs</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-meta">Robotics · Swarm</div>
+          <h3>
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="featured-title">
+              Swarm Robotics Simulator
+            </a>
+          </h3>
+          <p class="project-summary">
+            What I built: Multi-agent swarm with flocking, foraging, and formation from simple local interaction rules.
+          </p>
+          <div class="project-stack">
+            <span>Python</span>
+            <span>Multi-Agent</span>
+            <span>Swarm</span>
+          </div>
+          <div class="project-actions">
+            <span>Evidence:</span>
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer">Repo</a>
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator#readme" target="_blank" rel="noopener noreferrer">Docs</a>
           </div>
         </article>
       </div>
@@ -1425,6 +1474,174 @@ const blog = await getRecentPosts(3)
             <span>CNN-RNN</span>
             <span>PyTorch</span>
             <span>Classification</span>
+          </div>
+        </div>
+        
+        <!-- Agentic Long-Runner -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">
+              Agentic Long-Runner
+            </a>
+            <p class="project-description">
+              What I built: ReAct agent with 4 memory modes and needle-in-haystack eval benchmarks. Chunked vector retrieval fully recovers performance on 5,000+ word documents.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>ReAct</span>
+            <span>Memory</span>
+            <span>Eval</span>
+          </div>
+        </div>
+        
+        <!-- Custom PyMyCobot -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">
+              Custom PyMyCobot Teleoperation
+            </a>
+            <p class="project-description">
+              What I built: Leader-follower teleoperation system for bimanual manipulation. Real-time 7-DOF joint synchronization for imitation learning data collection.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Teleoperation</span>
+            <span>Imitation Learning</span>
+            <span>7-DOF</span>
+          </div>
+        </div>
+        
+        <!-- Swarm Robotics Simulator -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">
+              Swarm Robotics Simulator
+            </a>
+            <p class="project-description">
+              What I built: Multi-agent swarm simulation with flocking, foraging, and formation algorithms. Emergent collective behavior from simple local interaction rules.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/swarm-robotics-simulator#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Multi-Agent</span>
+            <span>Swarm</span>
+          </div>
+        </div>
+        
+        <!-- G1 Humanoid Spin Kick -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">
+              G1 Humanoid Spin Kick
+            </a>
+            <p class="project-description">
+              What I built: Reinforcement learning policy for dynamic humanoid locomotion. Trained a Unitree G1 to execute a full 360-degree spin kick in MuJoCo simulation.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>RL</span>
+            <span>MuJoCo</span>
+            <span>Humanoid</span>
+          </div>
+        </div>
+        
+        <!-- CFN Biomed Eval -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">
+              CFN Biomedical Eval
+            </a>
+            <p class="project-description">
+              What I built: Evaluation framework for biomedical NLP models. Token-level and span-level benchmarks for clinical concept extraction with F1 and precision/recall metrics.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/cfn-biomed-eval#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>NLP</span>
+            <span>Biomedical</span>
+            <span>Eval</span>
+          </div>
+        </div>
+        
+        <!-- MediSync -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">
+              MediSync
+            </a>
+            <p class="project-description">
+              What I built: Health records management platform with appointment scheduling, patient data, and clinical workflow tools.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/medisync#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>React</span>
+            <span>Node.js</span>
+            <span>Healthcare</span>
+          </div>
+        </div>
+        
+        <!-- Agrifinance -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-title">
+              AgriFinance
+            </a>
+            <p class="project-description">
+              What I built: Financial services platform for smallholder farmers. Loan management, credit scoring with agricultural data, and mobile-first interface.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/Agrifinance#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Flutter</span>
+            <span>Firebase</span>
+            <span>FinTech</span>
+          </div>
+        </div>
+        
+        <!-- ConnectFarm -->
+        <div class="project-entry">
+          <div class="project-info">
+            <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-title">
+              ConnectFarm
+            </a>
+            <p class="project-description">
+              What I built: Agricultural marketplace connecting farmers to buyers. Real-time listings, pricing data, and direct trade features.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+              <a href="https://github.com/Jonathan-321/ConnectFarm#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Flutter</span>
+            <span>Firebase</span>
+            <span>Marketplace</span>
           </div>
         </div>
         </div>

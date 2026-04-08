@@ -6,56 +6,144 @@ import Layout from '@/layouts/Layout.astro'
 ---
 
 <Layout class="max-w-3xl">
-  <PageHead slot="head" title="About" description="Learn more about Jonathan Muhire" />
+  <PageHead slot="head" title="About" description="Jonathan Muhire — ML systems, robotics, and research infrastructure" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>
     <div class="min-w-full">
       <div class="prose prose-neutral dark:prose-invert max-w-none">
-        <h1 class="text-3xl font-medium mb-8">About Me</h1>
+        <h1 class="text-3xl font-medium mb-8">About</h1>
         
         <p>
-          I'm Jonathan Muhire, a software R&D and ML researcher focused on deep learning systems, multimodal research,
-          and data infrastructure. Public implementation work is available on
-          <Link href="https://github.com/Jonathan-321" external>GitHub</Link>, and professional background details are
-          listed on <Link href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" external>LinkedIn</Link>.
+          I'm Jonathan Muhire — a CS & AI researcher building learning systems for real-world robots. I work across the
+          full stack of ML research: from hardware teleoperation and data collection, to distributed storage infrastructure,
+          to training and evaluation pipelines. I have 19 open-source repositories with working demos, real benchmarks, and
+          production-grade code.
         </p>
 
-        <h2 class="text-2xl font-medium mt-8 mb-4">Background</h2>
         <p>
-          I studied Computer Science and Artificial Intelligence across BS and MS programs, with work focused on
-          practical ML systems and research tooling. My current focus sits at the intersection of ML research, deep
-          learning, and distributed systems.
+          Previously, I co-founded <strong>Neotix Robotics</strong>, where I built teleoperation and manipulation systems
+          from scratch. I'm a <strong>Google Summer of Code 2025</strong> contributor, working on document AI pipelines for
+          Renaissance manuscript digitization. I study Computer Science at Oklahoma Christian University.
         </p>
 
-        <h2 class="text-2xl font-medium mt-8 mb-4">Current Focus</h2>
+        <h2 class="text-2xl font-medium mt-10 mb-4">What I Work On</h2>
+        
         <p>
-          I'm currently exploring multimodal modeling techniques for robust ML systems, with a particular interest in:
+          My research sits at the intersection of embodied AI, data infrastructure, and systems engineering. I don't just
+          train models — I build the entire pipeline around them.
         </p>
+
+        <h3 class="text-xl font-medium mt-6 mb-3">Robotics & Embodied AI</h3>
         <ul class="list-disc pl-6 space-y-2">
-          <li>Multimodal representation learning</li>
-          <li>Data-centric AI and synthetic augmentation</li>
-          <li>Scalable data infrastructure and dataset versioning</li>
-          <li>Efficient training and evaluation pipelines</li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/custom_pymycobot" external>Bimanual teleoperation</Link> — 
+            Custom leader-follower system with real-time 7-DOF joint synchronization for imitation learning data collection.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/G1Humanoid-spinkick" external>Humanoid locomotion</Link> — 
+            RL policy trained in MuJoCo for dynamic Unitree G1 motion including a full 360-degree spin kick.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/swarm-robotics-simulator" external>Swarm robotics</Link> — 
+            Multi-agent simulation with flocking, foraging, and formation algorithms demonstrating emergent collective behavior.
+          </li>
+          <li>
+            LeRobot ISO-101 platform — Local data-collection and policy-training workflow for fast experiment loops.
+          </li>
+          <li>
+            UMI multi-sensor extraction and trajectory analysis with ORB-SLAM-based tracking.
+          </li>
         </ul>
 
-        <h2 class="text-2xl font-medium mt-8 mb-4">Projects & Experience</h2>
-        <p>
-          My recent public work includes document-layout and OCR experiments, NLP crisis-signal prototypes, and
-          dataset-versioning workflows for robotics/ML data.
-        </p>
+        <h3 class="text-xl font-medium mt-6 mb-3">ML Research & Agents</h3>
         <ul class="list-disc pl-6 space-y-2">
-          <li><Link href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" external>RenAIssance (document AI)</Link></li>
-          <li><Link href="https://github.com/Jonathan-321/ISSR" external>ISSR (NLP prototype)</Link></li>
-          <li><Link href="https://github.com/Jonathan-321/minio" external>MinIO + LakeFS workflow</Link></li>
-          <li><Link href="https://github.com/Jonathan-321/ArtExtract" external>ArtExtract (CV experiments)</Link></li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/agentic" external>Agentic Long-Runner</Link> — 
+            ReAct agent with 4 memory modes. Needle-in-haystack evals show chunked vector retrieval fully recovers
+            performance on 5,000+ word documents (0% → 100%).
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" external>RenAIssance (GSoC 2025)</Link> — 
+            Document AI pipeline for Renaissance-era texts: layout detection with LayoutLMv3, OCR, and post-correction.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/ArtExtract" external>ArtExtract</Link> — 
+            CNN-RNN architecture for artwork classification with confusion matrix validation and training curves.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/cfn-biomed-eval" external>CFN Biomedical Eval</Link> — 
+            Token-level and span-level benchmarks for clinical concept extraction.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/ISSR" external>ISSR</Link> — 
+            Crisis detection system using NLP, sentiment analysis, and geospatial signal processing.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/pacman_ai" external>Pacman AI</Link> — 
+            Autonomous agents with search algorithms and gameplay heuristics.
+          </li>
         </ul>
 
-        <h2 class="text-2xl font-medium mt-8 mb-4">Get in Touch</h2>
+        <h3 class="text-xl font-medium mt-6 mb-3">Infrastructure & Systems</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>
+            <Link href="https://github.com/Jonathan-321/minio" external>MinIO + LakeFS</Link> — 
+            3-node distributed cluster with erasure coding, data versioning, AIStor cache, and Prometheus + Grafana monitoring.
+          </li>
+          <li>
+            Docker-based deployment pipelines for reproducible ML experiments.
+          </li>
+          <li>
+            Dataset annotation workflows for manipulation episodes (gripper-pose, keyframe labeling).
+          </li>
+        </ul>
+
+        <h3 class="text-xl font-medium mt-6 mb-3">Full-Stack & Mobile</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>
+            <Link href="https://github.com/Jonathan-321/medisync" external>MediSync</Link> — 
+            Health records platform with scheduling, patient data, and clinical workflows.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/Agrifinance" external>AgriFinance</Link> — 
+            Financial services for smallholder farmers with credit scoring and mobile-first design.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/ConnectFarm" external>ConnectFarm</Link> — 
+            Agricultural marketplace connecting farmers to buyers.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/CampusBuddy_V1" external>CampusBuddy</Link> — 
+            Flutter app for campus events, dining, and student resources.
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-medium mt-10 mb-4">Technical Stack</h2>
         <p>
-          I'm always excited to discuss robotics, AI infrastructure, or potential collaborations. Feel free to reach out 
-          via <Link href="mailto:muhirejonathan123@gmail.com">email</Link> or connect with me on 
-          <Link href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" external>LinkedIn</Link>.
+          <strong>Languages:</strong> Python, C++, Java, Dart, JavaScript<br/>
+          <strong>ML/DL:</strong> PyTorch, Transformers, RL (MuJoCo), Computer Vision, NLP<br/>
+          <strong>Robotics:</strong> ROS2, PyMyCobot, LeRobot, ORB-SLAM3, MuJoCo<br/>
+          <strong>Infrastructure:</strong> Docker, MinIO, LakeFS, Prometheus, Grafana<br/>
+          <strong>Mobile/Web:</strong> Flutter, React, Node.js, Firebase, Astro<br/>
+        </p>
+
+        <h2 class="text-2xl font-medium mt-10 mb-4">What I'm Looking For</h2>
+        <p>
+          I'm open to research engineer, ML systems, and robotics roles — anywhere that involves building
+          intelligent systems that interact with the physical world. I'm especially interested in teams working on
+          embodied AI, large-scale data infrastructure, or research tooling.
+        </p>
+
+        <h2 class="text-2xl font-medium mt-10 mb-4">Get in Touch</h2>
+        <p>
+          Email is best for opportunities. LinkedIn for introductions. I also have a 
+          <Link href="https://cal.com/jonathan-m-yugked" external>public booking link</Link> for calls.
+        </p>
+        <p>
+          <Link href="mailto:muhirejonathan123@gmail.com">muhirejonathan123@gmail.com</Link> · 
+          <Link href="https://github.com/Jonathan-321" external>GitHub</Link> · 
+          <Link href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" external>LinkedIn</Link>
         </p>
       </div>
     </div>
