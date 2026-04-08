@@ -11,13 +11,11 @@ const blog = await getRecentPosts(3)
   <PageHead slot="head" title="Home" />
   
   <style>
-    /* Smooth scrolling */
     html {
       scroll-behavior: smooth;
       scroll-snap-type: y proximity;
     }
     
-    /* Full-page sections */
     .page-section {
       min-height: 100vh;
       display: flex;
@@ -30,7 +28,7 @@ const blog = await getRecentPosts(3)
       scroll-snap-align: start;
     }
     
-    /* First page - intro */
+    /* Hero — clean, no gradients */
     .intro-page {
       position: relative;
       display: flex;
@@ -39,194 +37,93 @@ const blog = await getRecentPosts(3)
       padding: 2rem;
       overflow: hidden;
       background-color: var(--background);
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(94, 234, 212, 0.2), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.18), transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(129, 140, 248, 0.12), transparent 50%),
-        url('/static/circuit-board-dark.svg');
-      background-size: 120% 120%, 140% 140%, 160% 160%, 720px 720px;
-      background-position: 10% 0%, 80% 10%, 60% 80%, center;
     }
     
-    [data-theme="light"] .intro-page {
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(14, 116, 144, 0.12), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.1), transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.08), transparent 50%),
-        url('/static/circuit-board-light.svg');
-    }
-    
-    /* Hero */
-    .hero-grid {
+    .hero-layout {
       width: 100%;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    
-    .hero-content {
-      padding: 3rem;
       max-width: 720px;
     }
     
     .hero-eyebrow {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: var(--muted-foreground);
-      margin-bottom: 1.25rem;
+      margin-bottom: 2rem;
     }
     
     .hero-title {
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      font-weight: 400;
-      line-height: 1.1;
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 350;
+      line-height: 1.08;
       color: var(--foreground);
-      margin-bottom: 1rem;
-    }
-    
-    .hero-tagline {
-      font-size: 1.125rem;
-      line-height: 1.6;
-      color: var(--foreground);
-      margin-bottom: 0.75rem;
-    }
-    
-    .hero-subtext {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--muted-foreground);
-    }
-    
-    .hero-list {
-      list-style: none;
-      padding: 0;
-      margin: 1.5rem 0 2rem;
-      display: grid;
-      gap: 0.75rem;
-      color: var(--foreground);
-    }
-    
-    .hero-list li {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    
-    .hero-list li::before {
-      content: '-';
-      color: var(--muted-foreground);
-      margin-top: 0.1rem;
-    }
-    
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
       margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
     }
     
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.1rem;
-      border-radius: 999px;
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted-foreground);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    
+    .hero-desc a {
+      color: var(--foreground);
       text-decoration: none;
-      font-size: 0.85rem;
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s ease;
     }
     
-    .cta.primary {
+    .hero-desc a:hover {
+      border-color: var(--foreground);
+    }
+    
+    .hero-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    
+    .hero-link {
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .hero-link:hover {
+      opacity: 0.6;
+    }
+    
+    .hero-link--primary {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
       background: var(--foreground);
       color: var(--background);
-      border-color: transparent;
     }
     
-    .cta.primary:hover {
+    .hero-link--primary:hover {
       opacity: 0.9;
     }
     
-    .cta.secondary {
-      background: var(--background);
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      line-height: 1.7;
+    }
+    
+    .hero-meta a {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-meta a:hover {
       color: var(--foreground);
     }
-    
-    .cta.secondary:hover {
-      border-color: var(--foreground);
-    }
-    
-    .cta.ghost {
-      background: transparent;
-      color: var(--muted-foreground);
-    }
-    
-    .cta.ghost:hover {
-      color: var(--foreground);
-      border-color: var(--foreground);
-    }
-    
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .chip {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
-      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
-    }
-    
-    .hero-card {
-      background: color-mix(in oklch, var(--background), var(--foreground) 4%);
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: 20px;
-      backdrop-filter: blur(6px);
-    }
-    
-    .card-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted-foreground);
-      margin-bottom: 0.75rem;
-    }
-    
-    .card-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.5rem 0;
-      display: grid;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-      color: var(--foreground);
-    }
-    
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .card-tag {
-      font-size: 0.7rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
-    }
-    
     
     /* Scroll indicator */
     .scroll-indicator {
@@ -238,7 +135,7 @@ const blog = await getRecentPosts(3)
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      opacity: 0.6;
+      opacity: 0.4;
       transition: opacity 0.3s ease;
       cursor: pointer;
       text-decoration: none;
@@ -246,15 +143,7 @@ const blog = await getRecentPosts(3)
     }
     
     .scroll-indicator:hover {
-      opacity: 1;
-      color: var(--foreground);
-    }
-    
-    .scroll-text {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted-foreground);
+      opacity: 0.8;
     }
     
     .scroll-arrow {
@@ -273,23 +162,42 @@ const blog = await getRecentPosts(3)
       width: 100%;
       height: 50%;
       background: var(--foreground);
-      animation: scrollDown 2s infinite;
+      animation: scrollDown 2.5s infinite;
     }
     
     @keyframes scrollDown {
-      0% {
-        transform: translateY(-100%);
-      }
-      50% {
-        transform: translateY(200%);
-      }
-      100% {
-        transform: translateY(200%);
-      }
+      0% { transform: translateY(-100%); }
+      50% { transform: translateY(200%); }
+      100% { transform: translateY(200%); }
     }
     
-    /* Featured */
-    .nav-section {
+    /* Section styles */
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-foreground);
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 350;
+      margin-bottom: 1rem;
+      color: var(--foreground);
+      letter-spacing: -0.01em;
+    }
+    
+    .section-lede {
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+    
+    /* Featured work */
+    .work-section {
       display: grid;
       grid-template-columns: 2.2fr 1fr;
       gap: 4rem;
@@ -297,350 +205,147 @@ const blog = await getRecentPosts(3)
       align-items: start;
     }
     
-    .section-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted-foreground);
-      margin-bottom: 1.5rem;
-    }
-    
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 1.25rem;
-      color: var(--foreground);
-    }
-    
-    .section-lede {
-      font-size: 0.95rem;
-      color: var(--muted-foreground);
-      max-width: 520px;
-      margin-bottom: 2rem;
-    }
-    
-    .featured-grid {
+    .work-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
     
-    .featured-card {
+    .work-card {
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      border-radius: 14px;
+      padding: 1.25rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
+      transition: border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
     
-    .featured-card:hover {
-      border-color: var(--foreground);
-      transform: translateY(-2px);
+    .work-card:hover {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 20%);
     }
     
-    .featured-thumb {
+    .work-thumb {
       width: 100%;
-      height: 140px;
+      height: 130px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 0.25rem;
       border: 1px solid var(--border);
     }
     
-    .featured-title {
-      font-size: 1rem;
-      font-weight: 500;
+    .work-title {
+      font-size: 0.95rem;
+      font-weight: 450;
       color: var(--foreground);
       text-decoration: none;
     }
     
-    .featured-desc {
-      font-size: 0.9rem;
+    .work-desc {
+      font-size: 0.82rem;
       color: var(--muted-foreground);
-      margin: 0.75rem 0 1rem;
-      line-height: 1.5;
-    }
-
-    .featured-evidence {
-      font-size: 0.8rem;
-      color: var(--muted-foreground);
-      margin: 0 0 0.9rem;
-      line-height: 1.5;
-    }
-
-    .featured-evidence a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px dotted var(--border);
-    }
-
-    .featured-evidence a:hover {
-      color: var(--foreground);
+      line-height: 1.55;
     }
     
-    .featured-meta {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted-foreground);
-      margin-bottom: 0.75rem;
-    }
-    
-    .featured-tags {
+    .work-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
+      gap: 0.35rem;
+      margin-top: auto;
     }
     
-    .featured-tag {
-      font-size: 0.7rem;
+    .work-tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      border-left: 1px solid var(--border);
+      padding-left: 2.5rem;
+    }
+    
+    .sidebar-link {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      padding: 0.4rem 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .sidebar-link:hover {
+      opacity: 0.6;
+    }
+    
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    
+    .pill {
+      font-size: 0.65rem;
       padding: 0.25rem 0.5rem;
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--muted-foreground);
     }
     
-    .featured-links {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .featured-link {
-      font-size: 0.8rem;
-      color: var(--muted-foreground);
-      text-decoration: none;
-    }
-    
-    .featured-link:hover {
-      color: var(--foreground);
-    }
-    
-    /* Side profiles */
-    .profiles-section {
-      border-left: 1px solid var(--border);
-      padding-left: 3rem;
-    }
-    
-    .profile-link {
-      display: block;
-      font-size: 0.875rem;
-      color: var(--foreground);
-      text-decoration: none;
-      padding: 0.5rem 0;
-      transition: opacity 0.2s ease;
-    }
-    
-    .profile-link:hover {
-      opacity: 0.6;
-    }
-    
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    
-    .skill-pill {
-      font-size: 0.7rem;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
-    }
-    
-    .proof-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    
-    .proof-pill {
-      font-size: 0.7rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 999px;
-      border: 1px dashed var(--border);
-      color: var(--muted-foreground);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    
-    /* Visual systems */
-    .visuals-section {
+    /* Systems section */
+    .systems-section {
       width: 100%;
       max-width: 1100px;
     }
     
-    .visuals-grid {
+    .systems-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 2rem;
     }
     
-    .visual-card {
+    .system-card {
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.5rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
-      display: grid;
-      gap: 0.75rem;
+      border-radius: 14px;
+      padding: 1.25rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
     
-    .visual-title {
-      font-size: 0.95rem;
-      font-weight: 500;
+    .system-card img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    
+    .system-title {
+      font-size: 0.9rem;
+      font-weight: 450;
       color: var(--foreground);
     }
     
-    .visual-desc {
-      font-size: 0.85rem;
+    .system-desc {
+      font-size: 0.8rem;
       color: var(--muted-foreground);
       line-height: 1.5;
     }
     
-    .diagram {
-      width: 100%;
-      height: 210px;
-      color: color-mix(in oklch, var(--foreground), var(--background) 70%);
-    }
-    
-    .methods-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
-    }
-    
-    .method-pill {
-      font-size: 0.7rem;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      text-decoration: none;
-      position: relative;
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-    
-    .method-pill::after {
-      content: '↗';
-      font-size: 0.75rem;
-      margin-left: 0.25rem;
-      color: var(--muted-foreground);
-    }
-    
-    .method-pill:hover {
-      border-color: var(--foreground);
-      color: var(--foreground);
-    }
-    
-    /* Projects page */
+    /* Projects timeline */
     .projects-container {
       width: 100%;
       max-width: 800px;
     }
     
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .project-card {
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
-    }
-    
-    .project-meta {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted-foreground);
-      margin-bottom: 0.5rem;
-    }
-    
-    .project-card h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    
-    .project-summary {
-      font-size: 0.9rem;
-      color: var(--muted-foreground);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-    
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .project-stack span {
-      font-size: 0.7rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
-    }
-    
-    .project-actions {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-actions span {
-      font-size: 0.8rem;
-      color: var(--muted-foreground);
-    }
-    
-    .project-actions a {
-      font-size: 0.8rem;
-      color: var(--muted-foreground);
-      text-decoration: none;
-    }
-    
-    .project-actions a:hover {
-      color: var(--foreground);
-    }
-    
-    .details-block {
-      margin-top: 2.5rem;
-      border: 1px dashed var(--border);
-      border-radius: 16px;
-      padding: 1rem 1.5rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
-    }
-    
-    .details-block summary {
-      cursor: pointer;
-      font-size: 0.9rem;
-      color: var(--foreground);
-      list-style: none;
-    }
-    
-    .details-block summary::-webkit-details-marker {
-      display: none;
-    }
-    
-    .details-content {
-      margin-top: 1.5rem;
-    }
-    
-    /* Year sections */
     .year-section {
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
     
     .muted-year {
@@ -648,64 +353,41 @@ const blog = await getRecentPosts(3)
     }
     
     .year-header {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 300;
       color: var(--muted-foreground);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid var(--border);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
     
     .projects-list {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
     }
     
     .project-entry {
       display: grid;
       grid-template-columns: 1fr 100px;
       gap: 2rem;
-      padding: 1.5rem 0;
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--border);
       align-items: baseline;
-    }
-    
-    .project-year {
-      display: none;
     }
     
     .project-entry:last-child {
       border-bottom: none;
     }
     
-    .project-year {
-      font-size: 0.875rem;
-      color: var(--muted-foreground);
-      font-variant-numeric: tabular-nums;
-    }
-    
-    .project-entry.year-2024 .project-year {
-      color: #666;
-    }
-    
-    .project-entry.year-2024 .project-title {
-      opacity: 0.85;
-    }
-    
-    .project-entry.year-2024 .project-description {
-      opacity: 0.9;
-    }
-    
     .project-info {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.35rem;
     }
     
     .project-title {
-      font-size: 1.125rem;
+      font-size: 1rem;
       font-weight: 400;
       color: var(--foreground);
       text-decoration: none;
@@ -717,29 +399,28 @@ const blog = await getRecentPosts(3)
     }
     
     .project-description {
-      font-size: 0.875rem;
+      font-size: 0.82rem;
       color: var(--muted-foreground);
       line-height: 1.6;
     }
     
     .project-links {
       display: flex;
-      gap: 1rem;
-      margin-top: 0.25rem;
+      gap: 0.75rem;
+      margin-top: 0.15rem;
     }
     
     .project-link {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--muted-foreground);
       text-decoration: none;
-      transition: all 0.2s ease;
-      position: relative;
+      transition: color 0.2s ease;
     }
     
     .project-link::after {
-      content: '↗';
-      margin-left: 0.25rem;
-      font-size: 0.7rem;
+      content: '\2197';
+      margin-left: 0.2rem;
+      font-size: 0.65rem;
     }
     
     .project-link:hover {
@@ -747,22 +428,51 @@ const blog = await getRecentPosts(3)
     }
     
     .project-tech {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--muted-foreground);
       text-align: right;
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.2rem;
     }
     
-    /* Writing page */
+    /* Details block */
+    .details-block {
+      margin-top: 2rem;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.5rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 1%);
+    }
+    
+    .details-block summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      list-style: none;
+      transition: color 0.2s ease;
+    }
+    
+    .details-block summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .details-block summary:hover {
+      color: var(--foreground);
+    }
+    
+    .details-content {
+      margin-top: 1.5rem;
+    }
+    
+    /* Writing */
     .writing-list {
       width: 100%;
       max-width: 600px;
     }
     
     .post-item {
-      padding: 2rem 0;
+      padding: 1.75rem 0;
       border-bottom: 1px solid var(--border);
     }
     
@@ -771,37 +481,50 @@ const blog = await getRecentPosts(3)
     }
     
     .post-date {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--muted-foreground);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     
     .post-title {
-      font-size: 1.125rem;
+      font-size: 1rem;
       font-weight: 400;
     }
     
     .post-desc {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--muted-foreground);
-      margin-top: 0.5rem;
+      margin-top: 0.35rem;
       line-height: 1.5;
     }
     
-    .contact-card {
-      margin-top: 2rem;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
-      display: grid;
+    /* Contact */
+    .contact-links {
+      display: flex;
       gap: 1.5rem;
+      margin-top: 1rem;
     }
     
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+    .contact-link {
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .contact-link:hover {
+      opacity: 0.6;
+    }
+    
+    .contact-link--primary {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: var(--foreground);
+      color: var(--background);
+    }
+    
+    .contact-link--primary:hover {
+      opacity: 0.9;
     }
     
     @media (max-width: 768px) {
@@ -809,991 +532,477 @@ const blog = await getRecentPosts(3)
         padding: 3rem 1.5rem;
       }
       
-      .hero-grid {
+      .work-section {
         grid-template-columns: 1fr;
       }
       
-      .hero-content {
-        padding: 2rem;
-      }
-      
-      .hero-card {
-        order: 2;
-      }
-      
-      .nav-section {
+      .work-grid {
         grid-template-columns: 1fr;
       }
       
-      .profiles-section {
+      .sidebar {
         border-left: none;
         border-top: 1px solid var(--border);
         padding-left: 0;
         padding-top: 2rem;
       }
       
-      .featured-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .visuals-grid {
+      .systems-grid {
         grid-template-columns: 1fr;
       }
       
       .project-entry {
         grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .year-header {
-        font-size: 1.25rem;
-      }
-      
-      .project-year {
-        order: -1;
-        margin-bottom: 0.5rem;
+        gap: 0.75rem;
       }
       
       .project-tech {
         text-align: left;
         flex-direction: row;
-        gap: 1rem;
-        margin-top: 0.5rem;
+        gap: 0.75rem;
       }
     }
   </style>
   
-  <!-- Page 1: Intro -->
+  <!-- Hero -->
   <section class="page-section intro-page">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-eyebrow">ML Systems + Robotics Infrastructure</div>
-        <h1 class="hero-title">I build learning systems for real-world robots.</h1>
-        <p class="hero-tagline">
-          From teleoperation data pipelines to memory-augmented agents — I ship research code that works at scale. 19 open-source repositories with working demos, real benchmarks, and production-grade infrastructure.
-        </p>
-        <p class="hero-subtext">
-          CS & AI researcher. Prev co-founder @ Neotix Robotics. GSoC 2025 contributor. Full background on
-          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
-        </p>
-        <ul class="hero-list">
-          <li>Bimanual teleoperation + imitation learning data collection with <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">custom mycobot stack</a>.</li>
-          <li>3-node MinIO cluster with LakeFS versioning for <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">robotics datasets</a>.</li>
-          <li>ReAct agent with memory ablations — 0% to 100% retrieval rescue on <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">needle-in-haystack evals</a>.</li>
-          <li>Document AI pipeline for <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">GSoC 2025</a> — layout + OCR on Renaissance manuscripts.</li>
-        </ul>
-        <div class="hero-cta">
-          <a href="#featured" class="cta primary">See Featured Work</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta secondary">Resume</a>
-          <a href="mailto:muhirejonathan123@gmail.com" class="cta ghost">Email</a>
-        </div>
-        <div class="hero-chips">
-          <span class="chip">Open to: Research Engineer / ML Systems / Robotics</span>
-          <span class="chip">Focus: Embodied AI + Data Infrastructure</span>
-        </div>
-        <div class="proof-strip">
-          <span class="proof-pill">GSoC 2025 repository work</span>
-          <span class="proof-pill">Public GitHub repos</span>
-          <span class="proof-pill">Research notes</span>
-          <span class="proof-pill">Robotics demo clips</span>
-        </div>
+    <div class="hero-layout">
+      <div class="hero-eyebrow">Jonathan Muhire</div>
+      <h1 class="hero-title">I build intelligent systems that ship.</h1>
+      <p class="hero-desc">
+        ML systems, data infrastructure, and applied AI.
+        19 open-source repositories with real benchmarks and production code.
+        <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer">GitHub</a> has everything.
+      </p>
+      <div class="hero-links">
+        <a href="#work" class="hero-link hero-link--primary">Selected Work</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="hero-link">Resume</a>
+        <a href="mailto:muhirejonathan123@gmail.com" class="hero-link">Email</a>
       </div>
-      <div class="hero-card">
-        <div class="card-label">Shipped & Verified</div>
-        <ul class="card-list">
-          <li>Teleoperation system for bimanual manipulation + data collection (<a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">code</a>).</li>
-          <li>Memory-augmented ReAct agent: retrieval rescues 0% &rarr; 100% on long-context evals (<a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">benchmarks</a>).</li>
-          <li>Distributed MinIO + LakeFS data versioning for robotics datasets (<a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">infra</a>).</li>
-          <li>GSoC 2025: Document AI pipeline for Renaissance manuscripts (<a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">repo</a>).</li>
-        </ul>
-        <div class="card-label">Core Stack</div>
-        <div class="card-tags">
-          <span class="card-tag">Python</span>
-          <span class="card-tag">PyTorch</span>
-          <span class="card-tag">Robotics</span>
-          <span class="card-tag">Deep Learning</span>
-          <span class="card-tag">Distributed Systems</span>
-          <span class="card-tag">Data Infra</span>
-          <span class="card-tag">Docker</span>
-          <span class="card-tag">Flutter</span>
-        </div>
-      </div>
+      <p class="hero-meta">
+        CS & AI · GSoC 2025 · Prev co-founder @ <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer">Neotix</a>
+      </p>
     </div>
-    <a href="#featured" class="scroll-indicator">
-      <span class="scroll-text">View My Work</span>
+    <a href="#work" class="scroll-indicator">
       <div class="scroll-arrow"></div>
     </a>
   </section>
   
-  <!-- Page 2: Navigation -->
-  <section id="featured" class="page-section">
-    <div class="nav-section">
+  <!-- Featured Work -->
+  <section id="work" class="page-section">
+    <div class="work-section">
       <div>
-        <div class="section-label">Featured Work</div>
-        <h2 class="section-title">Selected projects aligned to ML research and systems engineering.</h2>
-        <p class="section-lede">
-          Each project summary below separates implementation scope from publicly verifiable evidence.
-        </p>
-        <div class="featured-grid">
-          <article class="featured-card">
-            <img src="/media/renaissance-pipeline.png" alt="RenAIssance 3-stage pipeline: detection, recognition, correction" class="featured-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-title">
-              RenAIssance Document Analysis
-            </a>
-            <p class="featured-desc">
-              GSoC 2025. Built AI pipeline for digitizing Renaissance-era texts — layout detection with LayoutLMv3, OCR, and post-correction. 3-stage architecture processing real manuscript pages.
-            </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer">README</a>
-            </p>
-            <div class="featured-tags">
-              <span class="featured-tag">Document AI</span>
-              <span class="featured-tag">LayoutLMv3</span>
-              <span class="featured-tag">OCR</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
-            </div>
-          </article>
-          <article class="featured-card">
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-title">
-              ISSR — Crisis Detection
-            </a>
-            <p class="featured-desc">
-              GSoC candidate project. AI-powered system for suicide prevention through social media analysis, sentiment detection, and geospatial crisis mapping.
-            </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer">README</a>
-            </p>
-            <div class="featured-tags">
-              <span class="featured-tag">NLP</span>
-              <span class="featured-tag">Sentiment Analysis</span>
-              <span class="featured-tag">Geospatial Signals</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
-            </div>
-          </article>
-          <article class="featured-card">
-            <img src="/media/minio-infrastructure.png" alt="3-node MinIO cluster with LakeFS, AIStor, and monitoring" class="featured-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-title">
-              MinIO + LakeFS Data Infrastructure
-            </a>
-            <p class="featured-desc">
-              3-node distributed MinIO cluster with erasure coding, LakeFS data versioning, AIStor small-file cache, and Prometheus + Grafana monitoring. Built for robotics dataset management.
-            </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer">README</a> · <a href="https://docs.lakefs.io/" target="_blank" rel="noopener noreferrer">LakeFS docs</a>
-            </p>
-            <div class="featured-tags">
-              <span class="featured-tag">Data Infrastructure</span>
-              <span class="featured-tag">Dataset Versioning</span>
-              <span class="featured-tag">MinIO + LakeFS</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
-            </div>
-          </article>
-          <article class="featured-card">
-            <img src="/media/artextract-hero.png" alt="ArtExtract CNN-RNN art classification with style predictions" class="featured-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-title">
-              ArtExtract — Art Analysis AI
-            </a>
-            <p class="featured-desc">
-              Deep learning system combining CNN-RNN architectures for artwork classification. Trained on real art samples with confusion matrix validation and training curves.
-            </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">README</a>
-            </p>
-            <div class="featured-tags">
-              <span class="featured-tag">Computer Vision</span>
-              <span class="featured-tag">CNN-RNN</span>
-              <span class="featured-tag">Classification</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
-            </div>
-          </article>
-          <article class="featured-card">
-            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval: retrieval memory rescues 0% to 100%" class="featured-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="featured-title">
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Research and systems I've shipped.</h2>
+        <div class="work-grid">
+          <article class="work-card">
+            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval heatmap" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="work-title">
               Agentic Long-Runner
             </a>
-            <p class="featured-desc">
-              ReAct agent with 4 memory modes. Eval benchmarks show chunked vector retrieval fully recovers needle-in-haystack performance on 5,000+ word docs.
+            <p class="work-desc">
+              ReAct agent with 4 memory modes. Chunked vector retrieval fully recovers needle-in-haystack performance on 5,000+ word documents.
             </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer">README</a>
-            </p>
-            <div class="featured-meta">Research &middot; Agents</div>
-            <div class="featured-tags">
-              <span class="featured-tag">ReAct</span>
-              <span class="featured-tag">Memory</span>
-              <span class="featured-tag">Eval</span>
-            </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
+            <div class="work-tags">
+              <span class="work-tag">ReAct</span>
+              <span class="work-tag">Memory</span>
+              <span class="work-tag">Eval</span>
             </div>
           </article>
-          <article class="featured-card">
-            <img src="/media/mycobot-hero.png" alt="Leader-follower teleoperation architecture with 7-DOF joint sync" class="featured-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="featured-title">
-              Bimanual Teleoperation
+          <article class="work-card">
+            <img src="/media/renaissance-pipeline.png" alt="RenAIssance 3-stage pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
+              RenAIssance — GSoC 2025
             </a>
-            <p class="featured-desc">
-              Custom leader-follower teleoperation system for data collection. Real-time 7-DOF joint synchronization for imitation learning with the mycobot stack.
+            <p class="work-desc">
+              Document AI pipeline for Renaissance manuscripts. Layout detection with LayoutLMv3, OCR, and post-correction on real historical pages.
             </p>
-            <p class="featured-evidence">
-              Evidence: <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer">README</a>
-            </p>
-            <div class="featured-meta">Robotics &middot; Hardware</div>
-            <div class="featured-tags">
-              <span class="featured-tag">Teleoperation</span>
-              <span class="featured-tag">Imitation Learning</span>
-              <span class="featured-tag">7-DOF</span>
+            <div class="work-tags">
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">LayoutLMv3</span>
+              <span class="work-tag">OCR</span>
             </div>
-            <div class="featured-links">
-              <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="featured-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer" class="featured-link">Docs</a>
+          </article>
+          <article class="work-card">
+            <img src="/media/minio-infrastructure.png" alt="MinIO + LakeFS architecture" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="work-title">
+              MinIO + LakeFS Infrastructure
+            </a>
+            <p class="work-desc">
+              3-node distributed cluster with erasure coding, LakeFS versioning, and Prometheus + Grafana monitoring for ML datasets.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">MinIO</span>
+              <span class="work-tag">LakeFS</span>
+              <span class="work-tag">Docker</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/artextract-hero.png" alt="ArtExtract classification" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="work-title">
+              ArtExtract
+            </a>
+            <p class="work-desc">
+              CNN-RNN architecture for artwork classification. Trained on real art samples with confusion matrix validation and training curves.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Computer Vision</span>
+              <span class="work-tag">CNN-RNN</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/biomed-hero.png" alt="Biomedical NLP eval" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="work-title">
+              CFN Biomedical Eval
+            </a>
+            <p class="work-desc">
+              Evaluation framework for biomedical NLP. Token-level and span-level benchmarks for clinical concept extraction.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">NLP</span>
+              <span class="work-tag">Biomedical</span>
+              <span class="work-tag">Eval</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="work-title">
+              ISSR — Crisis Detection
+            </a>
+            <p class="work-desc">
+              NLP system for crisis-signal classification using social text, sentiment analysis, and geospatial mapping.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">NLP</span>
+              <span class="work-tag">Sentiment</span>
+              <span class="work-tag">Geospatial</span>
             </div>
           </article>
         </div>
       </div>
       
-      <!-- Right side - profiles -->
-      <div class="profiles-section">
-        <div class="section-label">Quick Links</div>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="section-label">Links</div>
         <div>
-          <a href="mailto:muhirejonathan123@gmail.com" class="profile-link">Email</a>
-          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
-          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="profile-link">Resume</a>
-          <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="profile-link">Book a Call</a>
+          <a href="mailto:muhirejonathan123@gmail.com" class="sidebar-link">Email</a>
+          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="sidebar-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="sidebar-link">LinkedIn</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="sidebar-link">Resume</a>
+          <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="sidebar-link">Book a Call</a>
         </div>
-        <div class="section-label" style="margin-top: 2rem;">Core Skills</div>
-        <div class="skills-list">
-          <span class="skill-pill">Deep Learning</span>
-          <span class="skill-pill">ML Research</span>
-          <span class="skill-pill">Robotics</span>
-          <span class="skill-pill">Computer Vision</span>
-          <span class="skill-pill">NLP / Document AI</span>
-          <span class="skill-pill">Distributed Systems</span>
-          <span class="skill-pill">Data Infrastructure</span>
-          <span class="skill-pill">Docker / DevOps</span>
-          <span class="skill-pill">Flutter / Mobile</span>
-          <span class="skill-pill">ROS2</span>
+        <div class="section-label" style="margin-top: 2rem;">Focus Areas</div>
+        <div class="pill-list">
+          <span class="pill">ML Systems</span>
+          <span class="pill">Deep Learning</span>
+          <span class="pill">NLP</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">Data Infrastructure</span>
+          <span class="pill">Distributed Systems</span>
         </div>
-        <div class="section-label" style="margin-top: 2rem;">Languages</div>
-        <div class="skills-list">
-          <span class="skill-pill">Python</span>
-          <span class="skill-pill">C++</span>
-          <span class="skill-pill">Java</span>
-          <span class="skill-pill">Dart</span>
-          <span class="skill-pill">JavaScript</span>
+        <div class="section-label" style="margin-top: 1.5rem;">Languages</div>
+        <div class="pill-list">
+          <span class="pill">Python</span>
+          <span class="pill">C++</span>
+          <span class="pill">Java</span>
+          <span class="pill">Dart</span>
+          <span class="pill">JavaScript</span>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Page 3: Visual Systems -->
+  <!-- Systems -->
   <section id="systems" class="page-section">
-    <div class="visuals-section">
-      <div class="section-label">Research Systems</div>
-      <h2 class="section-title">Systems I've built — from hardware to eval.</h2>
+    <div class="systems-section">
+      <div class="section-label">Architecture</div>
+      <h2 class="section-title">Systems I've built.</h2>
       <p class="section-lede">
-        Real architectures from real projects. Each card links to the source repository with full documentation.
+        Real architectures from real projects. Each links to the source repo.
       </p>
-      <div class="methods-row">
-        <a class="method-pill" href="https://github.com/Jonathan-321/custom_pymycobot">Teleoperation</a>
-        <a class="method-pill" href="https://github.com/Jonathan-321/minio">Data Infrastructure</a>
-        <a class="method-pill" href="https://github.com/Jonathan-321/agentic">Agent Memory</a>
-        <a class="method-pill" href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025">Document AI</a>
-        <a class="method-pill" href="https://github.com/Jonathan-321/G1Humanoid-spinkick">RL + Simulation</a>
-      </div>
-      <div class="visuals-grid">
-        <div class="visual-card">
-          <div class="visual-title">Teleoperation & Data Collection</div>
-          <div class="visual-desc">Leader-follower bimanual manipulation with real-time 7-DOF joint synchronization for imitation learning datasets.</div>
-          <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer">
-            <img src="/media/mycobot-hero.png" alt="Leader-follower teleoperation architecture" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
-          </a>
-          <div class="featured-tags" style="margin-top:0.5rem;">
-            <span class="featured-tag">PyMyCobot</span>
-            <span class="featured-tag">ROS2</span>
-            <span class="featured-tag">7-DOF</span>
-          </div>
-        </div>
-        <div class="visual-card">
-          <div class="visual-title">Distributed Data Infrastructure</div>
-          <div class="visual-desc">3-node MinIO cluster with erasure coding, LakeFS versioning, and Prometheus monitoring for robotics datasets.</div>
-          <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">
-            <img src="/media/minio-infrastructure.png" alt="MinIO + LakeFS infrastructure architecture" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
-          </a>
-          <div class="featured-tags" style="margin-top:0.5rem;">
-            <span class="featured-tag">MinIO</span>
-            <span class="featured-tag">LakeFS</span>
-            <span class="featured-tag">Docker</span>
-          </div>
-        </div>
-        <div class="visual-card">
-          <div class="visual-title">Memory-Augmented Agents</div>
-          <div class="visual-desc">ReAct agent with 4 memory modes. Eval benchmarks show chunked retrieval rescues 0% to 100% on needle-in-haystack.</div>
+      <div class="systems-grid">
+        <div class="system-card">
+          <div class="system-title">Memory-Augmented Agents</div>
+          <div class="system-desc">ReAct agent with 4 memory modes. Chunked retrieval rescues 0% to 100% on needle-in-haystack evals.</div>
           <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer">
-            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval heatmap" style="width:100%;border-radius:12px;border:1px solid var(--border);" loading="lazy" />
+            <img src="/media/agentic-heatmap.png" alt="Needle-in-haystack eval heatmap" loading="lazy" />
           </a>
-          <div class="featured-tags" style="margin-top:0.5rem;">
-            <span class="featured-tag">ReAct</span>
-            <span class="featured-tag">Vector Retrieval</span>
-            <span class="featured-tag">Eval</span>
-          </div>
+        </div>
+        <div class="system-card">
+          <div class="system-title">Distributed Data Infrastructure</div>
+          <div class="system-desc">3-node MinIO cluster with erasure coding, LakeFS versioning, and Prometheus monitoring.</div>
+          <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">
+            <img src="/media/minio-infrastructure.png" alt="MinIO + LakeFS infrastructure" loading="lazy" />
+          </a>
+        </div>
+        <div class="system-card">
+          <div class="system-title">Document AI Pipeline</div>
+          <div class="system-desc">GSoC 2025. 3-stage architecture: layout detection, OCR, and post-correction on Renaissance manuscripts.</div>
+          <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">
+            <img src="/media/renaissance-pipeline.png" alt="RenAIssance pipeline" loading="lazy" />
+          </a>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Page 4: Projects -->
+  <!-- All Projects -->
   <section id="projects" class="page-section">
     <div class="projects-container">
       <div class="section-label">All Projects</div>
-      <h2 class="section-title">19 repositories. Full project timeline.</h2>
-      <p class="section-lede">
-        Spanning robotics, ML research, data infrastructure, and full-stack — the complete catalog of shipped work.
-      </p>
-      <div class="project-grid">
-        <article class="project-card">
-          <div class="project-meta">Research · Document AI</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="featured-title">
-              RenAIssance Document Analysis
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: Layout analysis + OCR experiments for historical document digitization.
-          </p>
-          <div class="project-stack">
-            <span>PyTorch</span>
-            <span>LayoutLMv3</span>
-            <span>Document AI</span>
+      <h2 class="section-title">Full timeline.</h2>
+      
+      <details class="details-block" open>
+        <summary>2025 — ML Research & Systems</summary>
+        <div class="details-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">Agentic Long-Runner</a>
+                <p class="project-description">ReAct agent with 4 memory modes. Needle-in-haystack evals: 0% to 100% retrieval recovery.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>ReAct</span>
+                <span>Memory</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance — GSoC 2025</a>
+                <p class="project-description">Document AI for historical manuscripts. Layout detection, OCR, post-correction.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>LayoutLMv3</span>
+                <span>PyTorch</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">MinIO + LakeFS Infrastructure</a>
+                <p class="project-description">Distributed object storage with dataset versioning for reproducible ML experiments.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>MinIO</span>
+                <span>Docker</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">CFN Biomedical Eval</a>
+                <p class="project-description">Token-level and span-level benchmarks for clinical NLP concept extraction.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>NLP</span>
+                <span>Eval</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">ISSR — Crisis Detection</a>
+                <p class="project-description">NLP crisis-signal classification with sentiment analysis and geospatial features.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>NLP</span>
+                <span>Sentiment</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-title">ArtExtract</a>
+                <p class="project-description">CNN-RNN architecture for artwork classification with validation metrics.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>PyTorch</span>
+                <span>CV</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">Custom PyMyCobot</a>
+                <p class="project-description">Leader-follower control system for bimanual manipulation and data collection.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Hardware</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">Swarm Simulator</a>
+                <p class="project-description">Multi-agent simulation with flocking, foraging, and formation algorithms.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Multi-Agent</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">G1 Humanoid RL</a>
+                <p class="project-description">RL policy for dynamic locomotion in MuJoCo simulation.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>RL</span>
+                <span>MuJoCo</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">MediSync</a>
+                <p class="project-description">Health records platform with scheduling and clinical workflows.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Node.js</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-title">AgriFinance</a>
+                <p class="project-description">Financial services for smallholder farmers. Credit scoring and mobile-first design.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Flutter</span>
+                <span>Firebase</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-title">ConnectFarm</a>
+                <p class="project-description">Agricultural marketplace connecting farmers to buyers.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Flutter</span>
+                <span>Firebase</span>
+              </div>
+            </div>
           </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-meta">Applied ML · NLP</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="featured-title">
-              ISSR — Crisis Detection
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: NLP prototype for crisis-signal classification using social text, sentiment, and location features.
-          </p>
-          <div class="project-stack">
-            <span>NLP</span>
-            <span>Sentiment Analysis</span>
-            <span>Geospatial Signals</span>
-          </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-meta">Systems · Data Infrastructure</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="featured-title">
-              MinIO + LakeFS Data Infrastructure
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: Object-storage + dataset versioning workflow for reproducible ML experiments.
-          </p>
-          <div class="project-stack">
-            <span>MinIO</span>
-            <span>LakeFS</span>
-            <span>Dataset Versioning</span>
-          </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-meta">Research · Computer Vision</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="featured-title">
-              ArtExtract — Art Analysis AI
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: CNN-RNN experiments for artwork classification and style-analysis tasks.
-          </p>
-          <div class="project-stack">
-            <span>PyTorch</span>
-            <span>CNN-RNN</span>
-            <span>Classification</span>
-          </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-meta">Robotics · RL</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="featured-title">
-              G1 Humanoid Spin Kick
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: RL policy for dynamic humanoid locomotion — 360-degree spin kick in MuJoCo simulation.
-          </p>
-          <div class="project-stack">
-            <span>RL</span>
-            <span>MuJoCo</span>
-            <span>Unitree G1</span>
-          </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-meta">Robotics · Swarm</div>
-          <h3>
-            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="featured-title">
-              Swarm Robotics Simulator
-            </a>
-          </h3>
-          <p class="project-summary">
-            What I built: Multi-agent swarm with flocking, foraging, and formation from simple local interaction rules.
-          </p>
-          <div class="project-stack">
-            <span>Python</span>
-            <span>Multi-Agent</span>
-            <span>Swarm</span>
-          </div>
-          <div class="project-actions">
-            <span>Evidence:</span>
-            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator#readme" target="_blank" rel="noopener noreferrer">Docs</a>
-          </div>
-        </article>
-      </div>
+        </div>
+      </details>
       
       <details class="details-block">
-        <summary>Additional projects (embodied AI, full-stack, mobile, games)</summary>
+        <summary>2024 — Full-Stack & Mobile</summary>
         <div class="details-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-title">NutrAI</a>
+                <p class="project-description">Full-stack nutrition app with meal planning and dietary analysis.</p>
+                <div class="project-links">
+                  <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Python</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-title">CampusBuddy</a>
+                <p class="project-description">Flutter app for campus events, dining, and student resources.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Flutter</span>
+                <span>Dart</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-title">POS Terminal</a>
+                <p class="project-description">Java POS application with inventory tracking and sales reporting.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Java</span>
+                <span>Desktop</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
       
-      <!-- 2025 Projects -->
-      <div class="year-section">
-        <h3 class="year-header">2025 - ML Research & Systems</h3>
-        <div class="projects-list">
-        <!-- PyMyCobot Teleoperation -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">
-              PyMyCobot Teleoperation
-            </a>
-            <p class="project-description">
-              What I built: Local teleoperation workflow and control scripts for manipulation data-collection experiments using the PyMyCobot stack.
-            </p>
-            <div class="project-links">
-              <a href="/media/neotixdemo.mp4" target="_blank" class="project-link">Demo</a>
-              <a href="https://github.com/elephantrobotics/pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Reference SDK</a>
+      <details class="details-block">
+        <summary>2023 — Early Projects</summary>
+        <div class="details-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-title">Space Invader</a>
+                <p class="project-description">C++ arcade game with custom rendering and gameplay mechanics.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>C++</span>
+                <span>SFML</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-title">Pacman AI</a>
+                <p class="project-description">Autonomous agents with search algorithms and gameplay heuristics.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Search</span>
+              </div>
             </div>
           </div>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>Teleoperation</span>
-            <span>Data Collection</span>
-          </div>
         </div>
-        
-        <!-- UMI Multi-Sensor Data Extraction -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://umi-gripper.github.io/" target="_blank" rel="noopener noreferrer" class="project-title">
-              UMI Multi-Sensor Data Extraction
-            </a>
-            <p class="project-description">
-              What I built: Multi-sensor extraction scripts and trajectory analysis workflow around UMI datasets and ORB-SLAM-based tracking.
-            </p>
-            <div class="project-links">
-              <a href="/media/umi-demo.mp4" target="_blank" class="project-link">Demo</a>
-              <a href="https://umi-gripper.github.io/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
-              <a href="https://umi-gripper.github.io/umi.pdf" target="_blank" rel="noopener noreferrer" class="project-link">Paper</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>ORB-SLAM3</span>
-            <span>Trajectory Analysis</span>
-            <span>Sensor Fusion</span>
-          </div>
-        </div>
-        
-        <!-- UMI Data Annotation Pipeline -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank" rel="noopener noreferrer" class="project-title">
-              UMI Data Annotation Pipeline
-            </a>
-            <p class="project-description">
-              What I built: Annotation workflow for manipulation episodes, including gripper-pose and keyframe labeling around embodied-CoT style experiments.
-            </p>
-            <div class="project-links">
-              <a href="/media/UMI-annotated.mp4" target="_blank" class="project-link">Demo</a>
-              <a href="https://github.com/MichalZawalski/embodied-CoT" target="_blank" rel="noopener noreferrer" class="project-link">Reference Repo</a>
-              <a href="https://arxiv.org/pdf/2407.08693" target="_blank" rel="noopener noreferrer" class="project-link">Paper</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Dataset Annotation</span>
-            <span>Computer Vision</span>
-            <span>Embodied CoT</span>
-          </div>
-        </div>
-        
-        <!-- MinIO + LakeFS Data Infrastructure -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">
-              MinIO + LakeFS Data Infrastructure
-            </a>
-            <p class="project-description">
-              What I built: Object-storage and dataset-versioning setup for robotics datasets with reproducible data snapshots.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/minio#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-              <a href="https://docs.lakefs.io/" target="_blank" rel="noopener noreferrer" class="project-link">LakeFS Docs</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>MinIO</span>
-            <span>LakeFS</span>
-            <span>Dataset Versioning</span>
-          </div>
-        </div>
-        
-        <!-- LeRobot ISO-101 Platform -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-title">
-              LeRobot ISO-101 Platform
-            </a>
-            <p class="project-description">
-              What I built: Local data-collection and policy-training workflow using LeRobot tooling for fast experiment loops.
-            </p>
-            <div class="project-links">
-              <a href="/media/lerobot.MP4" target="_blank" class="project-link">Demo</a>
-              <a href="https://huggingface.co/lerobot" target="_blank" rel="noopener noreferrer" class="project-link">Models</a>
-              <a href="https://huggingface.co/docs/lerobot/index" target="_blank" rel="noopener noreferrer" class="project-link">Docs</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>LeRobot</span>
-            <span>ROS2</span>
-            <span>Policy Training</span>
-          </div>
-        </div>
-        
-        <!-- RenAIssance GSoC -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">
-              RenAIssance Document Analysis
-            </a>
-            <p class="project-description">
-              What I built: GSoC 2025 repository work on historical document layout analysis and OCR experiments.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>PyTorch</span>
-            <span>LayoutLMv3</span>
-            <span>Document AI</span>
-          </div>
-        </div>
-        
-        <!-- ISSR -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">
-              ISSR - Mental Health Crisis Detection
-            </a>
-            <p class="project-description">
-              What I built: GSoC candidate repository prototype for crisis-signal detection from social text with sentiment and geospatial features.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/ISSR#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>NLP</span>
-            <span>Sentiment Analysis</span>
-            <span>Geospatial Signals</span>
-          </div>
-        </div>
-        
-        <!-- ArtExtract -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-title">
-              ArtExtract - Art Analysis AI
-            </a>
-            <p class="project-description">
-              What I built: CNN-RNN project for artwork classification and style-analysis experiments.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/ArtExtract#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>CNN-RNN</span>
-            <span>PyTorch</span>
-            <span>Classification</span>
-          </div>
-        </div>
-        
-        <!-- Agentic Long-Runner -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">
-              Agentic Long-Runner
-            </a>
-            <p class="project-description">
-              What I built: ReAct agent with 4 memory modes and needle-in-haystack eval benchmarks. Chunked vector retrieval fully recovers performance on 5,000+ word documents.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/agentic#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>ReAct</span>
-            <span>Memory</span>
-            <span>Eval</span>
-          </div>
-        </div>
-        
-        <!-- Custom PyMyCobot -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">
-              Custom PyMyCobot Teleoperation
-            </a>
-            <p class="project-description">
-              What I built: Leader-follower teleoperation system for bimanual manipulation. Real-time 7-DOF joint synchronization for imitation learning data collection.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/custom_pymycobot#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Teleoperation</span>
-            <span>Imitation Learning</span>
-            <span>7-DOF</span>
-          </div>
-        </div>
-        
-        <!-- Swarm Robotics Simulator -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">
-              Swarm Robotics Simulator
-            </a>
-            <p class="project-description">
-              What I built: Multi-agent swarm simulation with flocking, foraging, and formation algorithms. Emergent collective behavior from simple local interaction rules.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/swarm-robotics-simulator#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>Multi-Agent</span>
-            <span>Swarm</span>
-          </div>
-        </div>
-        
-        <!-- G1 Humanoid Spin Kick -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">
-              G1 Humanoid Spin Kick
-            </a>
-            <p class="project-description">
-              What I built: Reinforcement learning policy for dynamic humanoid locomotion. Trained a Unitree G1 to execute a full 360-degree spin kick in MuJoCo simulation.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>RL</span>
-            <span>MuJoCo</span>
-            <span>Humanoid</span>
-          </div>
-        </div>
-        
-        <!-- CFN Biomed Eval -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">
-              CFN Biomedical Eval
-            </a>
-            <p class="project-description">
-              What I built: Evaluation framework for biomedical NLP models. Token-level and span-level benchmarks for clinical concept extraction with F1 and precision/recall metrics.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/cfn-biomed-eval#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>NLP</span>
-            <span>Biomedical</span>
-            <span>Eval</span>
-          </div>
-        </div>
-        
-        <!-- MediSync -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">
-              MediSync
-            </a>
-            <p class="project-description">
-              What I built: Health records management platform with appointment scheduling, patient data, and clinical workflow tools.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/medisync#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Healthcare</span>
-          </div>
-        </div>
-        
-        <!-- Agrifinance -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-title">
-              AgriFinance
-            </a>
-            <p class="project-description">
-              What I built: Financial services platform for smallholder farmers. Loan management, credit scoring with agricultural data, and mobile-first interface.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/Agrifinance#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Flutter</span>
-            <span>Firebase</span>
-            <span>FinTech</span>
-          </div>
-        </div>
-        
-        <!-- ConnectFarm -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-title">
-              ConnectFarm
-            </a>
-            <p class="project-description">
-              What I built: Agricultural marketplace connecting farmers to buyers. Real-time listings, pricing data, and direct trade features.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-              <a href="https://github.com/Jonathan-321/ConnectFarm#readme" target="_blank" rel="noopener noreferrer" class="project-link">README</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Flutter</span>
-            <span>Firebase</span>
-            <span>Marketplace</span>
-          </div>
-        </div>
-        </div>
-      </div>
-      
-      <!-- 2024 Projects -->
-      <div class="year-section">
-        <h3 class="year-header">2024 - Full-Stack Development</h3>
-        <div class="projects-list">
-        <!-- NutrAI -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-title">
-              NutrAI Health Assistant
-            </a>
-            <p class="project-description">
-              What I built: Full-stack nutrition app prototype with meal-planning and dietary-analysis features.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>React</span>
-            <span>Python</span>
-            <span>Web App</span>
-          </div>
-        </div>
-        
-        <!-- CampusBuddy -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-title">
-              CampusBuddy Mobile App
-            </a>
-            <p class="project-description">
-              What I built: Flutter app for campus events, dining, and student-resource discovery.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Flutter</span>
-            <span>Dart</span>
-            <span>Mobile App</span>
-          </div>
-        </div>
-        
-        <!-- Point of Sales Terminal -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-title">
-              Point of Sales Terminal
-            </a>
-            <p class="project-description">
-              What I built: Java POS application with inventory tracking, payment flows, and sales reporting.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Java</span>
-            <span>Desktop App</span>
-            <span>Inventory</span>
-          </div>
-        </div>
-        </div>
-      </div>
-      
-      <!-- 2023 Projects -->
-      <div class="year-section muted-year">
-        <h3 class="year-header">2023 - Game Development</h3>
-        <div class="projects-list">
-        <!-- Space Invader -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-title">
-              Space Invader Game
-            </a>
-            <p class="project-description">
-              What I built: C++ arcade game project with custom gameplay mechanics and rendering logic.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>C++</span>
-            <span>SFML</span>
-            <span>Game Loop</span>
-          </div>
-        </div>
-        
-        <!-- Pacman AI -->
-        <div class="project-entry">
-          <div class="project-info">
-            <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-title">
-              Pacman AI
-            </a>
-            <p class="project-description">
-              What I built: Pacman AI project with autonomous agents, pathfinding, and gameplay heuristics.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>Pygame</span>
-            <span>Search Algorithms</span>
-          </div>
-        </div>
-        </div>
-      </div>
-      </div>
       </details>
     </div>
   </section>
   
-  <!-- Page 5: About -->
-  <section id="about" class="page-section">
-    <div class="projects-container">
-      <div class="section-label">About</div>
-      <h2 class="section-title">Background and research focus</h2>
-      <p class="section-lede">A quick overview of my path and what I am working on now.</p>
-      <div class="project-entry">
-        <div class="project-year"></div>
-        <div class="project-info">
-          <a href="/about" class="project-title">
-            About
-          </a>
-          <p class="project-description">
-            Learn more about my background, experience, and approach to building intelligent systems.
-          </p>
-          <div class="project-links">
-            <a href="/about" class="project-link">Read more</a>
-          </div>
-        </div>
-        <div class="project-tech">
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Page 6: Writing -->
+  <!-- Writing -->
   <section id="writing" class="page-section">
     <div class="writing-list">
-      <div class="section-label">Recent Writing</div>
-      <h2 class="section-title">Research notes and systems breakdowns</h2>
-      <p class="section-lede">Short technical writeups on robotics, ML systems, and multimodal research.</p>
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Notes and breakdowns.</h2>
       {blog.map((post) => (
         <article class="post-item">
           <time class="post-date">
@@ -1816,27 +1025,18 @@ const blog = await getRecentPosts(3)
     </div>
   </section>
   
-  <!-- Page 7: Contact -->
+  <!-- Contact -->
   <section id="contact" class="page-section">
     <div class="projects-container">
       <div class="section-label">Contact</div>
-      <h2 class="section-title">Open to ML research and systems roles.</h2>
+      <h2 class="section-title">Open to research and systems roles.</h2>
       <p class="section-lede">
-        Looking for teams building large-scale ML systems, deep learning pipelines, or research tooling.
-        Happy to chat about collaboration or roles.
+        Looking for teams building ML systems, data infrastructure, or applied AI.
       </p>
-      <div class="contact-card">
-        <div>
-          <strong>Fastest ways to reach me</strong>
-          <p class="section-lede" style="margin-top: 0.5rem;">
-            Email is best for opportunities; LinkedIn for introductions.
-          </p>
-        </div>
-        <div class="contact-actions">
-          <a href="mailto:muhirejonathan123@gmail.com" class="cta primary">Email me</a>
-          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="cta secondary">LinkedIn</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="cta ghost">Resume</a>
-        </div>
+      <div class="contact-links">
+        <a href="mailto:muhirejonathan123@gmail.com" class="contact-link contact-link--primary">Email</a>
+        <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">Resume</a>
       </div>
     </div>
   </section>
