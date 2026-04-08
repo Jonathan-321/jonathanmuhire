@@ -344,24 +344,6 @@ const blog = await getRecentPosts(3)
       max-width: 800px;
     }
     
-    .year-section {
-      margin-bottom: 3rem;
-    }
-    
-    .muted-year {
-      opacity: 0.75;
-    }
-    
-    .year-header {
-      font-size: 1.25rem;
-      font-weight: 300;
-      color: var(--muted-foreground);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-      letter-spacing: 0.03em;
-    }
-    
     .projects-list {
       display: flex;
       flex-direction: column;
@@ -369,9 +351,9 @@ const blog = await getRecentPosts(3)
     
     .project-entry {
       display: grid;
-      grid-template-columns: 1fr 100px;
+      grid-template-columns: 1fr 120px;
       gap: 2rem;
-      padding: 1.25rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid var(--border);
       align-items: baseline;
     }
@@ -383,12 +365,12 @@ const blog = await getRecentPosts(3)
     .project-info {
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.3rem;
     }
     
     .project-title {
-      font-size: 1rem;
-      font-weight: 400;
+      font-size: 0.95rem;
+      font-weight: 450;
       color: var(--foreground);
       text-decoration: none;
       transition: opacity 0.2s ease;
@@ -399,9 +381,9 @@ const blog = await getRecentPosts(3)
     }
     
     .project-description {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--muted-foreground);
-      line-height: 1.6;
+      line-height: 1.55;
     }
     
     .project-links {
@@ -436,33 +418,104 @@ const blog = await getRecentPosts(3)
       gap: 0.2rem;
     }
     
-    /* Details block */
-    .details-block {
-      margin-top: 2rem;
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-      padding: 1rem 1.5rem;
-      background: color-mix(in oklch, var(--background), var(--foreground) 1%);
+    /* Category dropdown blocks */
+    .category-block {
+      margin-top: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: color-mix(in oklch, var(--background), var(--foreground) 1.5%);
+      transition: border-color 0.2s ease;
     }
     
-    .details-block summary {
+    .category-block:hover {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 15%);
+    }
+    
+    .category-block[open] {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 10%);
+    }
+    
+    .category-block summary {
       cursor: pointer;
-      font-size: 0.85rem;
-      color: var(--muted-foreground);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       list-style: none;
-      transition: color 0.2s ease;
+      user-select: none;
+      transition: background 0.15s ease;
     }
     
-    .details-block summary::-webkit-details-marker {
+    .category-block summary::-webkit-details-marker {
       display: none;
     }
     
-    .details-block summary:hover {
-      color: var(--foreground);
+    .category-block summary:hover {
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
     }
     
-    .details-content {
-      margin-top: 1.5rem;
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .category-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 5%);
+      flex-shrink: 0;
+    }
+    
+    .category-title {
+      font-size: 0.9rem;
+      font-weight: 450;
+      color: var(--foreground);
+      letter-spacing: -0.01em;
+    }
+    
+    .category-count {
+      font-size: 0.7rem;
+      color: var(--muted-foreground);
+      margin-left: 0.25rem;
+    }
+    
+    .chevron {
+      width: 16px;
+      height: 16px;
+      color: var(--muted-foreground);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    
+    .category-block[open] .chevron {
+      transform: rotate(180deg);
+    }
+    
+    .category-content {
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .category-block[open] .category-content {
+      animation: slideDown 0.25s ease;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     /* Writing */
@@ -553,13 +606,21 @@ const blog = await getRecentPosts(3)
       
       .project-entry {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.5rem;
       }
       
       .project-tech {
         text-align: left;
         flex-direction: row;
         gap: 0.75rem;
+      }
+      
+      .category-block summary {
+        padding: 0.85rem 1rem;
+      }
+      
+      .category-content {
+        padding: 0 1rem 1rem;
       }
     }
   </style>
@@ -717,30 +778,37 @@ const blog = await getRecentPosts(3)
   <!-- All Projects -->
   <section id="projects" class="page-section">
     <div class="projects-container">
-      <div class="section-label">All Projects</div>
-      <h2 class="section-title">Full timeline.</h2>
+      <div class="section-label">GitHub</div>
+      <h2 class="section-title">All repositories, by domain.</h2>
       
-      <details class="details-block" open>
-        <summary>2025 — ML Research & Systems</summary>
-        <div class="details-content">
+      <!-- ML & AI Research -->
+      <details class="category-block" open>
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x1F9E0;</div>
+            <span class="category-title">ML & AI Research<span class="category-count">&nbsp;&middot; 7</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
           <div class="projects-list">
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">Agentic Long-Runner</a>
-                <p class="project-description">ReAct agent with 4 memory modes. Needle-in-haystack evals: 0% to 100% retrieval recovery.</p>
+                <p class="project-description">ReAct agent with 4 memory modes. Chunked retrieval recovers needle-in-haystack from 0% to 100%.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
                 <span>ReAct</span>
-                <span>Memory</span>
+                <span>LangChain</span>
               </div>
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance — GSoC 2025</a>
-                <p class="project-description">Document AI for historical manuscripts. Layout detection, OCR, post-correction.</p>
+                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance &mdash; GSoC 2025</a>
+                <p class="project-description">Document AI for Renaissance manuscripts. LayoutLMv3 detection, Tesseract OCR, and post-correction pipeline.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -752,21 +820,8 @@ const blog = await getRecentPosts(3)
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">MinIO + LakeFS Infrastructure</a>
-                <p class="project-description">Distributed object storage with dataset versioning for reproducible ML experiments.</p>
-                <div class="project-links">
-                  <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-                </div>
-              </div>
-              <div class="project-tech">
-                <span>MinIO</span>
-                <span>Docker</span>
-              </div>
-            </div>
-            <div class="project-entry">
-              <div class="project-info">
                 <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">CFN Biomedical Eval</a>
-                <p class="project-description">Token-level and span-level benchmarks for clinical NLP concept extraction.</p>
+                <p class="project-description">Leakage-safe evaluation of Compositional Function Networks for biomedical tabular prediction. AUROC/AUPRC benchmarks.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -778,21 +833,8 @@ const blog = await getRecentPosts(3)
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">ISSR — Crisis Detection</a>
-                <p class="project-description">NLP crisis-signal classification with sentiment analysis and geospatial features.</p>
-                <div class="project-links">
-                  <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-                </div>
-              </div>
-              <div class="project-tech">
-                <span>NLP</span>
-                <span>Sentiment</span>
-              </div>
-            </div>
-            <div class="project-entry">
-              <div class="project-info">
                 <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-title">ArtExtract</a>
-                <p class="project-description">CNN-RNN architecture for artwork classification with validation metrics.</p>
+                <p class="project-description">CNN-RNN art classification. Style, artist, and genre prediction with confusion matrix validation.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -804,8 +846,129 @@ const blog = await getRecentPosts(3)
             </div>
             <div class="project-entry">
               <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">ISSR &mdash; Crisis Detection</a>
+                <p class="project-description">Behavioral analysis for suicide prevention and mental health crisis detection with geospatial trend mapping.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>NLP</span>
+                <span>Geospatial</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-title">Vesuvius Challenge</a>
+                <p class="project-description">Deep learning for detecting ancient papyrus surfaces from 3D X-ray CT scans.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>3D Vision</span>
+                <span>PyTorch</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-title">SFN scRNA Study</a>
+                <p class="project-description">Single-cell RNA sequencing analysis pipeline for neuroscience research.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Genomics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      
+      <!-- Infrastructure & Systems -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x2699;&#xFE0F;</div>
+            <span class="category-title">Infrastructure & Systems<span class="category-count">&nbsp;&middot; 4</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">MinIO + LakeFS Infrastructure</a>
+                <p class="project-description">3-node distributed object store with erasure coding, LakeFS versioning, and Prometheus + Grafana monitoring.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>MinIO</span>
+                <span>Docker</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/paraview-scientific-viz" target="_blank" rel="noopener noreferrer" class="project-title">ParaView Scientific Viz</a>
+                <p class="project-description">Multi-domain visualization: volumetric scalar fields, CFD flow simulation, and 3D LiDAR point clouds.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/paraview-scientific-viz" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>ParaView</span>
+                <span>VTK</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">MediSync</a>
+                <p class="project-description">Healthcare IoT pipeline connecting glucose monitors and sensors to BigQuery with Vertex AI analytics.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>GCP</span>
+                <span>BigQuery</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/-VizV1" target="_blank" rel="noopener noreferrer" class="project-title">Robot Data Validator</a>
+                <p class="project-description">Multi-sensor robot training data validation webapp with embedded Rerun.io visualization.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/-VizV1" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Rerun.io</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      
+      <!-- Robotics & Simulation -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x1F916;</div>
+            <span class="category-title">Robotics & Simulation<span class="category-count">&nbsp;&middot; 4</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
                 <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">Custom PyMyCobot</a>
-                <p class="project-description">Leader-follower control system for bimanual manipulation and data collection.</p>
+                <p class="project-description">Bimanual teleoperation platform for MyArm M&C arms with GUI visualization and real-time streaming.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -817,21 +980,34 @@ const blog = await getRecentPosts(3)
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">Swarm Simulator</a>
-                <p class="project-description">Multi-agent simulation with flocking, foraging, and formation algorithms.</p>
+                <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank" rel="noopener noreferrer" class="project-title">LeRobot Modal</a>
+                <p class="project-description">Real-time robot vision with Modal-hosted SmolVLA inference and local camera input.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Modal</span>
+                <span>Vision</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">Swarm Robotics Simulator</a>
+                <p class="project-description">Browser-based multi-robot sim with flocking, foraging, and formation presets plus analytics dashboard.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
-                <span>Python</span>
+                <span>TypeScript</span>
                 <span>Multi-Agent</span>
               </div>
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">G1 Humanoid RL</a>
-                <p class="project-description">RL policy for dynamic locomotion in MuJoCo simulation.</p>
+                <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">G1 Humanoid Spin Kick</a>
+                <p class="project-description">RL motion imitation for Unitree G1 humanoid dynamic locomotion in MuJoCo.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -841,70 +1017,51 @@ const blog = await getRecentPosts(3)
                 <span>MuJoCo</span>
               </div>
             </div>
-            <div class="project-entry">
-              <div class="project-info">
-                <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">MediSync</a>
-                <p class="project-description">Health records platform with scheduling and clinical workflows.</p>
-                <div class="project-links">
-                  <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-                </div>
-              </div>
-              <div class="project-tech">
-                <span>React</span>
-                <span>Node.js</span>
-              </div>
-            </div>
+          </div>
+        </div>
+      </details>
+      
+      <!-- Full-Stack & Mobile -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x1F4F1;</div>
+            <span class="category-title">Full-Stack & Mobile<span class="category-count">&nbsp;&middot; 5</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
+          <div class="projects-list">
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-title">AgriFinance</a>
-                <p class="project-description">Financial services for smallholder farmers. Credit scoring and mobile-first design.</p>
+                <p class="project-description">Financial services for smallholder farmers. Climate-integrated credit scoring and risk assessment.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
-                <span>Flutter</span>
-                <span>Firebase</span>
+                <span>Python</span>
+                <span>ML</span>
               </div>
             </div>
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-title">ConnectFarm</a>
-                <p class="project-description">Agricultural marketplace connecting farmers to buyers.</p>
+                <p class="project-description">React Native app for farmer credit access with ML climate predictions.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
-                <span>Flutter</span>
-                <span>Firebase</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-      
-      <details class="details-block">
-        <summary>2024 — Full-Stack & Mobile</summary>
-        <div class="details-content">
-          <div class="projects-list">
-            <div class="project-entry">
-              <div class="project-info">
-                <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-title">NutrAI</a>
-                <p class="project-description">Full-stack nutrition app with meal planning and dietary analysis.</p>
-                <div class="project-links">
-                  <a href="https://github.com/abdulkarim-mugisha/nutrai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
-                </div>
-              </div>
-              <div class="project-tech">
                 <span>React</span>
-                <span>Python</span>
+                <span>Mobile</span>
               </div>
             </div>
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-title">CampusBuddy</a>
-                <p class="project-description">Flutter app for campus events, dining, and student resources.</p>
+                <p class="project-description">Flutter campus app for events, dining, and student resources.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -916,42 +1073,62 @@ const blog = await getRecentPosts(3)
             </div>
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-title">POS Terminal</a>
-                <p class="project-description">Java POS application with inventory tracking and sales reporting.</p>
+                <a href="https://github.com/Jonathan-321/XPR366" target="_blank" rel="noopener noreferrer" class="project-title">XPR366</a>
+                <p class="project-description">Infrastructure health monitoring platform using robot-collected sensor data for decision support.</p>
                 <div class="project-links">
-                  <a href="https://github.com/Jonathan-321/point-of-sales-terminal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                  <a href="https://github.com/Jonathan-321/XPR366" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
-                <span>Java</span>
-                <span>Desktop</span>
+                <span>JavaScript</span>
+                <span>Sensors</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/DatabaseSystemsFinal" target="_blank" rel="noopener noreferrer" class="project-title">Doctor Who Wiki DB</a>
+                <p class="project-description">ERD, ORM, and GUI system for a Doctor Who knowledge base. Database systems final project.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/DatabaseSystemsFinal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>SQL</span>
+                <span>JavaScript</span>
               </div>
             </div>
           </div>
         </div>
       </details>
       
-      <details class="details-block">
-        <summary>2023 — Early Projects</summary>
-        <div class="details-content">
+      <!-- Languages & Compilers -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x1F4DC;</div>
+            <span class="category-title">Languages & Compilers<span class="category-count">&nbsp;&middot; 2</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
           <div class="projects-list">
             <div class="project-entry">
               <div class="project-info">
-                <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-title">Space Invader</a>
-                <p class="project-description">C++ arcade game with custom rendering and gameplay mechanics.</p>
+                <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="project-title">Flint Lang</a>
+                <p class="project-description">Custom interpreted language with interpreter, C transpiler, and LLVM compiler backend.</p>
                 <div class="project-links">
-                  <a href="https://github.com/Jonathan-321/Space-Invader-Project" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                  <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
               </div>
               <div class="project-tech">
-                <span>C++</span>
-                <span>SFML</span>
+                <span>Python</span>
+                <span>LLVM</span>
               </div>
             </div>
             <div class="project-entry">
               <div class="project-info">
                 <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-title">Pacman AI</a>
-                <p class="project-description">Autonomous agents with search algorithms and gameplay heuristics.</p>
+                <p class="project-description">AI-driven game with autonomous agents, ghost AI, pathfinding algorithms, and visual enhancements.</p>
                 <div class="project-links">
                   <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
                 </div>
@@ -964,6 +1141,10 @@ const blog = await getRecentPosts(3)
           </div>
         </div>
       </details>
+      
+      <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted-foreground); text-align: center;">
+        <a href="https://github.com/Jonathan-321?tab=repositories" target="_blank" rel="noopener noreferrer" style="color: var(--foreground); text-decoration: none; border-bottom: 1px solid var(--border);">View all repositories on GitHub</a>
+      </p>
     </div>
   </section>
   
