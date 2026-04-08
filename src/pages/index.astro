@@ -657,86 +657,87 @@ const blog = await getRecentPosts(3)
         <h2 class="section-title">Research and systems I've shipped.</h2>
         <div class="work-grid">
           <article class="work-card">
-            <img src="/media/card-agentic.png" alt="Needle-in-haystack eval heatmap" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="work-title">
-              Agentic Long-Runner
-            </a>
-            <p class="work-desc">
-              ReAct agent with 4 memory modes. Chunked vector retrieval fully recovers needle-in-haystack performance on 5,000+ word documents.
-            </p>
-            <div class="work-tags">
-              <span class="work-tag">ReAct</span>
-              <span class="work-tag">Memory</span>
-              <span class="work-tag">Eval</span>
-            </div>
-          </article>
-          <article class="work-card">
-            <img src="/media/card-renaissance.png" alt="RenAIssance layout detection on manuscript" class="work-thumb" loading="lazy" />
+            <img src="/media/card-renaissance.png" alt="RenAIssance document AI pipeline" class="work-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
               RenAIssance — GSoC 2025
             </a>
             <p class="work-desc">
-              Document AI pipeline for Renaissance manuscripts. Layout detection with LayoutLMv3, OCR, and post-correction on real historical pages.
+              End-to-end Document AI for Renaissance manuscripts. LayoutLMv3 layout detection, U-Net text recognition, Tesseract OCR, and post-correction. 179 files.
             </p>
             <div class="work-tags">
               <span class="work-tag">Document AI</span>
               <span class="work-tag">LayoutLMv3</span>
-              <span class="work-tag">OCR</span>
+              <span class="work-tag">PyTorch</span>
             </div>
           </article>
           <article class="work-card">
-            <img src="/media/card-minio.png" alt="MinIO 3-node cluster topology" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="work-title">
-              MinIO + LakeFS Infrastructure
+            <img src="/media/card-vesuvius.png" alt="Vesuvius Challenge 3D segmentation" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="work-title">
+              Vesuvius Challenge
             </a>
             <p class="work-desc">
-              3-node distributed cluster with erasure coding, LakeFS versioning, and Prometheus + Grafana monitoring for ML datasets.
+              3D deep learning for detecting ancient papyrus in X-ray CT scans. Four architectures (3D U-Net, Attention U-Net, V-Net, Double U-Net) with ensemble + TTA.
             </p>
             <div class="work-tags">
-              <span class="work-tag">MinIO</span>
-              <span class="work-tag">LakeFS</span>
-              <span class="work-tag">Docker</span>
+              <span class="work-tag">3D Vision</span>
+              <span class="work-tag">MONAI</span>
+              <span class="work-tag">Kaggle</span>
             </div>
           </article>
           <article class="work-card">
-            <img src="/media/card-artextract.png" alt="ArtExtract confusion matrix and training curves" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="work-title">
-              ArtExtract
+            <img src="/media/card-agrifinance.png" alt="AgriFinance credit scoring platform" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="work-title">
+              AgriFinance
             </a>
             <p class="work-desc">
-              CNN-RNN architecture for artwork classification. Trained on real art samples with confusion matrix validation and training curves.
+              Full-stack agricultural finance platform. ML credit scoring, satellite NDVI crop monitoring, climate-adjusted loans, and offline-first PWA for low-connectivity regions.
             </p>
             <div class="work-tags">
-              <span class="work-tag">Computer Vision</span>
-              <span class="work-tag">CNN-RNN</span>
+              <span class="work-tag">Flask</span>
+              <span class="work-tag">TF Lite</span>
+              <span class="work-tag">PWA</span>
             </div>
           </article>
           <article class="work-card">
-            <img src="/media/card-biomed.png" alt="CFN benchmark comparison" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="work-title">
-              CFN Biomedical Eval
+            <img src="/media/card-swarm.png" alt="Swarm robotics simulation analytics" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="work-title">
+              Swarm Robotics Simulator
             </a>
             <p class="work-desc">
-              Evaluation framework for biomedical NLP. Token-level and span-level benchmarks for clinical concept extraction.
+              Full-stack web app for multi-robot simulation. React + Express + PostgreSQL with live visualization, configurable presets, and performance analytics.
             </p>
             <div class="work-tags">
-              <span class="work-tag">NLP</span>
-              <span class="work-tag">Biomedical</span>
-              <span class="work-tag">Eval</span>
+              <span class="work-tag">TypeScript</span>
+              <span class="work-tag">React</span>
+              <span class="work-tag">PostgreSQL</span>
             </div>
           </article>
           <article class="work-card">
-            <img src="/media/card-issr.png" alt="ISSR crisis detection pipeline" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="work-title">
-              ISSR — Crisis Detection
+            <img src="/media/card-flint.png" alt="Flint language compilation pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="work-title">
+              Flint Programming Language
             </a>
             <p class="work-desc">
-              NLP system for crisis-signal classification using social text, sentiment analysis, and geospatial mapping.
+              Custom language with three backends: tree-walk interpreter, C transpiler, and LLVM compiler. Lexer, parser, AST, and code generation from scratch.
             </p>
             <div class="work-tags">
-              <span class="work-tag">NLP</span>
-              <span class="work-tag">Sentiment</span>
-              <span class="work-tag">Geospatial</span>
+              <span class="work-tag">Compilers</span>
+              <span class="work-tag">LLVM</span>
+              <span class="work-tag">PL Design</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-campusbuddy.png" alt="CampusBuddy mobile app screens" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/CampusBuddy_V1" target="_blank" rel="noopener noreferrer" class="work-title">
+              CampusBuddy
+            </a>
+            <p class="work-desc">
+              Flutter mobile app for campus life — events, dining, resources. 412 files across iOS, Android, and desktop with real data integrations.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Flutter</span>
+              <span class="work-tag">Dart</span>
+              <span class="work-tag">Mobile</span>
             </div>
           </article>
         </div>
@@ -754,20 +755,20 @@ const blog = await getRecentPosts(3)
         </div>
         <div class="section-label" style="margin-top: 2rem;">Focus Areas</div>
         <div class="pill-list">
-          <span class="pill">ML Systems</span>
           <span class="pill">Deep Learning</span>
-          <span class="pill">NLP</span>
           <span class="pill">Computer Vision</span>
-          <span class="pill">Data Infrastructure</span>
-          <span class="pill">Distributed Systems</span>
+          <span class="pill">Document AI</span>
+          <span class="pill">Full-Stack</span>
+          <span class="pill">Compilers</span>
+          <span class="pill">Mobile</span>
         </div>
         <div class="section-label" style="margin-top: 1.5rem;">Languages</div>
         <div class="pill-list">
           <span class="pill">Python</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">Dart</span>
           <span class="pill">C++</span>
           <span class="pill">Java</span>
-          <span class="pill">Dart</span>
-          <span class="pill">JavaScript</span>
         </div>
       </div>
     </div>
