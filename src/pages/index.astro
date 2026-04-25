@@ -624,15 +624,16 @@ const blog = await getRecentPosts(3)
       }
     }
   </style>
-
+  
   <!-- Hero -->
   <section class="page-section intro-page">
     <div class="hero-layout">
       <div class="hero-eyebrow">Jonathan Muhire</div>
-      <h1 class="hero-title">Evaluating frontier AI<br>on scientific data.</h1>
+      <h1 class="hero-title">I build intelligent systems that ship.</h1>
       <p class="hero-desc">
-        Building rigorous benchmarks and evaluation frameworks for large language models in computational biology.
-        Currently benchmarking AI reasoning on single-cell RNA-seq data for IBD classification.
+        ML systems, data infrastructure, and applied AI.
+        19 open-source repositories with real benchmarks and production code.
+        <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer">GitHub</a> has everything.
       </p>
       <div class="hero-links">
         <a href="#work" class="hero-link hero-link--primary">Selected Work</a>
@@ -640,80 +641,122 @@ const blog = await getRecentPosts(3)
         <a href="mailto:muhirejonathan123@gmail.com" class="hero-link">Email</a>
       </div>
       <p class="hero-meta">
-        Computational Biology · GSoC 2025 · Oklahoma Christian University
+        CS & AI · GSoC 2025 · Prev co-founder @ <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer">Neotix</a>
       </p>
     </div>
     <a href="#work" class="scroll-indicator">
       <div class="scroll-arrow"></div>
     </a>
   </section>
-
+  
   <!-- Featured Work -->
   <section id="work" class="page-section">
     <div class="work-section">
       <div>
         <div class="section-label">Selected Work</div>
-        <h2 class="section-title">Research and evaluations I've built.</h2>
+        <h2 class="section-title">Research and systems I've shipped.</h2>
         <div class="work-grid">
           <article class="work-card">
-            <img src="/media/biomed-hero.png" alt="scRNA-seq IBD benchmarking" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="work-title">
-              IBD scRNA-seq Benchmarking
+            <img src="/media/card-docintel.png" alt="DocIntel document intelligence pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="work-title">
+              DocIntel — Document Intelligence API
             </a>
             <p class="work-desc">
-              Donor-aware benchmarking of CFN, linear, and VAE model families on two independent IBD cohorts (SCP259 UC atlas, Kong 2023 CD). Strict leakage-safe cross-validation. AUROC 0.978. Targeting bioRxiv.
+              End-to-end document intelligence pipeline. Upload PDFs or images → layout detection, OCR, entity extraction → structured JSON. FastAPI + React + 65 tests.
             </p>
             <div class="work-tags">
-              <span class="work-tag">Computational Biology</span>
+              <span class="work-tag">FastAPI</span>
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">React</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-renaissance.png" alt="RenAIssance document AI pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
+              RenAIssance — GSoC 2025
+            </a>
+            <p class="work-desc">
+              End-to-end Document AI for Renaissance manuscripts. LayoutLMv3 layout detection, U-Net text recognition, Tesseract OCR, and post-correction. 179 files.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">LayoutLMv3</span>
               <span class="work-tag">PyTorch</span>
-              <span class="work-tag">scanpy</span>
-            </div>
-          </article>
-          <article class="work-card">
-            <img src="/media/card-biomed.png" alt="CFN biomedical evaluation framework" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="work-title">
-              Reproducible Biomedical Eval Framework
-            </a>
-            <p class="work-desc">
-              Protocol-locked comparison of CFN vs XGBoost/MLP/logistic on NHANES hypertension data. Leakage guardrails, automated fold validation, expansion gates, and clinical calibration reporting.
-            </p>
-            <div class="work-tags">
-              <span class="work-tag">Eval Frameworks</span>
-              <span class="work-tag">scikit-learn</span>
-              <span class="work-tag">Reproducibility</span>
-            </div>
-          </article>
-          <article class="work-card">
-            <img src="/media/agentic-architecture.png" alt="ReAct agent with memory ablations" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="work-title">
-              Agent Evaluation — Memory Ablations
-            </a>
-            <p class="work-desc">
-              ReAct agent with memory-mode ablations (none/summary/retrieval/both) and needle-in-haystack benchmarks. Eval-driven development: write the eval before the agent can pass it.
-            </p>
-            <div class="work-tags">
-              <span class="work-tag">Agent Evals</span>
-              <span class="work-tag">Python</span>
-              <span class="work-tag">Benchmarking</span>
             </div>
           </article>
           <article class="work-card">
             <img src="/media/card-vesuvius.png" alt="Vesuvius Challenge 3D segmentation" class="work-thumb" loading="lazy" />
             <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="work-title">
-              Vesuvius Challenge — 3D Segmentation
+              Vesuvius Challenge
             </a>
             <p class="work-desc">
-              3D volumetric deep learning for detecting ancient papyrus surfaces in CT scans of carbonized Herculaneum scrolls. Four architectures with topology-aware loss, ensemble + TTA.
+              3D deep learning for detecting ancient papyrus in X-ray CT scans. Four architectures (3D U-Net, Attention U-Net, V-Net, Double U-Net) with ensemble + TTA.
             </p>
             <div class="work-tags">
               <span class="work-tag">3D Vision</span>
               <span class="work-tag">MONAI</span>
-              <span class="work-tag">PyTorch</span>
+              <span class="work-tag">Kaggle</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-agrifinance.png" alt="AgriFinance credit scoring platform" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="work-title">
+              AgriFinance
+            </a>
+            <p class="work-desc">
+              Full-stack agricultural finance platform. ML credit scoring, satellite NDVI crop monitoring, climate-adjusted loans, and offline-first PWA for low-connectivity regions.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Flask</span>
+              <span class="work-tag">TF Lite</span>
+              <span class="work-tag">PWA</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-swarm.png" alt="Swarm robotics simulation analytics" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="work-title">
+              Swarm Robotics Simulator
+            </a>
+            <p class="work-desc">
+              Full-stack web app for multi-robot simulation. React + Express + PostgreSQL with live visualization, configurable presets, and performance analytics.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">TypeScript</span>
+              <span class="work-tag">React</span>
+              <span class="work-tag">PostgreSQL</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-flint.png" alt="Flint language compilation pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="work-title">
+              Flint Programming Language
+            </a>
+            <p class="work-desc">
+              Custom language with three backends: tree-walk interpreter, C transpiler, and LLVM compiler. Lexer, parser, AST, and code generation from scratch.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Compilers</span>
+              <span class="work-tag">LLVM</span>
+              <span class="work-tag">PL Design</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-campusbuddy.png" alt="CampusBuddy mobile app screens" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/campus-buddy" target="_blank" rel="noopener noreferrer" class="work-title">
+              CampusBuddy
+            </a>
+            <p class="work-desc">
+              Flutter mobile app for campus life — events, dining, resources. 412 files across iOS, Android, and desktop with real data integrations.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Flutter</span>
+              <span class="work-tag">Dart</span>
+              <span class="work-tag">Mobile</span>
             </div>
           </article>
         </div>
       </div>
-
+      
       <!-- Sidebar -->
       <div class="sidebar">
         <div class="section-label">Links</div>
@@ -722,120 +765,459 @@ const blog = await getRecentPosts(3)
           <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="sidebar-link">GitHub</a>
           <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="sidebar-link">LinkedIn</a>
           <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="sidebar-link">Resume</a>
+          <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="sidebar-link">Book a Call</a>
         </div>
         <div class="section-label" style="margin-top: 2rem;">Focus Areas</div>
         <div class="pill-list">
-          <span class="pill">Scientific Evals</span>
-          <span class="pill">Computational Biology</span>
-          <span class="pill">scRNA-seq</span>
-          <span class="pill">LLM Benchmarking</span>
-          <span class="pill">Agent Evals</span>
+          <span class="pill">Deep Learning</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">Document AI</span>
+          <span class="pill">Full-Stack</span>
+          <span class="pill">Compilers</span>
+          <span class="pill">Mobile</span>
         </div>
-        <div class="section-label" style="margin-top: 1.5rem;">Stack</div>
+        <div class="section-label" style="margin-top: 1.5rem;">Languages</div>
         <div class="pill-list">
           <span class="pill">Python</span>
-          <span class="pill">PyTorch</span>
-          <span class="pill">scanpy</span>
-          <span class="pill">R</span>
-          <span class="pill">Docker</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">Dart</span>
+          <span class="pill">C++</span>
+          <span class="pill">Java</span>
         </div>
       </div>
     </div>
   </section>
+  
 
+  
   <!-- All Projects -->
   <section id="projects" class="page-section">
     <div class="projects-container">
       <div class="section-label">GitHub</div>
       <h2 class="section-title">All repositories, by domain.</h2>
-
+      
+      <!-- ML & AI Research -->
       <details class="category-block" open>
         <summary>
           <div class="category-header">
-            <div class="category-icon">&#x1F9EC;</div>
-            <div>
-              <div class="category-name">Scientific Evals & Research</div>
-              <div class="category-desc">Benchmarking AI on real biological data</div>
-            </div>
+            <div class="category-icon">&#x1F9E0;</div>
+            <span class="category-title">ML & AI Research<span class="category-count">&nbsp;&middot; 7</span></span>
           </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </summary>
-        <div class="projects-list">
-          <div class="project-entry">
-            <div class="project-info">
-              <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-title">sfn-scrna-study</a>
-              <p class="project-description">Donor-aware IBD classification benchmarking from single-cell RNA-seq data across two independent cohorts. AUROC 0.978.</p>
-              <div class="project-links">
-                <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">Agentic Long-Runner</a>
+                <p class="project-description">ReAct agent with 4 memory modes. Chunked retrieval recovers needle-in-haystack from 0% to 100%.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>ReAct</span>
+                <span>LangChain</span>
               </div>
             </div>
-          </div>
-          <div class="project-entry">
-            <div class="project-info">
-              <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">cfn-biomed-eval</a>
-              <p class="project-description">Protocol-locked reproducible eval framework for CFN on NHANES biomedical data. Leakage guardrails and automated expansion gates.</p>
-              <div class="project-links">
-                <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance &mdash; GSoC 2025</a>
+                <p class="project-description">Document AI for Renaissance manuscripts. LayoutLMv3 detection, Tesseract OCR, and post-correction pipeline.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>LayoutLMv3</span>
+                <span>PyTorch</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">CFN Biomedical Eval</a>
+                <p class="project-description">Leakage-safe evaluation of Compositional Function Networks for biomedical tabular prediction. AUROC/AUPRC benchmarks.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>NLP</span>
+                <span>Eval</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-title">ArtExtract</a>
+                <p class="project-description">CNN-RNN art classification. Style, artist, and genre prediction with confusion matrix validation.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ArtExtract" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>PyTorch</span>
+                <span>CV</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-title">ISSR &mdash; Crisis Detection</a>
+                <p class="project-description">Behavioral analysis for suicide prevention and mental health crisis detection with geospatial trend mapping.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ISSR" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>NLP</span>
+                <span>Geospatial</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-title">Vesuvius Challenge</a>
+                <p class="project-description">Deep learning for detecting ancient papyrus surfaces from 3D X-ray CT scans.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>3D Vision</span>
+                <span>PyTorch</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-title">SFN scRNA Study</a>
+                <p class="project-description">Single-cell RNA sequencing analysis pipeline for neuroscience research.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Genomics</span>
               </div>
             </div>
           </div>
         </div>
       </details>
-
+      
+      <!-- Infrastructure & Systems -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x2699;&#xFE0F;</div>
+            <span class="category-title">Infrastructure & Systems<span class="category-count">&nbsp;&middot; 5</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="project-title">DocIntel — Document Intelligence API</a>
+                <p class="project-description">End-to-end document intelligence: layout detection, OCR, and entity extraction via FastAPI. React dashboard, 65 tests, Docker deployment.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>FastAPI</span>
+                <span>React</span>
+                <span>Docker</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-title">MinIO + LakeFS Infrastructure</a>
+                <p class="project-description">3-node distributed object store with erasure coding, LakeFS versioning, and Prometheus + Grafana monitoring.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/minio" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>MinIO</span>
+                <span>Docker</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/paraview-scientific-viz" target="_blank" rel="noopener noreferrer" class="project-title">ParaView Scientific Viz</a>
+                <p class="project-description">Multi-domain visualization: volumetric scalar fields, CFD flow simulation, and 3D LiDAR point clouds.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/paraview-scientific-viz" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>ParaView</span>
+                <span>VTK</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-title">MediSync</a>
+                <p class="project-description">Healthcare IoT pipeline connecting glucose monitors and sensors to BigQuery with Vertex AI analytics.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/medisync" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>GCP</span>
+                <span>BigQuery</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/robodata-viz" target="_blank" rel="noopener noreferrer" class="project-title">Robot Data Validator</a>
+                <p class="project-description">Multi-sensor robot training data validation webapp with embedded Rerun.io visualization.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/robodata-viz" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Rerun.io</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      
+      <!-- Robotics & Simulation -->
       <details class="category-block">
         <summary>
           <div class="category-header">
             <div class="category-icon">&#x1F916;</div>
-            <div>
-              <div class="category-name">Agent & LLM Evaluation</div>
-              <div class="category-desc">Benchmarking long-running agents</div>
-            </div>
+            <span class="category-title">Robotics & Simulation<span class="category-count">&nbsp;&middot; 4</span></span>
           </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </summary>
-        <div class="projects-list">
-          <div class="project-entry">
-            <div class="project-info">
-              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">agentic</a>
-              <p class="project-description">Memory-mode ablations and needle-in-haystack benchmarks for ReAct agents. Eval-driven development framework.</p>
-              <div class="project-links">
-                <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-title">Custom PyMyCobot</a>
+                <p class="project-description">Bimanual teleoperation platform for MyArm M&C arms with GUI visualization and real-time streaming.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/custom_pymycobot" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Hardware</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank" rel="noopener noreferrer" class="project-title">LeRobot Modal</a>
+                <p class="project-description">Real-time robot vision with Modal-hosted SmolVLA inference and local camera input.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/lerobot_modal" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Modal</span>
+                <span>Vision</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-title">Swarm Robotics Simulator</a>
+                <p class="project-description">Browser-based multi-robot sim with flocking, foraging, and formation presets plus analytics dashboard.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>TypeScript</span>
+                <span>Multi-Agent</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-title">G1 Humanoid Spin Kick</a>
+                <p class="project-description">RL motion imitation for Unitree G1 humanoid dynamic locomotion in MuJoCo.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/G1Humanoid-spinkick" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>RL</span>
+                <span>MuJoCo</span>
               </div>
             </div>
           </div>
         </div>
       </details>
-
+      
+      <!-- Full-Stack & Mobile -->
       <details class="category-block">
         <summary>
           <div class="category-header">
-            <div class="category-icon">&#x1F52C;</div>
-            <div>
-              <div class="category-name">Applied AI for Science</div>
-              <div class="category-desc">AI applied to real scientific problems</div>
-            </div>
+            <div class="category-icon">&#x1F4F1;</div>
+            <span class="category-title">Full-Stack & Mobile<span class="category-count">&nbsp;&middot; 5</span></span>
           </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </summary>
-        <div class="projects-list">
-          <div class="project-entry">
-            <div class="project-info">
-              <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-title">vesuviusChallenge</a>
-              <p class="project-description">3D volumetric segmentation on ancient Herculaneum scroll CT scans. Topology-aware loss, four architectures, ensemble + TTA.</p>
-              <div class="project-links">
-                <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-title">AgriFinance</a>
+                <p class="project-description">Financial services for smallholder farmers. Climate-integrated credit scoring and risk assessment.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>ML</span>
               </div>
             </div>
-          </div>
-          <div class="project-entry">
-            <div class="project-info">
-              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance — GSoC 2025</a>
-              <p class="project-description">AI pipeline for digitizing Renaissance-era manuscripts using LayoutLMv3 for layout recognition and Tesseract OCR with post-correction.</p>
-              <div class="project-links">
-                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-title">ConnectFarm</a>
+                <p class="project-description">React Native app for farmer credit access with ML climate predictions.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/ConnectFarm" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Mobile</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/campus-buddy" target="_blank" rel="noopener noreferrer" class="project-title">CampusBuddy</a>
+                <p class="project-description">Flutter campus app for events, dining, and student resources.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/campus-buddy" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Flutter</span>
+                <span>Dart</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/XPR366" target="_blank" rel="noopener noreferrer" class="project-title">XPR366</a>
+                <p class="project-description">Infrastructure health monitoring platform using robot-collected sensor data for decision support.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/XPR366" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>JavaScript</span>
+                <span>Sensors</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/doctorwho-wiki-db" target="_blank" rel="noopener noreferrer" class="project-title">Doctor Who Wiki DB</a>
+                <p class="project-description">ERD, ORM, and GUI system for a Doctor Who knowledge base. Database systems final project.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/doctorwho-wiki-db" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>SQL</span>
+                <span>JavaScript</span>
               </div>
             </div>
           </div>
         </div>
       </details>
-
+      
+      <!-- Languages & Compilers -->
+      <details class="category-block">
+        <summary>
+          <div class="category-header">
+            <div class="category-icon">&#x1F4DC;</div>
+            <span class="category-title">Languages & Compilers<span class="category-count">&nbsp;&middot; 2</span></span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="category-content">
+          <div class="projects-list">
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="project-title">Flint Lang</a>
+                <p class="project-description">Custom interpreted language with interpreter, C transpiler, and LLVM compiler backend.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>LLVM</span>
+              </div>
+            </div>
+            <div class="project-entry">
+              <div class="project-info">
+                <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-title">Pacman AI</a>
+                <p class="project-description">AI-driven game with autonomous agents, ghost AI, pathfinding algorithms, and visual enhancements.</p>
+                <div class="project-links">
+                  <a href="https://github.com/Jonathan-321/pacman_ai" target="_blank" rel="noopener noreferrer" class="project-link">Repo</a>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Search</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+      
+      <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted-foreground); text-align: center;">
+        <a href="https://github.com/Jonathan-321?tab=repositories" target="_blank" rel="noopener noreferrer" style="color: var(--foreground); text-decoration: none; border-bottom: 1px solid var(--border);">View all repositories on GitHub</a>
+      </p>
+    </div>
+  </section>
+  
+  <!-- Writing -->
+  <section id="writing" class="page-section">
+    <div class="writing-list">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Notes and breakdowns.</h2>
+      {blog.map((post) => (
+        <article class="post-item">
+          <time class="post-date">
+            {new Date(post.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          <h3 class="post-title">
+            <Link href={`/blog/${post.id}`} class="project-link">
+              {post.data.title}
+            </Link>
+          </h3>
+          {post.data.description && (
+            <p class="post-desc">{post.data.description}</p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section id="contact" class="page-section">
+    <div class="projects-container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Open to research and systems roles.</h2>
+      <p class="section-lede">
+        Looking for teams building ML systems, data infrastructure, or applied AI.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:muhirejonathan123@gmail.com" class="contact-link contact-link--primary">Email</a>
+        <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">Resume</a>
+      </div>
     </div>
   </section>
 </Layout>
+
