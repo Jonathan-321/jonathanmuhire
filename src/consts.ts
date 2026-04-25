@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Jonathan Muhire',
   description:
-    'Computational biology & AI · building rigorous evaluation frameworks for frontier models in scientific domains',
+    'Software R&D + ML researcher building deep learning systems, data pipelines, and scalable infrastructure',
   href: 'https://jonathanmuhire.com',
   author: 'Jonathan Muhire',
   locale: 'en-US',
