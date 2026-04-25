@@ -649,74 +649,64 @@ const blog = await getRecentPosts(3)
     <div class="work-section">
       <div>
         <div class="section-label">Selected Work</div>
-        <h2 class="section-title">Research and systems I've shipped.</h2>
-        <div class="work-grid">
-          
-          <article class="work-card">
-            <img src="/media/card-renaissance.png" alt="RenAIssance document AI pipeline" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
-              RenAIssance — GSoC 2025
-            </a>
-            <p class="work-desc">
-              End-to-end Document AI for Renaissance manuscripts. LayoutLMv3 layout detection, U-Net text recognition, Tesseract OCR, and post-correction. 179 files.
-            </p>
-            <div class="work-tags">
-              <span class="work-tag">Document AI</span>
-              <span class="work-tag">LayoutLMv3</span>
-              <span class="work-tag">PyTorch</span>
+        <h2 class="section-title">Research and systems I've built.</h2>
+        <div class="projects-list">
+
+          <div class="project-entry">
+            <div class="project-info">
+              <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-title">IBD scRNA-seq Benchmarking</a>
+              <p class="project-description">Donor-aware benchmarking of CFN, linear, and VAE model families on two independent IBD cohorts. Strict leakage-safe cross-validation. AUROC 0.978. Targeting bioRxiv.</p>
+              <div class="project-links">
+                <a href="https://github.com/Jonathan-321/sfn-scrna-study" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              </div>
             </div>
-          </article>
-          <article class="work-card">
-            <img src="/media/card-vesuvius.png" alt="Vesuvius Challenge 3D segmentation" class="work-thumb" loading="lazy" />
-            <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="work-title">
-              Vesuvius Challenge
-            </a>
-            <p class="work-desc">
-              3D deep learning for detecting ancient papyrus in X-ray CT scans. Four architectures (3D U-Net, Attention U-Net, V-Net, Double U-Net) with ensemble + TTA.
-            </p>
-            <div class="work-tags">
-              <span class="work-tag">3D Vision</span>
-              <span class="work-tag">MONAI</span>
-              <span class="work-tag">Kaggle</span>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-info">
+              <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-title">Reproducible Biomedical Eval Framework</a>
+              <p class="project-description">Protocol-locked comparison of CFN vs XGBoost/MLP/logistic on NHANES hypertension data. Leakage guardrails, fold validation, and automated expansion gates.</p>
+              <div class="project-links">
+                <a href="https://github.com/Jonathan-321/cfn-biomed-eval" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              </div>
             </div>
-          </article>
-          
-          
-          
-          
+          </div>
+
+          <div class="project-entry">
+            <div class="project-info">
+              <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-title">Agent Evaluation — Memory Ablations</a>
+              <p class="project-description">ReAct agent with memory-mode ablations and needle-in-haystack benchmarks. Eval-driven development: write the eval before the agent can pass it.</p>
+              <div class="project-links">
+                <a href="https://github.com/Jonathan-321/agentic" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-info">
+              <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-title">Vesuvius Challenge — 3D Segmentation</a>
+              <p class="project-description">3D volumetric deep learning for detecting ancient papyrus surfaces in CT scans of carbonized Herculaneum scrolls. Topology-aware loss, ensemble + TTA.</p>
+              <div class="project-links">
+                <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-info">
+              <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-title">RenAIssance — GSoC 2025</a>
+              <p class="project-description">AI pipeline for digitizing Renaissance-era manuscripts using LayoutLMv3 layout recognition and Tesseract OCR with post-correction.</p>
+              <div class="project-links">
+                <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="project-link">Code</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="section-label">Links</div>
-        <div>
-          <a href="mailto:muhirejonathan123@gmail.com" class="sidebar-link">Email</a>
-          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="sidebar-link">GitHub</a>
-          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="sidebar-link">LinkedIn</a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="sidebar-link">Resume</a>
-          <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="sidebar-link">Book a Call</a>
-        </div>
-        <div class="section-label" style="margin-top: 2rem;">Focus Areas</div>
-        <div class="pill-list">
-          <span class="pill">Deep Learning</span>
-          <span class="pill">Computer Vision</span>
-          <span class="pill">Document AI</span>
-          <span class="pill">Full-Stack</span>
-          <span class="pill">Compilers</span>
-          <span class="pill">Mobile</span>
-        </div>
-        <div class="section-label" style="margin-top: 1.5rem;">Languages</div>
-        <div class="pill-list">
-          <span class="pill">Python</span>
-          <span class="pill">TypeScript</span>
-          <span class="pill">Dart</span>
-          <span class="pill">C++</span>
-          <span class="pill">Java</span>
-        </div>
-      </div>
-    </div>
   </section>
+
+
 
 
   
