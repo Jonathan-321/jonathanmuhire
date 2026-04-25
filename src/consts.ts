@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Jonathan Muhire',
   description:
-    'Software R&D + ML researcher building deep learning systems, data pipelines, and scalable infrastructure',
+    'Computational biology & AI · building rigorous evaluation frameworks for frontier models in scientific domains',
   href: 'https://jonathanmuhire.com',
   author: 'Jonathan Muhire',
   locale: 'en-US',
@@ -12,37 +12,16 @@ export const SITE: Site = {
 }
 
 export const NAV_LINKS: SocialLink[] = [
-  {
-    href: '/',
-    label: 'home',
-  },
-  {
-    href: '/blog',
-    label: 'blog',
-  },
-  {
-    href: '/about',
-    label: 'about',
-  },
+  { href: '/', label: 'home' },
+  { href: '/blog', label: 'blog' },
+  { href: '/about', label: 'about' },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  {
-    href: 'https://github.com/Jonathan-321',
-    label: 'GitHub',
-  },
-  {
-    href: 'https://www.linkedin.com/in/jonathan-muhire-aa8b06184/',
-    label: 'LinkedIn',
-  },
-  {
-    href: 'mailto:muhirejonathan123@gmail.com',
-    label: 'Email',
-  },
-  {
-    href: '/rss.xml',
-    label: 'RSS',
-  },
+  { href: 'https://github.com/Jonathan-321', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/jonathan-muhire-aa8b06184/', label: 'LinkedIn' },
+  { href: 'mailto:muhirejonathan123@gmail.com', label: 'Email' },
+  { href: '/rss.xml', label: 'RSS' },
 ]
 
 export const ICON_MAP: IconMap = {
