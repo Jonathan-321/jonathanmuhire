@@ -1,0 +1,831 @@
+---
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getRecentPosts } from '@/lib/data-utils'
+
+const blog = await getRecentPosts(3)
+---
+
+<Layout class="max-w-none">
+  <PageHead slot="head" title="Home" />
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+    }
+    
+    .page-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      scroll-snap-align: start;
+    }
+    
+    /* Hero — clean, no gradients */
+    .intro-page {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+      background-color: var(--background);
+    }
+    
+    .hero-layout {
+      width: 100%;
+      max-width: 720px;
+    }
+    
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted-foreground);
+      margin-bottom: 2rem;
+    }
+    
+    .hero-title {
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 350;
+      line-height: 1.08;
+      color: var(--foreground);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted-foreground);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    
+    .hero-desc a {
+      color: var(--foreground);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s ease;
+    }
+    
+    .hero-desc a:hover {
+      border-color: var(--foreground);
+    }
+    
+    .hero-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    
+    .hero-link {
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .hero-link:hover {
+      opacity: 0.6;
+    }
+    
+    .hero-link--primary {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: var(--foreground);
+      color: var(--background);
+    }
+    
+    .hero-link--primary:hover {
+      opacity: 0.9;
+    }
+    
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      line-height: 1.7;
+    }
+    
+    .hero-meta a {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-meta a:hover {
+      color: var(--foreground);
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--muted-foreground);
+    }
+    
+    .scroll-indicator:hover {
+      opacity: 0.8;
+    }
+    
+    .scroll-arrow {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .scroll-arrow::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--foreground);
+      animation: scrollDown 2.5s infinite;
+    }
+    
+    @keyframes scrollDown {
+      0% { transform: translateY(-100%); }
+      50% { transform: translateY(200%); }
+      100% { transform: translateY(200%); }
+    }
+    
+    /* Section styles */
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-foreground);
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 350;
+      margin-bottom: 1rem;
+      color: var(--foreground);
+      letter-spacing: -0.01em;
+    }
+    
+    .section-lede {
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+    
+    /* Featured work */
+    .work-section {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 4rem;
+      width: 100%;
+      align-items: start;
+    }
+    
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    
+    .work-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
+      transition: border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .work-card:hover {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 20%);
+    }
+    
+    .work-thumb {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.25rem;
+      border: 1px solid var(--border);
+    }
+    
+    .work-title {
+      font-size: 0.95rem;
+      font-weight: 450;
+      color: var(--foreground);
+      text-decoration: none;
+    }
+    
+    .work-desc {
+      font-size: 0.82rem;
+      color: var(--muted-foreground);
+      line-height: 1.55;
+    }
+    
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: auto;
+    }
+    
+    .work-tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      border-left: 1px solid var(--border);
+      padding-left: 2.5rem;
+    }
+    
+    .sidebar-link {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      padding: 0.4rem 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .sidebar-link:hover {
+      opacity: 0.6;
+    }
+    
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    
+    .pill {
+      font-size: 0.65rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+    
+    /* Systems section */
+    .systems-section {
+      width: 100%;
+      max-width: 1100px;
+    }
+    
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    
+    .system-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 2%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .system-card img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    
+    .system-title {
+      font-size: 0.9rem;
+      font-weight: 450;
+      color: var(--foreground);
+    }
+    
+    .system-desc {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+    
+    /* Projects timeline */
+    .projects-container {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-entry {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    
+    .project-entry:last-child {
+      border-bottom: none;
+    }
+    
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 450;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .project-title:hover {
+      opacity: 0.6;
+    }
+    
+    .project-description {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      line-height: 1.55;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.15rem;
+    }
+    
+    .project-link {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .project-link::after {
+      content: '\2197';
+      margin-left: 0.2rem;
+      font-size: 0.65rem;
+    }
+    
+    .project-link:hover {
+      color: var(--foreground);
+    }
+    
+    .project-tech {
+      font-size: 0.7rem;
+      color: var(--muted-foreground);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    
+    /* Category dropdown blocks */
+    .category-block {
+      margin-top: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: color-mix(in oklch, var(--background), var(--foreground) 1.5%);
+      transition: border-color 0.2s ease;
+    }
+    
+    .category-block:hover {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 15%);
+    }
+    
+    .category-block[open] {
+      border-color: color-mix(in oklch, var(--border), var(--foreground) 10%);
+    }
+    
+    .category-block summary {
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+    
+    .category-block summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .category-block summary:hover {
+      background: color-mix(in oklch, var(--background), var(--foreground) 3%);
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .category-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      background: color-mix(in oklch, var(--background), var(--foreground) 5%);
+      flex-shrink: 0;
+    }
+    
+    .category-title {
+      font-size: 0.9rem;
+      font-weight: 450;
+      color: var(--foreground);
+      letter-spacing: -0.01em;
+    }
+    
+    .category-count {
+      font-size: 0.7rem;
+      color: var(--muted-foreground);
+      margin-left: 0.25rem;
+    }
+    
+    .chevron {
+      width: 16px;
+      height: 16px;
+      color: var(--muted-foreground);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    
+    .category-block[open] .chevron {
+      transform: rotate(180deg);
+    }
+    
+    .category-content {
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .category-block[open] .category-content {
+      animation: slideDown 0.25s ease;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Writing */
+    .writing-list {
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .post-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .post-item:last-child {
+      border-bottom: none;
+    }
+    
+    .post-date {
+      font-size: 0.7rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.4rem;
+    }
+    
+    .post-title {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    
+    .post-desc {
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      margin-top: 0.35rem;
+      line-height: 1.5;
+    }
+    
+    /* Contact */
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .contact-link {
+      font-size: 0.85rem;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .contact-link:hover {
+      opacity: 0.6;
+    }
+    
+    .contact-link--primary {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: var(--foreground);
+      color: var(--background);
+    }
+    
+    .contact-link--primary:hover {
+      opacity: 0.9;
+    }
+    
+    @media (max-width: 768px) {
+      .page-section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .work-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 2rem;
+      }
+      
+      .systems-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .project-entry {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      
+      .project-tech {
+        text-align: left;
+        flex-direction: row;
+        gap: 0.75rem;
+      }
+      
+      .category-block summary {
+        padding: 0.85rem 1rem;
+      }
+      
+      .category-content {
+        padding: 0 1rem 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Hero -->
+  <section class="page-section intro-page">
+    <div class="hero-layout">
+      <div class="hero-eyebrow">Jonathan Muhire</div>
+      <h1 class="hero-title">I build intelligent systems that ship.</h1>
+      <p class="hero-desc">
+        ML systems, data infrastructure, and applied AI.
+      </p>
+      <div class="hero-links">
+        <a href="#work" class="hero-link hero-link--primary">Selected Work</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="hero-link">Resume</a>
+        <a href="mailto:muhirejonathan123@gmail.com" class="hero-link">Email</a>
+      </div>
+    </div>
+    <a href="#work" class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </a>
+  </section>
+  
+  <!-- Featured Work -->
+  <section id="work" class="page-section">
+    <div class="work-section">
+      <div>
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Research and systems I've shipped.</h2>
+        <div class="work-grid">
+          <article class="work-card">
+            <img src="/media/card-docintel.png" alt="DocIntel document intelligence pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/docintel" target="_blank" rel="noopener noreferrer" class="work-title">
+              DocIntel — Document Intelligence API
+            </a>
+            <p class="work-desc">
+              End-to-end document intelligence pipeline. Upload PDFs or images → layout detection, OCR, entity extraction → structured JSON. FastAPI + React + 65 tests.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">FastAPI</span>
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">React</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-renaissance.png" alt="RenAIssance document AI pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" target="_blank" rel="noopener noreferrer" class="work-title">
+              RenAIssance — GSoC 2025
+            </a>
+            <p class="work-desc">
+              End-to-end Document AI for Renaissance manuscripts. LayoutLMv3 layout detection, U-Net text recognition, Tesseract OCR, and post-correction. 179 files.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Document AI</span>
+              <span class="work-tag">LayoutLMv3</span>
+              <span class="work-tag">PyTorch</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-vesuvius.png" alt="Vesuvius Challenge 3D segmentation" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/vesuviusChallenge" target="_blank" rel="noopener noreferrer" class="work-title">
+              Vesuvius Challenge
+            </a>
+            <p class="work-desc">
+              3D deep learning for detecting ancient papyrus in X-ray CT scans. Four architectures (3D U-Net, Attention U-Net, V-Net, Double U-Net) with ensemble + TTA.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">3D Vision</span>
+              <span class="work-tag">MONAI</span>
+              <span class="work-tag">Kaggle</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-agrifinance.png" alt="AgriFinance credit scoring platform" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/Agrifinance" target="_blank" rel="noopener noreferrer" class="work-title">
+              AgriFinance
+            </a>
+            <p class="work-desc">
+              Full-stack agricultural finance platform. ML credit scoring, satellite NDVI crop monitoring, climate-adjusted loans, and offline-first PWA for low-connectivity regions.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Flask</span>
+              <span class="work-tag">TF Lite</span>
+              <span class="work-tag">PWA</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-swarm.png" alt="Swarm robotics simulation analytics" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/swarm-robotics-simulator" target="_blank" rel="noopener noreferrer" class="work-title">
+              Swarm Robotics Simulator
+            </a>
+            <p class="work-desc">
+              Full-stack web app for multi-robot simulation. React + Express + PostgreSQL with live visualization, configurable presets, and performance analytics.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">TypeScript</span>
+              <span class="work-tag">React</span>
+              <span class="work-tag">PostgreSQL</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-flint.png" alt="Flint language compilation pipeline" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/flint-lang" target="_blank" rel="noopener noreferrer" class="work-title">
+              Flint Programming Language
+            </a>
+            <p class="work-desc">
+              Custom language with three backends: tree-walk interpreter, C transpiler, and LLVM compiler. Lexer, parser, AST, and code generation from scratch.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Compilers</span>
+              <span class="work-tag">LLVM</span>
+              <span class="work-tag">PL Design</span>
+            </div>
+          </article>
+          <article class="work-card">
+            <img src="/media/card-campusbuddy.png" alt="CampusBuddy mobile app screens" class="work-thumb" loading="lazy" />
+            <a href="https://github.com/Jonathan-321/campus-buddy" target="_blank" rel="noopener noreferrer" class="work-title">
+              CampusBuddy
+            </a>
+            <p class="work-desc">
+              Flutter mobile app for campus life — events, dining, resources. 412 files across iOS, Android, and desktop with real data integrations.
+            </p>
+            <div class="work-tags">
+              <span class="work-tag">Flutter</span>
+              <span class="work-tag">Dart</span>
+              <span class="work-tag">Mobile</span>
+            </div>
+          </article>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="section-label">Links</div>
+        <div>
+          <a href="mailto:muhirejonathan123@gmail.com" class="sidebar-link">Email</a>
+          <a href="https://github.com/Jonathan-321" target="_blank" rel="noopener noreferrer" class="sidebar-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="sidebar-link">LinkedIn</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="sidebar-link">Resume</a>
+          <a href="https://cal.com/jonathan-m-yugked" target="_blank" rel="noopener noreferrer" class="sidebar-link">Book a Call</a>
+        </div>
+        <div class="section-label" style="margin-top: 2rem;">Focus Areas</div>
+        <div class="pill-list">
+          <span class="pill">Deep Learning</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">Document AI</span>
+          <span class="pill">Full-Stack</span>
+          <span class="pill">Compilers</span>
+          <span class="pill">Mobile</span>
+        </div>
+        <div class="section-label" style="margin-top: 1.5rem;">Languages</div>
+        <div class="pill-list">
+          <span class="pill">Python</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">Dart</span>
+          <span class="pill">C++</span>
+          <span class="pill">Java</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+  <!-- Writing -->
+  <section id="writing" class="page-section">
+    <div class="writing-list">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Notes and breakdowns.</h2>
+      {blog.map((post) => (
+        <article class="post-item">
+          <time class="post-date">
+            {new Date(post.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          <h3 class="post-title">
+            <Link href={`/blog/${post.id}`} class="project-link">
+              {post.data.title}
+            </Link>
+          </h3>
+          {post.data.description && (
+            <p class="post-desc">{post.data.description}</p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section id="contact" class="page-section">
+    <div class="projects-container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Open to research and systems roles.</h2>
+      <p class="section-lede">
+        Looking for teams building ML systems, data infrastructure, or applied AI.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:muhirejonathan123@gmail.com" class="contact-link contact-link--primary">Email</a>
+        <a href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">Resume</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
