@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Jonathan Muhire',
   description:
-    'Software R&D + ML researcher building deep learning systems, data pipelines, and scalable infrastructure',
+    'Software engineer focused on robotics simulation, CI reliability, ML evaluation, and data systems',
   href: 'https://jonathanmuhire.com',
   author: 'Jonathan Muhire',
   locale: 'en-US',
@@ -19,7 +19,10 @@ export const NAV_LINKS: SocialLink[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   { href: 'https://github.com/Jonathan-321', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/jonathan-muhire-aa8b06184/', label: 'LinkedIn' },
+  {
+    href: 'https://www.linkedin.com/in/jonathan-muhire-aa8b06184/',
+    label: 'LinkedIn',
+  },
   { href: 'mailto:muhirejonathan123@gmail.com', label: 'Email' },
   { href: '/rss.xml', label: 'RSS' },
 ]

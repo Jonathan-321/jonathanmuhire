@@ -1,0 +1,90 @@
+\documentclass[9pt,letterpaper]{article}
+
+\usepackage[letterpaper,margin=0.38in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{0.96}
+\setlist[itemize]{leftmargin=*, topsep=1pt, itemsep=0pt, parsep=0pt}
+\titleformat{\section}{\normalsize\bfseries\uppercase}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+\newcommand{\resumeRole}[4]{
+  \textbf{#1} \hfill #2\\
+  \textit{#3} \hfill \textit{#4}
+}
+
+\newcommand{\resumeProject}[3]{
+  \textbf{#1} \hfill #2\\
+  #3
+}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{Jonathan Muhire}}\\
+  Software Engineer - Robotics Simulation, CI Reliability, ML Evaluation\\
+  \href{mailto:muhirejonathan123@gmail.com}{muhirejonathan123@gmail.com} \,|\, 
+  +1 572-205-5073 \,|\, 
+  \href{https://jonathanmuhire.com}{jonathanmuhire.com} \,|\, 
+  \href{https://github.com/Jonathan-321}{github.com/Jonathan-321}
+\end{center}
+
+\section{Summary}
+Software engineer and M.S. AI candidate focused on C++/Python systems, robotics simulation, CI reliability, and ML evaluation. Recently submitted an upstream \href{https://github.com/commaai/openpilot/pull/38242}{comma.ai openpilot PR} for MetaDrive CI with simulator artifacts, observed-failure fixes, green upstream checks, and 20 consecutive full workflow passes on one submitted commit.
+
+\section{Education}
+\resumeRole{Oklahoma Christian University}{Expected Aug. 2026}{B.S. Computer Science and M.S. Artificial Intelligence - Concurrent Degrees}{Edmond, OK}\\
+GPA: 3.89/4.0. Completing remaining requirements asynchronously; available for immediate full-time employment.
+
+\section{Engineering Experience}
+\resumeRole{comma.ai openpilot}{Jun. 2026}{Open Source Contributor - MetaDrive CI Bounty \#30693}{Remote}
+\begin{itemize}
+  \item Submitted \href{https://github.com/commaai/openpilot/pull/38242}{PR \#38242} adding Linux GitHub Actions MetaDrive simulator coverage, scoped dependency install, and simulator log artifact upload.
+  \item Patched only observed failures from Actions logs and artifacts: lane/crash behavior, modeld restart handling, traffic-free vision leads, movement accounting, upload timing, racy Params timing, and runner apt-source 403s.
+  \item Validated the branch with 20/20 consecutive full \texttt{tests.yaml} workflow executions, green upstream PR checks, and mergeable current head.
+\end{itemize}
+
+\resumeRole{Neotix Robotics}{May 2025 to Present}{Technical Lead and Founder}{New Haven, CT}
+\begin{itemize}
+  \item Received \$20,000 in non-dilutive support from Yale Tsai City Ventures to fund R\&D on robotics data collection tooling.
+  \item Built a pipeline to store and version roughly 500GB of RGB-D and geometry logs using MinIO and LakeFS, enabling reproducible dataset snapshots and rollbacks.
+  \item Developed a ROS2/C++ teleoperation and data-capture prototype; integrated SAM2 segmentation and ORB-SLAM3 tracking into the perception stack.
+\end{itemize}
+
+\resumeRole{Scale AI}{May 2024 to Aug. 2024}{AI Safety and Code Evaluation Specialist}{San Francisco, CA}
+\begin{itemize}
+  \item Created adversarial and edge-case evaluations for code-generation models, focusing on security-sensitive prompts, robustness failures, async workflows, and API integrations.
+  \item Reviewed and annotated 3,000+ lines of model-generated code, documenting injection risks, race conditions, memory bugs, and scoring rubrics.
+\end{itemize}
+
+\section{Research and Open Source}
+\resumeRole{RenAIssance - Document Understanding Pipeline}{May 2025 to Aug. 2025}{Google Summer of Code 2025 - Deep Learning Engineer}{Remote}
+\begin{itemize}
+  \item Contributed to an open-source manuscript digitization pipeline using LayoutLMv3; implemented training, inference, evaluation, structured logging, input validation, and batch failure handling.
+\end{itemize}
+
+\resumeRole{Data and ML Systems Research}{Jan. 2024 to Present}{Graduate Researcher}{Edmond, OK}
+\begin{itemize}
+  \item Built Jerry Mandarin, a six-state election model over 1.89M census blocks; converted RDH/VEST shapefiles to CSVs and trained a k=512 MLP for R/D vote-share prediction (avg. MAE 0.1005).
+\end{itemize}
+
+\section{Selected Projects}
+\resumeProject{\href{https://github.com/Jonathan-321/agentic}{Agent Evaluation - Memory Ablations}}{2025}{ReAct agent evaluation harness with memory-mode ablations and needle-in-haystack tests; eval-first development for retrieval and tool-use failure modes.}
+\par\vspace{1pt}
+\resumeProject{\href{https://github.com/Jonathan-321/vesuviusChallenge}{Vesuvius Challenge - 3D Segmentation}}{2025}{Volumetric deep learning for CT scans of carbonized Herculaneum scrolls; focused on data handling, segmentation quality, and model evaluation.}
+
+\section{Technical Skills}
+\textbf{Languages:} C++, Python, SQL, TypeScript, JavaScript, MATLAB\\
+\textbf{Systems and Robotics:} ROS2, GitHub Actions, Docker, Linux, CI/CD, telemetry, simulator debugging, data capture\\
+\textbf{ML and Vision:} PyTorch, TensorFlow, Transformers, OpenCV, SAM2, ORB-SLAM3, LayoutLMv3, OCR\\
+\textbf{Data Infrastructure:} MinIO, LakeFS, PostgreSQL, S3-compatible storage, ETL, reproducible datasets
+
+\end{document}

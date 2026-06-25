@@ -6,74 +6,165 @@ import Layout from '@/layouts/Layout.astro'
 ---
 
 <Layout class="max-w-3xl">
-  <PageHead slot="head" title="About" description="Jonathan Muhire — ML systems, data infrastructure, applied AI" />
+  <PageHead
+    slot="head"
+    title="About"
+    description="Jonathan Muhire - robotics simulation, CI reliability, ML evaluation, and data systems"
+  />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>
     <div class="min-w-full">
       <div class="prose prose-neutral dark:prose-invert max-w-none">
-        <h1 class="text-3xl font-light mb-8" style="letter-spacing: -0.02em;">About</h1>
-        
+        <h1 class="mb-8 text-3xl font-light" style="letter-spacing: -0.02em;">
+          About
+        </h1>
+
         <p>
-          I build ML systems and data infrastructure. 19 open-source repositories spanning agents, document AI,
-          distributed storage, NLP evaluation frameworks, and full-stack applications. I write research code
-          that works at production scale.
+          I build software for systems that need to survive real execution:
+          robotics simulation, CI reliability, ML evaluation, and data
+          infrastructure. I care about tight feedback loops, reproducible proof,
+          and debugging from logs instead of assumptions.
         </p>
 
         <p>
-          GSoC 2025 contributor. Previously co-founded Neotix. Studying Computer Science at Oklahoma Christian University.
+          Recent work includes an upstream openpilot MetaDrive CI PR with 20
+          consecutive full workflow passes, a ROS2/C++ robotics data-capture
+          prototype, and open-source document AI work through GSoC 2025. I am
+          completing concurrent Computer Science and AI degrees at Oklahoma
+          Christian University.
         </p>
 
-        <h2 class="text-xl font-normal mt-10 mb-4" style="letter-spacing: -0.01em;">Current Focus</h2>
-        
-        <ul class="list-disc pl-6 space-y-2">
+        <h2
+          class="mt-10 mb-4 text-xl font-normal"
+          style="letter-spacing: -0.01em;"
+        >
+          Current Focus
+        </h2>
+
+        <ul class="list-disc space-y-2 pl-6">
           <li>
-            <Link href="https://github.com/Jonathan-321/agentic" external>Memory-augmented agents</Link> — 
-            ReAct with 4 memory modes, needle-in-haystack evals showing 0% to 100% retrieval recovery.
+            <Link
+              href="https://github.com/commaai/openpilot/pull/38242"
+              external>openpilot MetaDrive CI</Link
+            > - Linux GitHub Actions simulator coverage, CI-scoped reliability fixes,
+            log artifacts, and 20/20 consecutive workflow proof on the submitted
+            PR.
           </li>
           <li>
-            <Link href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025" external>Document AI</Link> — 
-            GSoC 2025. Layout detection, OCR, and post-correction on Renaissance manuscripts.
+            <Link href="https://github.com/Jonathan-321/agentic" external
+              >Memory-augmented agents</Link
+            > — ReAct with 4 memory modes, needle-in-haystack evals showing 0% to
+            100% retrieval recovery.
           </li>
           <li>
-            <Link href="https://github.com/Jonathan-321/minio" external>Data infrastructure</Link> — 
-            Distributed MinIO + LakeFS for reproducible ML experiments.
+            <Link
+              href="https://github.com/Jonathan-321/RenAIssance-GSoC-2025"
+              external>Document AI</Link
+            > — GSoC 2025. Layout detection, OCR, and post-correction on Renaissance
+            manuscripts.
           </li>
           <li>
-            <Link href="https://github.com/Jonathan-321/cfn-biomed-eval" external>Biomedical NLP</Link> — 
-            Token-level and span-level clinical concept extraction benchmarks.
+            <Link href="/resume.pdf">Data infrastructure</Link> - Distributed MinIO
+            + LakeFS for reproducible ML experiments.
+          </li>
+          <li>
+            <Link
+              href="https://github.com/Jonathan-321/cfn-biomed-eval"
+              external>Biomedical NLP</Link
+            > — Token-level and span-level clinical concept extraction benchmarks.
           </li>
         </ul>
 
-        <h2 class="text-xl font-normal mt-10 mb-4" style="letter-spacing: -0.01em;">Other Work</h2>
+        <h2
+          class="mt-10 mb-4 text-xl font-normal"
+          style="letter-spacing: -0.01em;"
+        >
+          Other Work
+        </h2>
 
-        <ul class="list-disc pl-6 space-y-2">
-          <li><Link href="https://github.com/Jonathan-321/ArtExtract" external>ArtExtract</Link> — CNN-RNN artwork classification.</li>
-          <li><Link href="https://github.com/Jonathan-321/ISSR" external>ISSR</Link> — Crisis detection via NLP and geospatial signals.</li>
-          <li><Link href="https://github.com/Jonathan-321/medisync" external>MediSync</Link> — Health records platform.</li>
-          <li><Link href="https://github.com/Jonathan-321/Agrifinance" external>AgriFinance</Link> — Credit scoring for smallholder farmers.</li>
-          <li><Link href="https://github.com/Jonathan-321/ConnectFarm" external>ConnectFarm</Link> — Agricultural marketplace.</li>
-          <li><Link href="https://github.com/Jonathan-321/campus-buddy" external>CampusBuddy</Link> — Campus events app.</li>
-          <li><Link href="https://github.com/Jonathan-321/G1Humanoid-spinkick" external>G1 Humanoid RL</Link> — Dynamic locomotion in MuJoCo.</li>
-          <li><Link href="https://github.com/Jonathan-321/swarm-robotics-simulator" external>Swarm Simulator</Link> — Multi-agent flocking and formation.</li>
-          <li><Link href="https://github.com/Jonathan-321/custom_pymycobot" external>Custom PyMyCobot</Link> — Leader-follower control for data collection.</li>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>
+            <Link href="https://github.com/Jonathan-321/ArtExtract" external
+              >ArtExtract</Link
+            > — CNN-RNN artwork classification.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/ISSR" external
+              >ISSR</Link
+            > — Crisis detection via NLP and geospatial signals.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/medisync" external
+              >MediSync</Link
+            > — Health records platform.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/Agrifinance" external
+              >AgriFinance</Link
+            > — Credit scoring for smallholder farmers.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/ConnectFarm" external
+              >ConnectFarm</Link
+            > — Agricultural marketplace.
+          </li>
+          <li>
+            <Link href="https://github.com/Jonathan-321/campus-buddy" external
+              >CampusBuddy</Link
+            > — Campus events app.
+          </li>
+          <li>
+            <Link
+              href="https://github.com/Jonathan-321/G1Humanoid-spinkick"
+              external>G1 Humanoid RL</Link
+            > — Dynamic locomotion in MuJoCo.
+          </li>
+          <li>
+            <Link
+              href="https://github.com/Jonathan-321/swarm-robotics-simulator"
+              external>Swarm Simulator</Link
+            > — Multi-agent flocking and formation.
+          </li>
+          <li>
+            <Link
+              href="https://github.com/Jonathan-321/custom_pymycobot"
+              external>Custom PyMyCobot</Link
+            > — Leader-follower control for data collection.
+          </li>
         </ul>
 
-        <h2 class="text-xl font-normal mt-10 mb-4" style="letter-spacing: -0.01em;">Stack</h2>
+        <h2
+          class="mt-10 mb-4 text-xl font-normal"
+          style="letter-spacing: -0.01em;"
+        >
+          Stack
+        </h2>
         <p>
-          Python, C++, Java, Dart, JavaScript.
-          PyTorch, Transformers, Docker, MinIO, LakeFS, Flutter, React, Firebase.
+          Python, C++, SQL, TypeScript. PyTorch, Transformers, OpenCV, ROS2,
+          Docker, GitHub Actions, MinIO, LakeFS, PostgreSQL.
         </p>
 
-        <h2 class="text-xl font-normal mt-10 mb-4" style="letter-spacing: -0.01em;">Contact</h2>
+        <h2
+          class="mt-10 mb-4 text-xl font-normal"
+          style="letter-spacing: -0.01em;"
+        >
+          Contact
+        </h2>
         <p>
-          <Link href="mailto:muhirejonathan123@gmail.com">muhirejonathan123@gmail.com</Link><br/>
-          <Link href="https://github.com/Jonathan-321" external>GitHub</Link> · 
-          <Link href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/" external>LinkedIn</Link> · 
-          <Link href="https://cal.com/jonathan-m-yugked" external>Book a call</Link>
+          <Link href="mailto:muhirejonathan123@gmail.com"
+            >muhirejonathan123@gmail.com</Link
+          ><br />
+          <Link href="https://github.com/Jonathan-321" external>GitHub</Link> ·
+          <Link
+            href="https://www.linkedin.com/in/jonathan-muhire-aa8b06184/"
+            external>LinkedIn</Link
+          > ·
+          <Link href="https://cal.com/jonathan-m-yugked" external
+            >Book a call</Link
+          >
         </p>
       </div>
     </div>
   </section>
 </Layout>
-
